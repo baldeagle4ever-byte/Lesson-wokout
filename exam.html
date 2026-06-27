@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة الحصة الأولى - أكاديمية النسر</title>
+<style>
+  :root{
+    --gold:#d4af37;
+    --dark:#0f1b2b;
+    --dark2:#16263d;
+    --green:#2ecc71;
+    --red:#e74c3c;
+    --text:#eef3f8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Tahoma','Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#0f1b2b,#1c3350);
+    color:var(--text);
+    min-height:100vh;
+    padding:20px;
+  }
+  .container{
+    max-width:850px;
+    margin:0 auto;
+  }
+  header{
+    text-align:center;
+    background:linear-gradient(135deg,var(--dark2),#1f3a5f);
+    border:2px solid var(--gold);
+    border-radius:16px;
+    padding:25px 15px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.4);
+  }
+  header .logo{
+    font-size:40px;
+    margin-bottom:5px;
+  }
+  header h1{
+    margin:5px 0;
+    color:var(--gold);
+    font-size:24px;
+  }
+  header h2{
+    margin:5px 0;
+    font-size:18px;
+    color:#cfd8e3;
+    font-weight:normal;
+  }
+  header p.org{
+    margin-top:10px;
+    font-size:14px;
+    color:#9fb0c3;
+  }
+  .progress-wrap{
+    background:var(--dark2);
+    border-radius:10px;
+    padding:10px 15px;
+    margin-bottom:20px;
+    border:1px solid #2b4566;
+  }
+  .progress-bar{
+    height:10px;
+    background:#23395a;
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--gold),#f1d57a);
+    transition:.4s;
+  }
+  .progress-text{
+    font-size:13px;
+    margin-top:6px;
+    color:#9fb0c3;
+    display:flex;
+    justify-content:space-between;
+  }
+  .question-card{
+    background:var(--dark2);
+    border:1px solid #2b4566;
+    border-radius:14px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
+  }
+  .q-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  .q-num{
+    background:var(--gold);
+    color:var(--dark);
+    font-weight:bold;
+    border-radius:50%;
+    width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+  }
+  .q-topic{
+    font-size:12px;
+    color:#9fb0c3;
+    background:#0f1b2b;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid #2b4566;
+  }
+  .q-text{
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:15px;
+    color:#fff;
+  }
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .option{
+    background:#0f1b2b;
+    border:2px solid #2b4566;
+    border-radius:10px;
+    padding:12px 15px;
+    cursor:pointer;
+    transition:.2s;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .option:hover{
+    border-color:var(--gold);
+    background:#15233a;
+  }
+  .option.selected{
+    border-color:var(--gold);
+    background:#1c2f4c;
+  }
+  .option.correct{
+    border-color:var(--green);
+    background:rgba(46,204,113,.15);
+  }
+  .option.wrong{
+    border-color:var(--red);
+    background:rgba(231,76,60,.15);
+  }
+  .option input{
+    accent-color:var(--gold);
+    width:16px;height:16px;
+    pointer-events:none;
+  }
+  .option.locked{
+    cursor:default;
+  }
+  .feedback{
+    margin-top:12px;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:14px;
+    display:none;
+    line-height:1.6;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{
+    background:rgba(46,204,113,.15);
+    border:1px solid var(--green);
+    color:#b9f6ca;
+  }
+  .feedback.ko{
+    background:rgba(231,76,60,.15);
+    border:1px solid var(--red);
+    color:#ffcdd2;
+  }
+  .btn{
+    display:inline-block;
+    background:linear-gradient(135deg,var(--gold),#f1d57a);
+    color:var(--dark);
+    border:none;
+    padding:14px 35px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+    transition:.2s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(212,175,55,.4);}
+  .btn:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+    transform:none;
+  }
+  .submit-wrap{
+    text-align:center;
+    margin:25px 0 10px;
+  }
+  #result{
+    display:none;
+    text-align:center;
+    background:var(--dark2);
+    border:2px solid var(--gold);
+    border-radius:16px;
+    padding:30px 20px;
+    margin-top:20px;
+  }
+  #result h2{
+    color:var(--gold);
+    font-size:26px;
+    margin-bottom:10px;
+  }
+  .score-circle{
+    width:140px;height:140px;
+    border-radius:50%;
+    border:8px solid var(--gold);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin:15px auto;
+    background:#0f1b2b;
+  }
+  .score-circle .num{
+    font-size:32px;
+    font-weight:bold;
+    color:#fff;
+  }
+  .score-circle .lbl{
+    font-size:12px;
+    color:#9fb0c3;
+  }
+  .verdict{
+    font-size:18px;
+    margin:10px 0;
+    font-weight:bold;
+  }
+  .topic-stats{
+    text-align:right;
+    background:#0f1b2b;
+    border-radius:10px;
+    padding:15px;
+    margin-top:15px;
+    border:1px solid #2b4566;
+  }
+  .topic-stats h3{
+    color:var(--gold);
+    font-size:15px;
+    margin-bottom:10px;
+    text-align:center;
+  }
+  .topic-row{
+    display:flex;
+    justify-content:space-between;
+    padding:6px 0;
+    border-bottom:1px solid #1b2c45;
+    font-size:14px;
+  }
+  .topic-row:last-child{border-bottom:none;}
+  .topic-row span.score-val{
+    color:var(--gold);
+    font-weight:bold;
+  }
+  footer{
+    text-align:center;
+    margin-top:30px;
+    color:#647488;
+    font-size:13px;
+  }
+  .locked-msg{
+    font-size:13px;
+    color:#f1d57a;
+    margin-top:8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">🦅</div>
+    <h1>أكاديمية النسر للتدريب والتعليم التقني</h1>
+    <h2>مراجعة الحصة الأولى من دورة التحضير لمسابقة الترقية</h2>
+    <p class="org">امتحان تفاعلي في مادة الإعلام الآلي — اكتشف أخطاءك فور الإجابة وتعرّف على نقطتك النهائية</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text">
+      <span id="progressLabel">0 / 0 سؤال تمت الإجابة عنه</span>
+      <span id="liveScore">النقطة الحالية: 0</span>
+    </div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="submit-wrap">
+    <button class="btn" id="submitBtn" onclick="finishExam()" disabled>إنهاء الامتحان وعرض النتيجة النهائية</button>
+    <div class="locked-msg" id="lockMsg">أجب عن جميع الأسئلة لتفعيل هذا الزر</div>
+  </div>
+
+  <div id="result"></div>
+
+  <footer>© أكاديمية النسر للتدريب والتعليم التقني — جميع الحقوق محفوظة</footer>
+</div>
+
+<script>
+const questions = [
+  {
+    topic:"مفهوم الإعلام الآلي",
+    text:"ما هو التعريف الأدق لـ«الإعلام الآلي» (Informatique)؟",
+    options:[
+      "علم معالجة المعلومة بطريقة آلية وعقلانية باستعمال الحاسوب",
+      "علم تصنيع الأجهزة الإلكترونية فقط",
+      "تقنية ربط الهواتف بالأقمار الصناعية",
+      "دراسة الكهرباء والمغناطيسية"
+    ],
+    correct:0,
+    explain:"الإعلام الآلي هو العلم الذي يهتم بمعالجة المعلومة (المعطيات) بطريقة آلية ومنطقية باستخدام الحاسوب وما يرتبط به من برمجيات وعتاد."
+  },
+  {
+    topic:"مفهوم الإعلام الآلي",
+    text:"كلمة Informatique تتكون من دمج كلمتين، ما هما؟",
+    options:[
+      "Information و Automatique",
+      "Internet و Technique",
+      "Information و Mathématique",
+      "Informer و Pratique"
+    ],
+    correct:0,
+    explain:"كلمة Informatique مأخوذة من دمج Information (المعلومة) و Automatique (آلي)، أي معالجة آلية للمعلومة."
+  },
+  {
+    topic:"عمليات الإدخال والإخراج والمعالجة",
+    text:"ما هو الترتيب الصحيح للعمليات الأساسية التي يقوم بها الحاسوب؟",
+    options:[
+      "إدخال المعطيات ← معالجتها ← إخراج النتائج",
+      "إخراج النتائج ← معالجتها ← إدخال المعطيات",
+      "معالجة المعطيات ← إخراجها ← إدخالها",
+      "إدخال المعطيات ← إخراجها مباشرة بدون معالجة"
+    ],
+    correct:0,
+    explain:"يعمل الحاسوب وفق الدورة: إدخال (Input) ثم معالجة (Process) ثم إخراج (Output)، وقد تُخزَّن النتائج لاحقًا."
+  },
+  {
+    topic:"عمليات الإدخال والإخراج والمعالجة",
+    text:"عملية طبع وثيقة من الحاسوب نحو الطابعة تُعتبر عملية:",
+    options:[
+      "إدخال",
+      "إخراج",
+      "تخزين",
+      "معالجة"
+    ],
+    correct:1,
+    explain:"الطباعة تنقل المعلومة من الحاسوب إلى الخارج (الطابعة)، وهذا يُصنَّف ضمن عمليات الإخراج (Output)."
+  },
+  {
+    topic:"عمليات الإدخال والإخراج والمعالجة",
+    text:"الوحدة المسؤولة عن تنفيذ عمليات المعالجة (الحساب والمقارنة والتحكم) داخل الحاسوب تسمى:",
+    options:[
+      "وحدة المعالجة المركزية CPU",
+      "لوحة المفاتيح",
+      "الشاشة",
+      "الطابعة"
+    ],
+    correct:0,
+    explain:"المعالج المركزي (CPU - Central Processing Unit) هو «عقل» الحاسوب الذي ينفذ التعليمات ويعالج المعطيات."
+  },
+  {
+    topic:"مكونات الحاسوب",
+    text:"ينقسم نظام الحاسوب بشكل عام إلى:",
+    options:[
+      "عتاد (Hardware) وبرمجيات (Software) فقط",
+      "شاشة ولوحة مفاتيح فقط",
+      "ذاكرة فقط",
+      "إنترنت وكهرباء فقط"
+    ],
+    correct:0,
+    explain:"يتكون نظام الحاسوب من جزأين رئيسيين: العتاد (المكونات الفيزيائية الملموسة) والبرمجيات (البرامج والتطبيقات)."
+  },
+  {
+    topic:"مكونات الحاسوب",
+    text:"أيٌّ من العناصر التالية يُعتبر «برمجية» (Software) وليس عتادًا؟",
+    options:[
+      "نظام التشغيل Windows",
+      "المعالج CPU",
+      "الذاكرة العشوائية RAM",
+      "لوحة الأم Motherboard"
+    ],
+    correct:0,
+    explain:"نظام التشغيل برنامج غير ملموس يُدير عمل العتاد، بينما المعالج والذاكرة واللوحة الأم مكونات فيزيائية (عتاد)."
+  },
+  {
+    topic:"العتاد: أجهزة الإدخال والإخراج",
+    text:"أي مجموعة من الأجهزة التالية تُعتبر جميعها أجهزة إدخال؟",
+    options:[
+      "الفأرة، لوحة المفاتيح، الماسح الضوئي (Scanner)",
+      "الشاشة، الطابعة، السماعات",
+      "الفأرة، الطابعة، الشاشة",
+      "لوحة المفاتيح، الشاشة، السماعات"
+    ],
+    correct:0,
+    explain:"أجهزة الإدخال تُدخل المعلومة إلى الحاسوب، مثل الفأرة ولوحة المفاتيح والماسح الضوئي والكاميرا والميكروفون."
+  },
+  {
+    topic:"العتاد: أجهزة الإدخال والإخراج",
+    text:"الشاشة (Moniteur) والطابعة (Imprimante) والسماعات (Haut-parleurs) تُصنَّف كأجهزة:",
+    options:[
+      "إخراج",
+      "إدخال",
+      "تخزين",
+      "معالجة"
+    ],
+    correct:0,
+    explain:"أجهزة الإخراج تعرض أو تُخرج نتائج المعالجة للمستخدم، مثل الشاشة (عرض بصري) والطابعة (نسخة ورقية) والسماعات (صوت)."
+  },
+  {
+    topic:"العتاد: أجهزة الإدخال والإخراج",
+    text:"شاشة اللمس (Écran tactile) تعتبر جهاز:",
+    options:[
+      "إدخال وإخراج في نفس الوقت",
+      "إدخال فقط",
+      "إخراج فقط",
+      "تخزين فقط"
+    ],
+    correct:0,
+    explain:"شاشة اللمس تعرض المعلومات (إخراج) وتستقبل لمسات المستخدم كأوامر (إدخال)، فهي جهاز مزدوج الوظيفة."
+  },
+  {
+    topic:"الذاكرة والتخزين",
+    text:"ما الفرق الأساسي بين الذاكرة العشوائية RAM وذاكرة التخزين (القرص الصلب مثلاً)؟",
+    options:[
+      "الـ RAM ذاكرة مؤقتة تفقد محتواها عند انقطاع التيار، بينما التخزين يحفظ المعطيات بشكل دائم",
+      "الـ RAM تحفظ المعطيات بشكل دائم والتخزين مؤقت",
+      "لا يوجد أي فرق بينهما",
+      "الـ RAM أكبر سعة من القرص الصلب دائمًا"
+    ],
+    correct:0,
+    explain:"RAM (الذاكرة العشوائية) ذاكرة مؤقتة (Volatile) تُستخدم أثناء تشغيل البرامج وتُفرَّغ عند إغلاق الحاسوب، أما وحدات التخزين كالقرص الصلب فتحفظ المعطيات بشكل دائم."
+  },
+  {
+    topic:"الذاكرة والتخزين",
+    text:"أيٌّ من هذه الوحدات تُستخدم للتخزين الدائم للمعطيات؟",
+    options:[
+      "القرص الصلب (Disque dur) أو القرص SSD",
+      "الذاكرة العشوائية RAM",
+      "ذاكرة التخزين المؤقت Cache فقط",
+      "سجلات المعالج (Registres)"
+    ],
+    correct:0,
+    explain:"القرص الصلب HDD ووحدات SSD من وسائل التخزين الدائم، بينما RAM والـ Cache والسجلات ذواكر مؤقتة وسريعة تُستخدم أثناء المعالجة فقط."
+  },
+  {
+    topic:"الذاكرة والتخزين",
+    text:"وحدة قياس سعة الذاكرة والتخزين الأساسية هي:",
+    options:[
+      "البايت (Octet/Byte) ومضاعفاتها مثل GB و TB",
+      "الواط (Watt)",
+      "الهرتز (Hertz)",
+      "الأمبير (Ampère)"
+    ],
+    correct:0,
+    explain:"تُقاس سعة الذاكرة والتخزين بالبايت (Octet) ومضاعفاته: كيلوبايت، ميغابايت، غيغابايت، تيرابايت، بينما الهرتز يقيس سرعة المعالج والواط يقيس الاستطاعة الكهربائية."
+  },
+  {
+    topic:"المنافذ (HDMI/RJ45/USB)",
+    text:"منفذ HDMI يُستخدم أساسًا لنقل:",
+    options:[
+      "الصورة والصوت عالي الجودة إلى شاشة أو تلفاز",
+      "الاتصال بشبكة الإنترنت السلكية",
+      "الطاقة الكهربائية فقط لشحن الهاتف",
+      "البيانات بين الفأرة والحاسوب فقط"
+    ],
+    correct:0,
+    explain:"منفذ HDMI (High-Definition Multimedia Interface) مخصص لنقل الصورة والصوت الرقمي بجودة عالية بين الحاسوب وشاشة أو تلفاز أو جهاز عرض."
+  },
+  {
+    topic:"المنافذ (HDMI/RJ45/USB)",
+    text:"منفذ RJ45 يُستخدم لربط الحاسوب بـ:",
+    options:[
+      "شبكة الإنترنت السلكية (كابل الشبكة Ethernet)",
+      "الشاشة الخارجية",
+      "الطابعة عبر الواي فاي",
+      "السماعات اللاسلكية"
+    ],
+    correct:0,
+    explain:"منفذ RJ45 هو المنفذ المستخدم لتوصيل كابل الشبكة (Ethernet) لربط الحاسوب بشبكة محلية أو بالإنترنت بشكل سلكي."
+  },
+  {
+    topic:"المنافذ (HDMI/RJ45/USB)",
+    text:"منفذ USB يتميز بكونه منفذًا:",
+    options:[
+      "متعدد الاستخدامات (Universal) لتوصيل أجهزة متنوعة كالفأرة والطابعة والمفاتيح",
+      "مخصص فقط لشحن الهاتف",
+      "مخصص فقط لكابل الإنترنت",
+      "مخصص فقط للشاشة"
+    ],
+    correct:0,
+    explain:"USB تعني Universal Serial Bus، وهو منفذ عالمي يُستخدم لتوصيل العديد من الأجهزة الطرفية مثل الفأرة، لوحة المفاتيح، الطابعة، المفاتيح المرنة، الهاتف، وغيرها."
+  },
+  {
+    topic:"المنافذ (HDMI/RJ45/USB)",
+    text:"إذا أردتَ توصيل حاسوبك مباشرة بشبكة محلية (LAN) باستخدام كابل، فأي منفذ ستستعمل؟",
+    options:[
+      "RJ45",
+      "HDMI",
+      "USB",
+      "VGA"
+    ],
+    correct:0,
+    explain:"RJ45 هو منفذ كابل الشبكة (Ethernet) المخصص للربط السلكي بالشبكات المحلية والإنترنت."
+  }
+];
+
+let answered = {};
+let locked = {};
+
+function buildQuiz(){
+  const quizDiv = document.getElementById('quiz');
+  questions.forEach((q, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = 'q'+idx;
+
+    let optsHtml = '';
+    q.options.forEach((opt, oIdx)=>{
+      optsHtml += `<div class="option" data-q="${idx}" data-o="${oIdx}" onclick="selectOption(${idx},${oIdx})">
+        <input type="radio" name="q${idx}">
+        <span>${opt}</span>
+      </div>`;
+    });
+
+    card.innerHTML = `
+      <div class="q-header">
+        <div class="q-num">${idx+1}</div>
+        <div class="q-topic">${q.topic}</div>
+      </div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">${optsHtml}</div>
+      <div class="feedback" id="fb${idx}"></div>
+    `;
+    quizDiv.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOption(qIdx, oIdx){
+  if(locked[qIdx]) return;
+  locked[qIdx] = true;
+  answered[qIdx] = oIdx;
+
+  const q = questions[qIdx];
+  const options = document.querySelectorAll(`#q${qIdx} .option`);
+  options.forEach(opt=>{
+    opt.classList.add('locked');
+    const o = parseInt(opt.dataset.o);
+    if(o === q.correct){
+      opt.classList.add('correct');
+    }
+    if(o === oIdx && o !== q.correct){
+      opt.classList.add('wrong');
+    }
+    if(o === oIdx){
+      opt.classList.add('selected');
+      opt.querySelector('input').checked = true;
+    }
+  });
+
+  const fb = document.getElementById('fb'+qIdx);
+  fb.classList.add('show');
+  if(oIdx === q.correct){
+    fb.classList.add('ok');
+    fb.innerHTML = '✅ إجابة صحيحة! ' + q.explain;
+  } else {
+    fb.classList.add('ko');
+    fb.innerHTML = '❌ إجابة خاطئة. ' + q.explain;
+  }
+
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = questions.length;
+  const done = Object.keys(answered).length;
+  const correctCount = Object.keys(answered).filter(k => answered[k] === questions[k].correct).length;
+
+  document.getElementById('progressFill').style.width = (done/total*100) + '%';
+  document.getElementById('progressLabel').textContent = `${done} / ${total} سؤال تمت الإجابة عنه`;
+  document.getElementById('liveScore').textContent = `النقطة الحالية: ${correctCount} / ${total}`;
+
+  const submitBtn = document.getElementById('submitBtn');
+  const lockMsg = document.getElementById('lockMsg');
+  if(done === total){
+    submitBtn.disabled = false;
+    lockMsg.style.display = 'none';
+  } else {
+    submitBtn.disabled = true;
+    lockMsg.style.display = 'block';
+  }
+}
+
+function finishExam(){
+  const total = questions.length;
+  const correctCount = Object.keys(answered).filter(k => answered[k] === questions[k].correct).length;
+  const percent = Math.round((correctCount/total)*100);
+
+  // Topic stats
+  const topicStats = {};
+  questions.forEach((q, idx)=>{
+    if(!topicStats[q.topic]) topicStats[q.topic] = {correct:0, total:0};
+    topicStats[q.topic].total++;
+    if(answered[idx] === q.correct) topicStats[q.topic].correct++;
+  });
+
+  let verdictText = '';
+  let verdictColor = '';
+  if(percent >= 85){
+    verdictText = '🏆 ممتاز! إتقان جيد جدًا لمحتوى الحصة';
+    verdictColor = '#2ecc71';
+  } else if(percent >= 60){
+    verdictText = '👍 جيد، لكن يستحسن مراجعة بعض النقاط';
+    verdictColor = '#f1d57a';
+  } else {
+    verdictText = '⚠️ يُنصح بإعادة مراجعة محتوى الحصة الأولى بتركيز';
+    verdictColor = '#e74c3c';
+  }
+
+  let topicHtml = '';
+  Object.keys(topicStats).forEach(t=>{
+    const s = topicStats[t];
+    topicHtml += `<div class="topic-row"><span>${t}</span><span class="score-val">${s.correct} / ${s.total}</span></div>`;
+  });
+
+  const resultDiv = document.getElementById('result');
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML = `
+    <h2>📊 نتيجتك النهائية</h2>
+    <div class="score-circle" style="border-color:${verdictColor}">
+      <div class="num">${correctCount}/${total}</div>
+      <div class="lbl">${percent}%</div>
+    </div>
+    <div class="verdict" style="color:${verdictColor}">${verdictText}</div>
+    <div class="topic-stats">
+      <h3>تفصيل النتيجة حسب المحور</h3>
+      ${topicHtml}
+    </div>
+  `;
+
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitBtn').textContent = 'تم إنهاء الامتحان';
+  document.getElementById('lockMsg').style.display = 'none';
+
+  resultDiv.scrollIntoView({behavior:'smooth'});
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

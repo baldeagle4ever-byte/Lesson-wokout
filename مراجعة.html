@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة الحصة الأولى - أكاديمية النسر</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+  body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    padding: 20px;
+    color: #fff;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.15);
+    margin-bottom: 25px;
+  }
+  header h1 {
+    font-size: 1.7em;
+    color: #ffd369;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  header h2 {
+    font-size: 1.1em;
+    color: #93a8c7;
+    font-weight: normal;
+  }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(45deg, #ee0979, #ff6a00);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  .screen { display: none; animation: fadeIn 0.5s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .start-box {
+    text-align: center;
+    padding: 30px 20px;
+  }
+  .start-box p {
+    font-size: 1.1em;
+    line-height: 1.9;
+    margin-bottom: 15px;
+    color: #e0e6ed;
+  }
+  .topics {
+    background: rgba(0,0,0,0.25);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: right;
+  }
+  .topics h3 { color: #ffd369; margin-bottom: 12px; }
+  .topics ul { list-style: none; }
+  .topics li {
+    padding: 8px 15px;
+    margin: 6px 0;
+    background: rgba(255,255,255,0.06);
+    border-right: 3px solid #4facfe;
+    border-radius: 6px;
+  }
+  .topics li::before { content: "◆ "; color: #4facfe; }
+  .btn {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    color: #0f2027;
+    border: none;
+    padding: 14px 40px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 10px 5px;
+    box-shadow: 0 6px 20px rgba(79,172,254,0.4);
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(79,172,254,0.6); }
+  .btn.secondary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: #fff;
+  }
+  .progress-bar {
+    background: rgba(0,0,0,0.3);
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    width: 0%;
+    transition: width 0.4s;
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    color: #b0c4de;
+  }
+  .question-card {
+    background: rgba(255,255,255,0.06);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .question-text {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #fff;
+    line-height: 1.7;
+  }
+  .question-number {
+    color: #ffd369;
+    font-weight: bold;
+    margin-left: 8px;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    background: rgba(255,255,255,0.08);
+    padding: 14px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.25s;
+    font-size: 1.05em;
+    color: #fff;
+  }
+  .option:hover {
+    background: rgba(79,172,254,0.2);
+    border-color: #4facfe;
+    transform: translateX(-5px);
+  }
+  .option.selected {
+    background: rgba(79,172,254,0.3);
+    border-color: #4facfe;
+  }
+  .option.correct {
+    background: rgba(46,213,115,0.3);
+    border-color: #2ed573;
+  }
+  .option.wrong {
+    background: rgba(255,71,87,0.3);
+    border-color: #ff4757;
+  }
+  .option-letter {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .results {
+    text-align: center;
+    padding: 20px;
+  }
+  .score-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 2.5em;
+    font-weight: bold;
+    position: relative;
+  }
+  .score-circle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 6px;
+    background: linear-gradient(45deg, #4facfe, #00f2fe, #ffd369);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .score-label { font-size: 0.4em; color: #b0c4de; margin-top: 5px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+  }
+  .stat-box {
+    background: rgba(0,0,0,0.25);
+    padding: 18px;
+    border-radius: 12px;
+  }
+  .stat-box .num { font-size: 2em; font-weight: bold; color: #4facfe; }
+  .stat-box .label { font-size: 0.9em; color: #b0c4de; margin-top: 5px; }
+  .stat-box.correct .num { color: #2ed573; }
+  .stat-box.wrong .num { color: #ff4757; }
+  .review-section {
+    margin-top: 30px;
+    text-align: right;
+  }
+  .review-section h3 {
+    color: #ffd369;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .review-item {
+    background: rgba(0,0,0,0.25);
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border-right: 4px solid #ff4757;
+  }
+  .review-item.ok { border-right-color: #2ed573; }
+  .review-item .q { font-weight: bold; margin-bottom: 10px; color: #fff; }
+  .review-item .ans {
+    font-size: 0.95em;
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-radius: 6px;
+  }
+  .ans.your-wrong { background: rgba(255,71,87,0.2); }
+  .ans.correct-ans { background: rgba(46,213,115,0.2); }
+  .feedback-msg {
+    font-size: 1.2em;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .timer {
+    background: rgba(0,0,0,0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: monospace;
+    font-size: 1.1em;
+  }
+  @media (max-width: 600px) {
+    .container { padding: 20px 15px; }
+    header h1 { font-size: 1.3em; }
+    .stats { grid-template-columns: 1fr; }
+    .score-circle { width: 150px; height: 150px; font-size: 2em; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🎓 مراجعة الحصة الأولى من دورة التحضير لمسابقة الترقية</h1>
+    <h2>محاكاة امتحان في الإعلام الآلي</h2>
+    <div class="badge">🦅 أكاديمية النسر للتدريب والتعليم التقني</div>
+  </header>
+
+  <!-- شاشة البداية -->
+  <div id="start-screen" class="screen active">
+    <div class="start-box">
+      <p>مرحباً بك في امتحان المراجعة التفاعلي!</p>
+      <p>هذا الامتحان يقيّم مستواك في المفاهيم الأساسية للإعلام الآلي.</p>
+      <div class="topics">
+        <h3>📚 المحاور المشمولة:</h3>
+        <ul>
+          <li>مفهوم الإعلام الآلي</li>
+          <li>عمليات الإدخال والإخراج والمعالجة</li>
+          <li>مكونات الحاسوب</li>
+          <li>العتاد: أجهزة الإدخال والإخراج</li>
+          <li>الذاكرة والتخزين</li>
+          <li>المنافذ (HDMI / RJ45 / USB)</li>
+        </ul>
+      </div>
+      <p>⏱️ عدد الأسئلة: <strong>15</strong> | 🎯 لكل سؤال نقطة واحدة</p>
+      <button class="btn" onclick="startQuiz()">🚀 ابدأ الامتحان</button>
+    </div>
+  </div>
+
+  <!-- شاشة الأسئلة -->
+  <div id="quiz-screen" class="screen">
+    <div class="progress-info">
+      <span id="q-counter">السؤال 1 من 15</span>
+      <span class="timer" id="timer">⏱️ 00:00</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    <div class="question-card">
+      <div class="question-text">
+        <span class="question-number" id="q-num">1.</span>
+        <span id="q-text"></span>
+      </div>
+      <div class="options" id="options"></div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn secondary" id="prev-btn" onclick="prevQuestion()">→ السابق</button>
+      <button class="btn" id="next-btn" onclick="nextQuestion()">التالي ←</button>
+    </div>
+  </div>
+
+  <!-- شاشة النتائج -->
+  <div id="result-screen" class="screen">
+    <div class="results">
+      <h2 style="color:#ffd369;">📊 نتيجة الامتحان</h2>
+      <div class="score-circle">
+        <div id="score-value">0/15</div>
+        <div class="score-label" id="score-percent">0%</div>
+      </div>
+      <div class="feedback-msg" id="feedback"></div>
+      <div class="stats">
+        <div class="stat-box correct"><div class="num" id="correct-count">0</div><div class="label">✅ إجابات صحيحة</div></div>
+        <div class="stat-box wrong"><div class="num" id="wrong-count">0</div><div class="label">❌ إجابات خاطئة</div></div>
+        <div class="stat-box"><div class="num" id="time-spent">00:00</div><div class="label">⏱️ الوقت المستغرق</div></div>
+      </div>
+      <div class="review-section">
+        <h3>📝 مراجعة الإجابات</h3>
+        <div id="review-list"></div>
+      </div>
+      <button class="btn" onclick="restartQuiz()">🔄 إعادة الامتحان</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "ما هو تعريف الإعلام الآلي (Informatique)؟",
+    options: [
+      "علم معالجة المعلومات آلياً باستخدام الحاسوب",
+      "علم صناعة الأجهزة الإلكترونية فقط",
+      "علم تصميم المواقع الإلكترونية",
+      "علم إصلاح الهواتف الذكية"
+    ],
+    correct: 0
+  },
+  {
+    q: "كلمة Informatique مشتقة من كلمتين، هما:",
+    options: [
+      "Information + Automatique",
+      "Internet + Machine",
+      "Info + Mathématique",
+      "Input + Output"
+    ],
+    correct: 0
+  },
+  {
+    q: "ما هي العمليات الأساسية التي يقوم بها الحاسوب؟",
+    options: [
+      "الإدخال، المعالجة، الإخراج، التخزين",
+      "الطباعة، المسح، النسخ فقط",
+      "التشغيل والإيقاف فقط",
+      "التحميل والتنزيل فقط"
+    ],
+    correct: 0
+  },
+  {
+    q: "أي من العمليات التالية تُعدّ عملية معالجة (Traitement)؟",
+    options: [
+      "كتابة نص على لوحة المفاتيح",
+      "قيام المعالج بحساب عملية جمع",
+      "عرض صورة على الشاشة",
+      "طباعة وثيقة"
+    ],
+    correct: 1
+  },
+  {
+    q: "المكونان الأساسيان للحاسوب هما:",
+    options: [
+      "الشاشة ولوحة المفاتيح",
+      "العتاد المادي (Hardware) والبرمجيات (Software)",
+      "الفأرة والطابعة",
+      "الإنترنت والواي فاي"
+    ],
+    correct: 1
+  },
+  {
+    q: "أي من العناصر التالية يُعتبر من العتاد المادي (Hardware)؟",
+    options: [
+      "نظام التشغيل Windows",
+      "برنامج Word",
+      "المعالج (CPU)",
+      "ملف PDF"
+    ],
+    correct: 2
+  },
+  {
+    q: "أي من الأجهزة التالية يُصنَّف كجهاز إدخال (Périphérique d'entrée)؟",
+    options: [
+      "الشاشة",
+      "الطابعة",
+      "الماسح الضوئي (Scanner)",
+      "مكبر الصوت"
+    ],
+    correct: 2
+  },
+  {
+    q: "أي من الأجهزة التالية يُعتبر جهاز إخراج (Périphérique de sortie)؟",
+    options: [
+      "لوحة المفاتيح",
+      "الفأرة",
+      "الميكروفون",
+      "جهاز العرض (Projecteur)"
+    ],
+    correct: 3
+  },
+  {
+    q: "ما هو الجهاز الذي يُعتبر دماغ الحاسوب؟",
+    options: [
+      "الذاكرة RAM",
+      "القرص الصلب",
+      "المعالج (CPU)",
+      "اللوحة الأم"
+    ],
+    correct: 2
+  },
+  {
+    q: "ذاكرة RAM هي ذاكرة:",
+    options: [
+      "دائمة ولا تُمحى عند انقطاع التيار",
+      "مؤقتة تُمحى محتوياتها عند إيقاف الحاسوب",
+      "مخصصة لتخزين الصور فقط",
+      "أبطأ من القرص الصلب"
+    ],
+    correct: 1
+  },
+  {
+    q: "أي من وسائط التخزين التالية لها أكبر سعة تخزين عادةً؟",
+    options: [
+      "ذاكرة USB (فلاش)",
+      "القرص الصلب (Disque Dur)",
+      "القرص المدمج CD",
+      "قرص مرن Disquette"
+    ],
+    correct: 1
+  },
+  {
+    q: "وحدة قياس سعة التخزين الأساسية هي:",
+    options: [
+      "Hertz (هرتز)",
+      "Pixel (بكسل)",
+      "Octet / Byte (أُكتي)",
+      "Pouce (بوصة)"
+    ],
+    correct: 2
+  },
+  {
+    q: "منفذ HDMI يُستخدم أساساً لنقل:",
+    options: [
+      "الصوت والصورة عالي الجودة",
+      "الاتصال بالإنترنت",
+      "الطاقة الكهربائية فقط",
+      "بيانات الفأرة ولوحة المفاتيح"
+    ],
+    correct: 0
+  },
+  {
+    q: "منفذ RJ45 مخصص لـ:",
+    options: [
+      "توصيل الشاشة",
+      "الاتصال بالشبكة السلكية (Ethernet)",
+      "شحن الهاتف",
+      "توصيل السماعات"
+    ],
+    correct: 1
+  },
+  {
+    q: "منفذ USB يسمح بـ:",
+    options: [
+      "الاتصال بالإنترنت فقط",
+      "توصيل أجهزة متنوعة مثل الفأرة، لوحة المفاتيح، فلاش...",
+      "نقل الصورة فقط",
+      "تشغيل الحاسوب دون كهرباء"
+    ],
+    correct: 1
+  }
+];
+
+let currentQ = 0;
+let userAnswers = new Array(questions.length).fill(-1);
+let startTime;
+let timerInterval;
+
+function startQuiz() {
+  document.getElementById('start-screen').classList.remove('active');
+  document.getElementById('quiz-screen').classList.add('active');
+  startTime = Date.now();
+  timerInterval = setInterval(updateTimer, 1000);
+  showQuestion();
+}
+
+function updateTimer() {
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+  const s = String(elapsed % 60).padStart(2, '0');
+  document.getElementById('timer').textContent = `⏱️ ${m}:${s}`;
+}
+
+function showQuestion() {
+  const q = questions[currentQ];
+  document.getElementById('q-num').textContent = (currentQ + 1) + '.';
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('q-counter').textContent = `السؤال ${currentQ + 1} من ${questions.length}`;
+  document.getElementById('progress').style.width = ((currentQ + 1) / questions.length * 100) + '%';
+
+  const optionsDiv = document.getElementById('options');
+  optionsDiv.innerHTML = '';
+  const letters = ['أ', 'ب', 'ج', 'د'];
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option' + (userAnswers[currentQ] === i ? ' selected' : '');
+    div.innerHTML = `<span class="option-letter">${letters[i]}</span>${opt}`;
+    div.onclick = () => selectOption(i);
+    optionsDiv.appendChild(div);
+  });
+
+  document.getElementById('prev-btn').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+  document.getElementById('next-btn').textContent = currentQ === questions.length - 1 ? '✓ إنهاء الامتحان' : 'التالي ←';
+}
+
+function selectOption(i) {
+  userAnswers[currentQ] = i;
+  document.querySelectorAll('.option').forEach((el, idx) => {
+    el.classList.toggle('selected', idx === i);
+  });
+}
+
+function nextQuestion() {
+  if (userAnswers[currentQ] === -1) {
+    alert('⚠️ الرجاء اختيار إجابة قبل المتابعة');
+    return;
+  }
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    currentQ--;
+    showQuestion();
+  }
+}
+
+function finishQuiz() {
+  clearInterval(timerInterval);
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+  const s = String(elapsed % 60).padStart(2, '0');
+
+  let correct = 0;
+  questions.forEach((q, i) => { if (userAnswers[i] === q.correct) correct++; });
+  const wrong = questions.length - correct;
+  const percent = Math.round((correct / questions.length) * 100);
+
+  document.getElementById('quiz-screen').classList.remove('active');
+  document.getElementById('result-screen').classList.add('active');
+
+  document.getElementById('score-value').textContent = `${correct}/${questions.length}`;
+  document.getElementById('score-percent').textContent = `${percent}%`;
+  document.getElementById('correct-count').textContent = correct;
+  document.getElementById('wrong-count').textContent = wrong;
+  document.getElementById('time-spent').textContent = `${m}:${s}`;
+
+  let feedback = '', color = '';
+  if (percent >= 90) { feedback = '🏆 ممتاز! لديك فهم قوي للحصة الأولى. استمر بهذا التميز!'; color = '#2ed573'; }
+  else if (percent >= 70) { feedback = '👏 جيد جداً! مستوى مرضٍ، راجع بعض النقاط لتحسينه.'; color = '#4facfe'; }
+  else if (percent >= 50) { feedback = '💪 مقبول، لكن تحتاج لمراجعة أعمق للحصة.'; color = '#ffd369'; }
+  else { feedback = '📚 تحتاج لإعادة دراسة الحصة الأولى بتركيز أكبر. لا تيأس!'; color = '#ff4757'; }
+
+  const fb = document.getElementById('feedback');
+  fb.textContent = feedback;
+  fb.style.background = color + '33';
+  fb.style.border = `2px solid ${color}`;
+
+  const reviewList = document.getElementById('review-list');
+  reviewList.innerHTML = '';
+  const letters = ['أ', 'ب', 'ج', 'د'];
+  questions.forEach((q, i) => {
+    const isOk = userAnswers[i] === q.correct;
+    const item = document.createElement('div');
+    item.className = 'review-item' + (isOk ? ' ok' : '');
+    let html = `<div class="q">${i + 1}. ${q.q}</div>`;
+    if (isOk) {
+      html += `<div class="ans correct-ans">✅ إجابتك: ${letters[userAnswers[i]]}) ${q.options[userAnswers[i]]}</div>`;
+    } else {
+      html += `<div class="ans your-wrong">❌ إجابتك: ${userAnswers[i] === -1 ? 'لم تُجب' : letters[userAnswers[i]] + ') ' + q.options[userAnswers[i]]}</div>`;
+      html += `<div class="ans correct-ans">✅ الإجابة الصحيحة: ${letters[q.correct]}) ${q.options[q.correct]}</div>`;
+    }
+    item.innerHTML = html;
+    reviewList.appendChild(item);
+  });
+}
+
+function restartQuiz() {
+  currentQ = 0;
+  userAnswers = new Array(questions.length).fill(-1);
+  document.getElementById('result-screen').classList.remove('active');
+  document.getElementById('start-screen').classList.add('active');
+}
+</script>
+</body>
+</html>
