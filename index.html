@@ -4,59 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أكاديمية النسر - صفحة البداية</title>
+    <!-- استدعاء مكتبة Font Awesome للأيقونات الاحترافية -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             background-color: #1a2a33;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             background-color: #243441;
-            padding: 40px;
-            border-radius: 20px;
+            padding: 40px 30px;
+            border-radius: 24px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 500px;
-            width: 90%;
-        }
-        .logo { width: 80px; margin-bottom: 20px; }
-        h1 { color: #ffad33; font-size: 24px; margin-bottom: 10px; }
-        p { color: #cfd8dc; margin-bottom: 30px; }
-        .btn {
-            display: block;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            max-width: 550px;
             width: 100%;
-            padding: 15px;
-            margin: 15px 0;
-            border: none;
-            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .logo { 
+            width: 90px; 
+            margin-bottom: 15px; 
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+        h1 { 
+            color: #ffad33; 
+            font-size: 28px; 
+            margin: 0 0 5px 0; 
+            font-weight: bold;
+        }
+        .welcome-msg { 
+            color: #cfd8dc; 
+            margin: 0 0 8px 0; 
+            font-size: 16px;
+        }
+        .subtitle {
+            color: #ff9f43;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 30px 0;
+            background: rgba(255, 159, 67, 0.1);
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* تحسين أشكال أزرار الحصص */
+        .btn-card {
+            display: flex;
+            align-items: center;
+            background-color: #2c3e50;
+            margin: 18px 0;
+            padding: 16px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: right;
+            box-sizing: border-box;
+        }
+        .btn-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .btn-icon {
+            font-size: 26px;
+            margin-left: 20px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .btn-content {
+            flex-grow: 1;
+        }
+        .btn-title {
             font-size: 18px;
             font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            box-sizing: border-box;
-            transition: transform 0.2s, background-color 0.2s;
+            margin-bottom: 2px;
         }
-        .btn-blue { background-color: #34ace0; color: white; }
-        .btn-orange { background-color: #ff9f43; color: white; }
-        .btn-green { background-color: #2ed573; color: white; }
-        .btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .btn-desc {
+            font-size: 13px;
+            color: #b0bec5;
+        }
+        
+        /* تخصيص ألوان وتوهج البطاقات */
+        .btn-h1 .btn-icon { background: rgba(52, 172, 224, 0.15); color: #34ace0; }
+        .btn-h1:hover { border-color: #34ace0; background-color: rgba(52, 172, 224, 0.08); }
+        
+        .btn-h2 .btn-icon { background: rgba(255, 159, 67, 0.15); color: #ff9f43; }
+        .btn-h2:hover { border-color: #ff9f43; background-color: rgba(255, 159, 67, 0.08); }
+        
+        .btn-h3 .btn-icon { background: rgba(46, 213, 115, 0.15); color: #2ed573; }
+        .btn-h3:hover { border-color: #2ed573; background-color: rgba(46, 213, 115, 0.08); }
+
+        .arrow-left {
+            font-size: 16px;
+            color: #78909c;
+            transition: transform 0.3s;
+        }
+        .btn-card:hover .arrow-left {
+            transform: translateX(-5px);
+            color: white;
+        }
+
+        /* الجزء السفلي والعبارات */
+        .footer {
+            margin-top: 35px;
+            border-top: 1px solid #2c3e50;
+            padding-top: 20px;
+        }
+        .motto {
+            font-size: 15px;
+            font-weight: bold;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            color: #26a69a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            background: rgba(38, 166, 154, 0.08);
+            padding: 8px 16px;
+            border-radius: 30px;
+        }
+        .telegram-link:hover {
+            color: #4db6ac;
+            background: rgba(38, 166, 154, 0.15);
+        }
+        .telegram-link i {
+            margin-left: 8px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="logo.png" alt="شعار أكاديمية النسر" class="logo">
-        <h1>أكاديمية النسر</h1>
-        <p>مرحباً بك في منصة الاختبارات والمراجعات الذكية</p>
+        <!-- الشعار والترتيب العلوي -->
+        <img src="logo.png" alt="Logo" class="logo">[span_2](start_span)[span_2](end_span)
+        <h1>أكاديمية النسر</h1>[span_3](start_span)[span_3](end_span)
+        <p class="welcome-msg">مرحباً بك في منصة الاختبارات والمراجعات الذكية</p>[span_4](start_span)[span_4](end_span)
+        <div class="subtitle"><i class="fa-solid fa-graduation-cap"></i> التحضير لمسابقة الترقية</div>
         
-        <a href="exam.html" class="btn btn-blue">مراجعة الحصة الأولى</a>
-        <a href="review2.html" class="btn btn-orange">مراجعة الحصة الثانية</a>
-        <a href="review3.html" class="btn btn-green">مراجعة الحصة الثالثة (Word)</a>
+        <!-- بطاقات الحصص المحسنة مع الأيقونات والتفاصيل -->
+        <a href="exam.html" class="btn-card btn-h1">[span_5](start_span)[span_5](end_span)
+            <div class="btn-icon"><i class="fa-solid fa-desktop"></i></div>
+            <div class="btn-content">
+                <div class="btn-title">مراجعة الحصة الأولى</div>[span_6](start_span)[span_6](end_span)
+                <div class="btn-desc">أساسيات الإعلام الآلي</div>
+            </div>
+            <div class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+
+        <a href="review2.html" class="btn-card btn-h2">[span_7](start_span)[span_7](end_span)
+            <div class="btn-icon"><i class="fa-solid fa-gears"></i></div>
+            <div class="btn-content">
+                <div class="btn-title">مراجعة الحصة الثانية</div>[span_8](start_span)[span_8](end_span)
+                <div class="btn-desc">البرمجيات</div>
+            </div>
+            <div class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+
+        <a href="review3.html" class="btn-card btn-h3">
+            <div class="btn-icon"><i class="fa-solid fa-file-word"></i></div>
+            <div class="btn-content">
+                <div class="btn-title">مراجعة الحصة الثالثة</div>
+                <div class="btn-desc">وورد (Microsoft Office Word)</div>
+            </div>
+            <div class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+
+        <!-- الجزء السفلي المتضمن العبارة ورابط التلغرام -->
+        <div class="footer">
+            <div class="motto"><i class="fa-solid fa-lightbulb" style="color: #ffd369; margin-left: 5px;"></i> التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
+            <a href="https://t.me/اسم_قناتك_هنا" target="_blank" class="telegram-link">
+                <i class="fa-brands fa-telegram"></i>
+                <span>قناة التلغرام: أكاديمية النسر للتدريب والتعليم التقني</span>
+            </a>
+        </div>
     </div>
 
 </body>
