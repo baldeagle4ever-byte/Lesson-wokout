@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أكاديمية النسر - صفحة البداية</title>
-    <!-- استدعاء مكتبة Font Awesome للأيقونات الاحترافية -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             background-color: #1a2a33;
@@ -33,7 +31,6 @@
         .logo { 
             width: 90px; 
             margin-bottom: 15px; 
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
         h1 { 
             color: #ffad33; 
@@ -43,48 +40,45 @@
         }
         .welcome-msg { 
             color: #cfd8dc; 
-            margin: 0 0 8px 0; 
+            margin: 0 0 12px 0; 
             font-size: 16px;
         }
         .subtitle {
             color: #ff9f43;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            margin: 0 0 30px 0;
+            margin: 0 0 25px 0;
             background: rgba(255, 159, 67, 0.1);
             padding: 6px 15px;
             border-radius: 20px;
             display: inline-block;
         }
         
-        /* تحسين أشكال أزرار الحصص */
+        /* أزرار الحصص المحسنة والآمنة */
         .btn-card {
             display: flex;
             align-items: center;
             background-color: #2c3e50;
-            margin: 18px 0;
+            margin: 15px 0;
             padding: 16px 20px;
             border-radius: 16px;
             text-decoration: none;
             color: white;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
             text-align: right;
             box-sizing: border-box;
         }
         .btn-card:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .btn-icon {
-            font-size: 26px;
-            margin-left: 20px;
-            width: 45px;
-            height: 45px;
+            font-size: 24px;
+            margin-left: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 12px;
         }
         .btn-content {
             flex-grow: 1;
@@ -99,29 +93,19 @@
             color: #b0bec5;
         }
         
-        /* تخصيص ألوان وتوهج البطاقات */
-        .btn-h1 .btn-icon { background: rgba(52, 172, 224, 0.15); color: #34ace0; }
-        .btn-h1:hover { border-color: #34ace0; background-color: rgba(52, 172, 224, 0.08); }
-        
-        .btn-h2 .btn-icon { background: rgba(255, 159, 67, 0.15); color: #ff9f43; }
-        .btn-h2:hover { border-color: #ff9f43; background-color: rgba(255, 159, 67, 0.08); }
-        
-        .btn-h3 .btn-icon { background: rgba(46, 213, 115, 0.15); color: #2ed573; }
-        .btn-h3:hover { border-color: #2ed573; background-color: rgba(46, 213, 115, 0.08); }
+        /* تمييز حدود الأزرار عند التمرير */
+        .btn-h1:hover { border-color: #34ace0; }
+        .btn-h2:hover { border-color: #ff9f43; }
+        .btn-h3:hover { border-color: #2ed573; }
 
         .arrow-left {
-            font-size: 16px;
+            font-size: 18px;
             color: #78909c;
-            transition: transform 0.3s;
-        }
-        .btn-card:hover .arrow-left {
-            transform: translateX(-5px);
-            color: white;
         }
 
-        /* الجزء السفلي والعبارات */
+        /* الجزء السفلي */
         .footer {
-            margin-top: 35px;
+            margin-top: 30px;
             border-top: 1px solid #2c3e50;
             padding-top: 20px;
         }
@@ -132,73 +116,68 @@
             margin-bottom: 15px;
         }
         .telegram-link {
-            display: inline-flex;
-            align-items: center;
+            display: inline-block;
             color: #26a69a;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.2s;
             background: rgba(38, 166, 154, 0.08);
             padding: 8px 16px;
             border-radius: 30px;
+            transition: background 0.2s;
         }
         .telegram-link:hover {
-            color: #4db6ac;
             background: rgba(38, 166, 154, 0.15);
-        }
-        .telegram-link i {
-            margin-left: 8px;
-            font-size: 16px;
+            color: #4db6ac;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- الشعار والترتيب العلوي -->
-        <img src="logo.png" alt="Logo" class="logo">[span_2](start_span)[span_2](end_span)
-        <h1>أكاديمية النسر</h1>[span_3](start_span)[span_3](end_span)
-        <p class="welcome-msg">مرحباً بك في منصة الاختبارات والمراجعات الذكية</p>[span_4](start_span)[span_4](end_span)
-        <div class="subtitle"><i class="fa-solid fa-graduation-cap"></i> التحضير لمسابقة الترقية</div>
+        <!-- الشعار والترتيب العلوي بعبارات ورموز أساسية -->
+        <img src="logo.png" alt="🦅" class="logo">
+        <h1>أكاديمية النسر</h1>
+        <p class="welcome-msg">مرحباً بك في منصة الاختبارات والمراجعات الذكية</p>
+        <div class="subtitle">🎓 التحضير لمسابقة الترقية</div>
         
-        <!-- بطاقات الحصص المحسنة مع الأيقونات والتفاصيل -->
-        <a href="exam.html" class="btn-card btn-h1">[span_5](start_span)[span_5](end_span)
-            <div class="btn-icon"><i class="fa-solid fa-desktop"></i></div>
+        <!-- بطاقات الحصص -->
+        <a href="exam.html" class="btn-card btn-h1">
+            <div class="btn-icon">💻</div>
             <div class="btn-content">
-                <div class="btn-title">مراجعة الحصة الأولى</div>[span_6](start_span)[span_6](end_span)
+                <div class="btn-title">مراجعة الحصة الأولى</div>
                 <div class="btn-desc">أساسيات الإعلام الآلي</div>
             </div>
-            <div class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="arrow-left">◀</div>
         </a>
 
-        <a href="review2.html" class="btn-card btn-h2">[span_7](start_span)[span_7](end_span)
-            <div class="btn-icon"><i class="fa-solid fa-gears"></i></div>
+        <a href="review2.html" class="btn-card btn-h2">
+            <div class="btn-icon">⚙️</div>
             <div class="btn-content">
-                <div class="btn-title">مراجعة الحصة الثانية</div>[span_8](start_span)[span_8](end_span)
+                <div class="btn-title">مراجعة الحصة الثانية</div>
                 <div class="btn-desc">البرمجيات</div>
             </div>
-            <div class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="arrow-left">◀</div>
         </a>
 
         <a href="review3.html" class="btn-card btn-h3">
-            <div class="btn-icon"><i class="fa-solid fa-file-word"></i></div>
+            <div class="btn-icon">📝</div>
             <div class="btn-content">
                 <div class="btn-title">مراجعة الحصة الثالثة</div>
                 <div class="btn-desc">وورد (Microsoft Office Word)</div>
             </div>
-            <div class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="arrow-left">◀</div>
         </a>
 
-        <!-- الجزء السفلي المتضمن العبارة ورابط التلغرام -->
+        <!-- الجزء السفلي -->
         <div class="footer">
-            <div class="motto"><i class="fa-solid fa-lightbulb" style="color: #ffd369; margin-left: 5px;"></i> التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
+            <div class="motto">💡 التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
             <a href="https://t.me/اسم_قناتك_هنا" target="_blank" class="telegram-link">
-                <i class="fa-brands fa-telegram"></i>
-                <span>قناة التلغرام: أكاديمية النسر للتدريب والتعليم التقني</span>
+                📢 قناة التلغرام: أكاديمية النسر للتدريب والتعليم التقني
             </a>
         </div>
     </div>
 
 </body>
 </html>
+
