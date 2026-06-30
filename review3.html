@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراجعة الحصة الثالثة (Word) - أكاديمية النسر</title>
+    <style>
+        body {
+            background-color: #1a2a33;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            max-width: 850px;
+            width: 100%;
+            background: #243441;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h2 { color: #ffad33; margin: 5px 0; font-size: 24px; }
+        .header p { color: #cfd8dc; font-size: 14px; margin: 5px 0 0 0; }
+        .progress-bar {
+            height: 6px;
+            background-color: #1a2a33;
+            border-radius: 3px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #ff9f43;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .question-box { display: none; }
+        .question-box.active { display: block; }
+        .question-text { font-size: 20px; font-weight: bold; margin-bottom: 20px; line-height: 1.6; }
+        .options-list { display: flex; flex-direction: column; gap: 12px; }
+        .option {
+            background: #2c3e50;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            border: 2px solid transparent;
+            font-size: 16px;
+        }
+        .option:hover { background: #34495e; transform: scale(1.01); }
+        .option.correct { background: #2ed573 !important; border-color: #26af5f; color: white; }
+        .option.wrong { background: #ff4757 !important; border-color: #d63031; color: white; }
+        .actions { margin-top: 25px; text-align: left; }
+        .btn {
+            background-color: #ff9f43;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            display: none;
+            transition: background 0.2s;
+        }
+        .btn:hover { background-color: #e67e22; }
+        .results-window { display: none; text-align: center; padding: 20px; }
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #ffad33;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+        }
+        .score-circle .num { font-size: 32px; font-weight: bold; color: #ffad33; }
+        .feedback { font-size: 18px; margin-top: 15px; color: #cfd8dc; }
+        .home-btn {
+            display: inline-block;
+            margin-top: 25px;
+            background-color: #34ace0;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .home-btn:hover { background-color: #227093; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h2>🦅 مراجعة الحصة الثالثة: Microsoft Office Word</h2>
+        <p id="question-counter">السؤال 1 من 20</p>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress" id="progress-line"></div>
+    </div>
+
+    <div id="quiz-window">
+        <div id="question-container"></div>
+        <div class="actions">
+            <button class="btn" id="next-button" onclick="nextQuestion()">التالي</button>
+        </div>
+    </div>
+
+    <div id="results-window" class="results-window">
+        <h2>📊 نتيجتك النهائية</h2>
+        <div class="score-circle">
+            <div class="num" id="final-score">0</div>
+            <div style="font-size: 12px; color: #aaa;" id="total-label">من 20</div>
+        </div>
+        <p class="feedback" id="feedback-text"></p>
+        <a href="index.html" class="home-btn">العودة للرئيسية</a>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        // --- العمليات على الخط والفقرة ---
+        {
+            q: "أي من الأزرار التالية في تبويب 'الصفحة الرئيسية' يستخدم لتغيير المسافة بين أسطر الفقرة الواحدة؟",
+            options: ["محاذاة النص", "تباعد الأسطر والفقرات", "ضبط المستند", "تعداد نقطي"],
+            correct: 1
+        },
+        {
+            q: "لجعل حواف الفقرة متساوية ومستقيمة من الجانبين الأيمن والأيسر تماماً، نختار الأمر:",
+            options: ["محاذاة إلى اليمين", "توسط", "محاذاة إلى اليسار", "ضبط (Justify)"],
+            correct: 3
+        },
+        {
+            q: "إذا أردت إنشاء قائمة مرتبة بأرقام تسلسلية تلقائية (1، 2، 3...)، فما الخيار المناسب في تبويب الصفحة الرئيسية؟",
+            options: ["تعداد نقطي", "ترقيم", "تباعد الفقرات", "أنماط جاهزة"],
+            correct: 1
+        },
+        {
+            q: "تغيير لون الخط، وحجمه، ونوعه، وجعله مائلاً أو سميكاً (Bold) يتم من خلال مجموعة:",
+            options: ["فقرة (Paragraph)", "أنماط (Styles)", "خط (Font)", "تحرير (Editing)"],
+            correct: 2
+        },
+        {
+            q: "عند الرغبة في تمييز عناصر غير مرتبة بنقاط أو رموز معينة، نستخدم خاصية:",
+            options: ["التعداد النقطي", "الترقيم الرقمي", "التباعد العمودي", "الحدود والتظليل"],
+            correct: 0
+        },
+        // --- البحث والاستبدال ---
+        {
+            q: "الوصول السريع إلى أداة 'البحث والاستبدال' في Word لتغيير كلمة محددة بكلمة أخرى في المستند بأكمله يكون عبر تبويب:",
+            options: ["عرض", "إدراج", "تنسيق الصفحة", "الصفحة الرئيسية (مجموعة تحرير)"],
+            correct: 3
+        },
+        {
+            q: "الاختصار اللوحي المباشر لفتح نافذة 'الاستبدال' (Replace) في برنامج Word هو:",
+            options: ["Ctrl + F", "Ctrl + H", "Ctrl + P", "Ctrl + S"],
+            correct: 1
+        },
+        // --- الإدراج ---
+        {
+            q: "لإضافة جدول منظم من صفوف وأعمدة لعرض البيانات، نتوجه مباشرة إلى تبويب:",
+            options: ["إدراج (Insert)", "الصفحة الرئيسية", "مراسلات", "عرض"],
+            correct: 0
+        },
+        {
+            q: "إذا أردت إدراج مخطط هيكلي أو رسم بياني ذكي لتوضيح دورة حياة مشروع أو شجرة عائلية، نختار:",
+            options: ["شكل (Shape)", "سمارت آرت (SmartArt)", "وورد آرت (WordArt)", "مربع نص"],
+            correct: 1
+        },
+        {
+            q: "لإضافة نص زخرفي ملون وبمؤثرات بصرية ثلاثية الأبعاد، نستخدم أداة:",
+            options: ["مربع نص", "الخط المائل", "وورد آرت (WordArt)", "الرموز"],
+            correct: 2
+        },
+        {
+            q: "عند الرغبة في وضع نص حر يمكن تحريكه ونقله بسهولة في أي مكان داخل الصفحة فوق الصور أو الأشكال، ندرج:",
+            options: ["مربع نص (Text Box)", "جدول", "سمارت آرت", "تعداد نقطي"],
+            correct: 0
+        },
+        {
+            q: "يمكننا إدراج (دائرة، مستطيل، سهم) داخل المستند من خلال قائمة:",
+            options: ["سمارت آرت", "أشكال (Shapes)", "نماذج ثلاثية الأبعاد", "لقطة شاشة"],
+            correct: 1
+        },
+        // --- المراسلات ---
+        {
+            q: "الخطوة الأولى والأهم للبدء في عملية دمج المراسلات لربط المستند بقاعدة بيانات أو ملف Excel هي:",
+            options: ["إدراج حقل الدمج", "تحديد المستلمين (Select Recipients)", "معاينة النتائج", "إنهاء ودمج"],
+            correct: 1
+        },
+        {
+            q: "تسمح لنا خاصية دمج المراسلات (Mail Merge) بـ:",
+            options: ["إرسال الملف عبر البريد كنسخة PDF فقط", "تصميم شريحة عرض متحركة", "إنتاج مجموعة مستندات مخصصة تلقائياً (مثل الشهادات أو الرسائل) لأسماء متعددة", "ترجمة المستند إلى لغة أخرى"],
+            correct: 2
+        },
+        {
+            q: "لوضع اسم الطالب أو رقم جلوسه في مكان محدد داخل التصميم ليأخذ بياناته تلقائياً من القائمة المربوطة، نختار:",
+            options: ["كتلة العنوان", "سطر الترحيب", "إدراج حقل الدمج (Insert Merge Field)", "تحديث التسميات"],
+            correct: 2
+        },
+        {
+            q: "قبل القيام بعملية الطباعة النهائية للمراسلات المدمجة، للتأكد من أن الأسماء تظهر بشكل صحيح داخل المتغيرات نضغط على زر:",
+            options: ["معاينة النتائج (Preview Results)", "البحث عن مستلم", "التحقق من الأخطاء", "معاينة الطباعة من تبويب عرض"],
+            correct: 0
+        },
+        {
+            q: "لإتمام العملية وحفظ كل الشهادات أو الخطابات في ملف واحد أو إرسالها للمطبعة مباشرة، نضغط على زر:",
+            options: ["تحديد المستلمين", "إنهاء ودمج (Finish & Merge)", "تنسيق الصفحة", "إدراج حقل"],
+            correct: 1
+        },
+        // --- تبويبات عامة ---
+        {
+            q: "أي تبويب نستخدمه إذا أردنا تغيير طريقة رؤية المستند (مثل وضع القراءة، أو تخطيط الطباعة، أو تكبير وتصغير الشاشة)؟",
+            options: ["تنسيق الصفحة", "عرض (View)", "مراسلات", "إدراج"],
+            correct: 1
+        },
+        {
+            q: "لتعديل هوامش الصفحة، واتجاهها (عمودي أو أفقي)، وحجم الورق (A4، Letter)، نتوجه لتبويب:",
+            options: ["تخطيط / تنسيق الصفحة (Layout)", "عرض", "الصفحة الرئيسية", "إدراج"],
+            correct: 0
+        },
+        {
+            q: "أي من الأدوات التالية لا تنتمي لتبويب 'إدراج' (Insert)؟",
+            options: ["جدول", "سمارت آرت", "مربع نص", "ضبط ومحاذاة الفقرة"],
+            correct: 3
+        }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    function renderQuestion() {
+        const totalQ = questions.length;
+        document.getElementById('question-counter').innerText = `السؤال ${currentIdx + 1} من ${totalQ}`;
+        document.getElementById('next-button').style.display = 'none';
+        
+        const progressPercent = ((currentIdx) / totalQ) * 100;
+        document.getElementById('progress-line').style.width = `${progressPercent}%`;
+
+        const q = questions[currentIdx];
+        const container = document.getElementById('question-container');
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+            optionsHtml += `<div class="option" onclick="checkAnswer(this, ${idx})">${opt}</div>`;
+        });
+
+        container.innerHTML = `
+            <div class="question-box active">
+                <div class="question-text">${q.q}</div>
+                <div class="options-list">${optionsHtml}</div>
+            </div>
+        `;
+    }
+
+    function checkAnswer(selectedElement, choiceIndex) {
+        const q = questions[currentIdx];
+        const options = selectedElement.parentElement.getElementsByClassName('option');
+        
+        for (let opt of options) {
+            opt.style.pointerEvents = 'none';
+        }
+
+        if (choiceIndex === q.correct) {
+            selectedElement.classList.add('correct');
+            score++;
+        } else {
+            selectedElement.classList.add('wrong');
+            options[q.correct].classList.add('correct');
+        }
+        
+        document.getElementById('next-button').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        if (currentIdx < questions.length) {
+            renderQuestion();
+        } else {
+            finishQuiz();
+        }
+    }
+
+    function finishQuiz() {
+        document.getElementById('progress-line').style.width = `100%`;
+        document.getElementById('quiz-window').style.display = 'none';
+        document.getElementById('results-window').style.display = 'block';
+        document.getElementById('final-score').innerText = score;
+        
+        const feedback = document.getElementById('feedback-text');
+        const percent = (score / questions.length) * 100;
+
+        if (percent >= 85) {
+            feedback.innerText = "أداء ممتاز ومبهر! لقد أتقنت مهارات تبويبات Microsoft Word المتقدمة والمراسلات بدقة عالية. 🦅";
+        } else if (percent >= 60) {
+            feedback.innerText = "عمل رائع! لقد نجحت في الاختبار، ولديك معرفة جيدة جداً بمهارات الحصة الثالثة.";
+        } else {
+            feedback.innerText = "تحتاج إلى إعادة تطبيق خطوات الإدراج والمراسلات عملياً في برنامج Word لتعزيز مهاراتك. حاول مرة أخرى!";
+        }
+    }
+
+    window.onload = renderQuestion;
+</script>
+
+</body>
+  </html>
+  
