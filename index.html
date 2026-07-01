@@ -54,7 +54,6 @@
             display: inline-block;
         }
         
-        /* أزرار الحصص المحسنة والآمنة */
         .btn-card {
             display: flex;
             align-items: center;
@@ -93,17 +92,17 @@
             color: #b0bec5;
         }
         
-        /* تمييز حدود الأزرار عند التمرير */
         .btn-h1:hover { border-color: #34ace0; }
         .btn-h2:hover { border-color: #ff9f43; }
         .btn-h3:hover { border-color: #2ed573; }
+        .btn-excel-lesson:hover { border-color: #4b7bec; }
+        .btn-excel-quiz:hover { border-color: #00d2d3; }
 
         .arrow-left {
             font-size: 18px;
             color: #78909c;
         }
 
-        /* الجزء السفلي */
         .footer {
             margin-top: 30px;
             border-top: 1px solid #2c3e50;
@@ -135,13 +134,11 @@
 <body>
 
     <div class="container">
-        <!-- الشعار والترتيب العلوي بعبارات ورموز أساسية -->
         <img src="logo.png" alt="🦅" class="logo">
         <h1>أكاديمية النسر</h1>
         <p class="welcome-msg">مرحباً بك في منصة الاختبارات والمراجعات الذكية</p>
         <div class="subtitle">🎓 التحضير لمسابقة الترقية</div>
         
-        <!-- بطاقات الحصص -->
         <a href="exam.html" class="btn-card btn-h1">
             <div class="btn-icon">💻</div>
             <div class="btn-content">
@@ -155,7 +152,7 @@
             <div class="btn-icon">⚙️</div>
             <div class="btn-content">
                 <div class="btn-title">مراجعة الحصة الثانية</div>
-                <div class="btn-desc">البرمجيات والشبكات والذاكرة والتخزين</div>
+                <div class="btn-desc">الشبكات، التخزين، والبرمجيات</div>
             </div>
             <div class="arrow-left">◀</div>
         </a>
@@ -169,7 +166,24 @@
             <div class="arrow-left">◀</div>
         </a>
 
-        <!-- الجزء السفلي -->
+        <a href="excel-lessons.html" class="btn-card btn-excel-lesson">
+            <div class="btn-icon">📖</div>
+            <div class="btn-content">
+                <div class="btn-title">تعليم دوال الإكسيل</div>
+                <div class="btn-desc">طرق الصياغة، الشرح والمقارنة بالفرنسية</div>
+            </div>
+            <div class="arrow-left">◀</div>
+        </a>
+
+        <a href="review4.html" class="btn-card btn-excel-quiz">
+            <div class="btn-icon">📊</div>
+            <div class="btn-content">
+                <div class="btn-title">مراجعة الحصة الرابعة</div>
+                <div class="btn-desc">اختبار التبويبات والتنسيقات في Excel</div>
+            </div>
+            <div class="arrow-left">◀</div>
+        </a>
+
         <div class="footer">
             <div class="motto">💡 التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
             <a href="https://t.me/اسم_قناتك_هنا" target="_blank" class="telegram-link">
@@ -180,4 +194,3 @@
 
 </body>
 </html>
-
