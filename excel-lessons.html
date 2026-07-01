@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعليم دوال الإكسيل - أكاديمية النسر</title>
+    <style>
+        body {
+            background-color: #1a2a33;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .lesson-container {
+            max-width: 850px;
+            width: 100%;
+            background: #243441;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        .header h2 { color: #ffad33; margin: 5px 0; font-size: 26px; }
+        .card {
+            background: #2c3e50;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-right: 5px solid #ff9f43;
+        }
+        .card h3 { color: #ff9f43; margin-top: 0; font-size: 18px; margin-bottom: 12px; }
+        .card p, .card li { color: #cfd8dc; font-size: 15px; line-height: 1.6; }
+        ul { padding-right: 20px; margin: 8px 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: #1a2a33;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #2c3e50;
+            font-size: 14px;
+        }
+        th { background-color: #ff9f43; color: #1a2a33; font-weight: bold; }
+        .code {
+            background: #1a2a33;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #2ed573;
+            font-family: Consolas, Monaco, monospace;
+            direction: ltr;
+            display: inline-block;
+        }
+        .home-btn {
+            display: inline-block;
+            margin-top: 15px;
+            background-color: #34ace0;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+            text-align: center;
+        }
+        .home-btn:hover { background-color: #227093; }
+    </style>
+</head>
+<body>
 
+<div class="lesson-container">
+    <div class="header">
+        <h2>📖 حصة الشرح: تعليم دوال الإكسيل (Excel Formulas)</h2>
+    </div>
+
+    <div class="card">
+        <h3>1. طرق إدراج دالة في خلية معينة</h3>
+        <p>يمكن إدراج الصيغ والدوال في برنامج Excel بطريقتين أساسيتين:</p>
+        <ul>
+            <li><strong>كتابة الصيغة مباشرة:</strong> عن طريق تحديد الخلية المراد إظهار النتيجة بها، ثم كتابة علامة التساوي <span class="code">=</span> يتبعها اسم الدالة ونطاق الخلايا مباشرة (مثال: <span class="code">=SUM(A1:A10)</span>).</li>
+            <li><strong>الاختيار من تبويب صيغ:</strong> تحديد الخلية، ثم الذهاب إلى علامة التبويب <strong>"صيغ" (Formulas)</strong> في الشريط العلوي، واختيار الدالة المطلوبة من المكتبات الجاهزة، أو الضغط على زر <span class="code">fx</span> (إدراج دالة).</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>2. الدوال الحسابية التلقائية الأساسية</h3>
+        <p>يوفر إكسيل ميزة الجمع والتعديل التلقائي السريع لأهم العمليات الإحصائية البسيطة:</p>
+        <ul>
+            <li><strong>الجمع التلقائي (SUM / SOMME):</strong> لحساب مجموع قيم الخلايا المحددة.</li>
+            <li><strong>المتوسط الحسابي (AVERAGE / MOYENNE):</strong> لحساب معدل أو متوسط القيم.</li>
+            <li><strong>الأعلى (MAX):</strong> لاستخراج القيمة القصوى أو أكبر رقم في النطاق.</li>
+            <li><strong>الأقل (MIN):</strong> لاستخراج القيمة الدنيا أو أصغر رقم في النطاق.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>3. الفروقات بين الصيغ وكتابتها بالنسخ (العربية/الإنجليزية) والنسخة الفرنسية</h3>
+        <p>تختلف صياغة وحروف الدوال باختلاف لغة تثبيت حزمة الأوفيس، كما يختلف رمز الفصل بين الخلايا:</p>
+        <ul>
+            <li><strong>النسخة الإنجليزية / العربية الموحدة:</strong> تستخدم الأسماء الإنجليزية للدوال، ويكون الفاصل بين وسيطات الدالة هو الفاصلة العادية <span class="code">,</span>.</li>
+            <li><strong>النسخة الفرنسية:</strong> تستخدم مصطلحات فرنسية تماماً للدوال، والفاصل الأساسي بين وسيطات الدالة داخل الأقواس هو الفاصلة المنقوطة <span class="code">;</span> وهو أمر جوهري لمنع حدوث أخطاء مثل <span class="code">#NAME?</span>.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>4. جدول المقارنة وشرح الدوال المتقدمة وما يقابلها</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>اسم الدالة (EN/AR)</th>
+                    <th>المقابل بالفرنسية (FR)</th>
+                    <th>الوظيفة والشرح الشامل</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="code">SUM</span></td>
+                    <td><span class="code">SOMME</span></td>
+                    <td>جمع قيم كافة الخلايا في النطاق المحدد.</td>
+                </tr>
+                <tr>
+                    <td><span class="code">AVERAGE</span></td>
+                    <td><span class="code">MOYENNE</span></td>
+                    <td>حساب المتوسط الحسابي (المجموع ÷ العدد).</td>
+                </tr>
+                <tr>
+                    <td><span class="code">MAX</span></td>
+                    <td><span class="code">MAX</span></td>
+                    <td>إيجاد أكبر أو أعلى قيمة رقمية.</td>
+                </tr>
+                <tr>
+                    <td><span class="code">MIN</span></td>
+                    <td><span class="code">MIN</span></td>
+                    <td>إيجاد أصغر أو أقل قيمة رقمية.</td>
+                </tr>
+                <tr>
+                    <td><span class="code">COUNTIF</span></td>
+                    <td><span class="code">NB.SI</span></td>
+                    <td>حساب عدد الخلايا التي تستوفي شرطاً معيناً.</td>
+                </tr>
+                <tr>
+                    <td><span class="code">DATE</span></td>
+                    <td><span class="code">DATE</span></td>
+                    <td>إدراج وتنسيق تاريخ معين (سنة، شهر، يوم).</td>
+                </tr>
+                <tr>
+                    <td><span class="code">TIME</span></td>
+                    <td><span class="code">TEMPS</span></td>
+                    <td>إدراج وقت محدد بالساعات والدقائق والثواني.</td>
+                </tr>
+                <tr>
+                    <td><span class="code">IF</span></td>
+                    <td><span class="code">SI</span></td>
+                    <td>الدالة الشرطية (إذا تحقق الشرط نفذ 'أ'، وإلا نفذ 'ب').</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="home-btn">العودة لصفحة البداية</a>
+    </div>
+</div>
+
+</body>
+  </html>
+  
