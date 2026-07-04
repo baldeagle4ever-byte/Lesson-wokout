@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكاة إجرائية Word - أكاديمية النسر</title>
+    <style>
+        body { background-color: #1a2a33; color: white; font-family: 'Segoe UI', sans-serif; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .quiz-container { max-width: 800px; width: 100%; background: #243441; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .header { text-align: center; border-bottom: 2px solid #2b579a; padding-bottom: 15px; margin-bottom: 20px; }
+        .header h2 { color: #ffad33; margin: 5px 0; }
+        .question-box { display: none; }
+        .question-box.active { display: block; }
+        .scenario { background: #2c3e50; padding: 15px; border-radius: 8px; border-right: 4px solid #34ace0; font-size: 15px; color: #b0bec5; margin-bottom: 15px; line-height: 1.5; }
+        .question-text { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { background: #2c3e50; padding: 14px 18px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; font-size: 15px; }
+        .option:hover { background: #34495e; }
+        .option.correct { background: #2ed573 !important; border-color: #26af5f; }
+        .option.wrong { background: #ff4757 !important; border-color: #d63031; }
+        .btn { background-color: #ff9f43; color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; display: none; margin-top: 15px; font-weight: bold; }
+        .result-view { display: none; text-align: center; }
+        .home-btn { display: inline-block; margin-top: 20px; background-color: #34ace0; color: white; padding: 10px 25px; border-radius: 20px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h2>📝 محاكاة الإجراءات التطبيقية: Microsoft Word</h2>
+        <p id="counter">السؤال 1 من 8</p>
+    </div>
+
+    <div id="quiz-body">
+        <div id="question-place"></div>
+        <button class="btn" id="next-btn" onclick="nextQ()">السؤال التالي ◀</button>
+    </div>
+
+    <div id="result-body" class="result-view">
+        <h3>📊 النتيجة النهائية للمحاكاة الإجرائية</h3>
+        <p id="score-text" style="font-size: 22px; font-weight: bold; color: #ffad33;"></p>
+        <p id="feedback" style="color: #cfd8dc;"></p>
+        <a href="index.html" class="home-btn">🏠 العودة للرئيسية</a>
+    </div>
+</div>
+
+<script>
+    const wordQuestions = [
+        {
+            scenario: "📂 طلب منك رئيسك حفظ وثيقة إدارية حالية باسم جديد تماماً لتعديلها مع الإبقاء على النسخة الأصلية دون مساس.",
+            q: "🤔 ما هو المسار الإجرائي والخطوة الصحيحة لتنفيذ ذلك داخل البرنامج؟",
+            options: [
+                "🔲 الذهاب إلى تبويب (ملف File) ثم اختيار الأمر (حفظ Save) مباشرة",
+                "✅ الذهاب إلى تبويب (ملف File) ثم اختيار الأمر (حفظ باسم Save As) وتحديد المجلد والاسم الجديد",
+                "🔲 الانتقال إلى تبويب (إدراج Insert) واختيار ميزة كائن جديد",
+                "🔲 الضغط على زر إغلاق النافذة والموافقة على التعديل"
+            ],
+            correct: 1
+        },
+        {
+            scenario: "🎨 تريد تعديل نوع الخط لفقرة محددة مسبقاً وتكبير حجمه ليكون متوافقاً مع معايير المراسلات الإدارية الرسمية.",
+            q: "🤔 أين تجد هذه الأوامر الإجرائية مجمعة في واجهة البرنامج؟",
+            options: [
+                "🔲 تبويب (إدراج Insert) ➡️ مجموعة (رسومات توضيحية)",
+                "🔲 تبويب (عرض View) ➡️ مجموعة (نوافذ متتالية)",
+                "✅ تبويب (الشريط الرئيسي Home) ➡️ مجموعة (خط Font)",
+                "🔲 تبويب (تخطيط Layout) ➡️ مجموعة (إعداد الصفحة)"
+            ],
+            correct: 2
+        },
+        {
+            scenario: "📏 لاحظت أن هوامش الصفحة ومواقع التوقف غير مرئية على شاشتك وتريد إظهار مسطرة القياس الأفقية والعمودية لتنظيم النص.",
+            q: "🤔 ما هو الإجراء المناسب لإظهار المسطرة؟",
+            options: [
+                "✅ الذهاب لتبويب (عرض View) ➡️ وتفعيل خيار (المسطرة Ruler) في مجموعة إظهار",
+                "🔲 الذهاب لتبويب (رسم Draw) واختيار أداة القلم المستقيم",
+                "🔲 النقر المزدوج على أي مساحة فارغة وسط المستند الحالي",
+                "🔲 الدخول لقائمة (ملف) ثم اختيار (خيارات متقدمة)"
+            ],
+            correct: 0
+        },
+        {
+            scenario: "📊 ترغب في تنظيم قائمة بأسماء الموظفين الحاليين بشكل نقطي مرتب مع دفع مستويات القائمة الفرعية نحو الداخل لتوضيح التبعية الإدارية.",
+            q: "🤔 كيف تقوم بضبط وضبط مستويات القوائم المتقدمة هذه؟",
+            options: [
+                "🔲 الضغط المستمر على زر Enter بعد كل اسم",
+                "✅ من تبويب (الشريط الرئيسي Home) ➡️ مجموعة (فقرة Paragraph) ➡️ اختيار التعداد النقطي واستخدام مفتاح Tab لتغيير المستوى",
+                "🔲 من تبويب (تصميم Design) واختيار علامة مائية مخصصة",
+                "🔲 من تبويب (إدراج) ثم اختيار (رموز)"
+            ],
+            correct: 1
+        },
+        {
+            scenario: "📄 تريد إنهاء الكتابة في الصفحة الحالية والبدء في كتابة محور جديد تماماً في صفحة جديدة مستقلة دون ملء الفراغات بالضغط العشوائي على Enter.",
+            q: "🤔 ما هو الإجراء الاحترافي السريع لعمل ذلك؟",
+            options: [
+                "🔲 تبويب (عرض) ➡️ ترتيب النوافذ المفتوحة",
+                "🔲 تبويب (مراجعة) ➡️ مجموعة تدقيق إملائي",
+                "✅ تبويب (إدراج Insert) ➡️ مجموعة (صفحات Pages) ➡️ اختيار (فاصل صفحات أو صفحة فارغة)",
+                "🔲 استخدام اختصار لوحة المفاتيح Ctrl + S"
+            ],
+            correct: 2
+        },
+        {
+            scenario: "✏️ قمت بإدراج شكل مربع نص توضيحي وتريد تغيير لون خلفيته الداخلية وجعل حدوده الخارجية حمراء اللون وسميكة.",
+            q: "🤔 ما هي الخطوات الإجرائية للوصول لأدوات تنسيق الأشكال؟",
+            options: [
+                "🔲 النقر على قائمة ملف واختيار طباعة مخصصة",
+                "✅ النقر لتحديد الشكل ➡️ ليظهر تبويب أدوات مخصص يسمى (تنسيق الشكل Shape Format) ➡️ استخدام (تعبئة الشكل) و(المخطط التفصيلي)",
+                "🔲 الانتقال لتبويب مراجع واختيار إدراج تسمية توضيحية",
+                "🔲 النقر بالزر الأيسر مرتين على المسطرة العلوية"
+            ],
+            correct: 1
+        },
+        {
+            scenario: "🖨️ لديك ملف يتكون من 50 صفحة وتريد معاينة تنسيق النص الإجمالي، والتأكد من توافق الهوامش قبل إعطاء الأمر الفعلي بالطبع الفيزيائي على الأوراق.",
+            q: "🤔 ما هو المسار الصحيح لإجراء المعاينة والطباعة؟",
+            options: [
+                "🔲 تبويب (إدراج Insert) ➡️ جداول مخصصة",
+                "🔲 الضغط على زر إغلاق التطبيق مباشرة",
+                "✅ تبويب (ملف File) ➡️ ثم اختيار الأمر (طباعة Print) لتظهر شاشة الإعداد والمعاينة قبل السحب",
+                "🔲 تبويب (مساعد Help) واختيار ميزة التدريب الذاتي"
+            ],
+            correct: 2
+        },
+        {
+            scenario: "🖥️ تقوم بالعمل على مستندين مختلفين للوورد في نفس الوقت وتريد عرضهما معاً على الشاشة جنباً إلى جنب لتسهيل عملية نقل البيانات والمقارنة البصرية.",
+            q: "🤔 ما هو الإجراء الصحيح لتنظيم النوافذ المفتوحة؟",
+            options: [
+                "✅ الانتقال لتبويب (عرض View) ➡️ مجموعة (نافذة Window) ➡️ واختيار الأمر (ترتيب الكل Arrange All أو عرض جنب إلى جنب)",
+                "🔲 النقر على تبويب الشريط الرئيسي واختيار المحاذاة لليمين لكل نافذة",
+                "🔲 إغلاق المستند الأول لفتح المستند الثاني بأمان",
+                "🔲 الدخول لتبويب تخطيط واختيار فواصل الأعمدة"
+            ],
+            correct: 0
+        }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    function renderQ() {
+        document.getElementById('counter').innerText = `السؤال ${currentIdx + 1} من ${wordQuestions.length}`;
+        document.getElementById('next-btn').style.display = 'none';
+        
+        const qData = wordQuestions[currentIdx];
+        const container = document.getElementById('question-place');
+        
+        let optsHtml = '';
+        qData.options.forEach((opt, index) => {
+            optsHtml += `<div class="option" onclick="checkAnswer(this, ${index})">${opt}</div>`;
+        });
+
+        container.innerHTML = `
+            <div class="question-box active">
+                <div class="scenario">${qData.scenario}</div>
+                <div class="question-text">${qData.q}</div>
+                <div class="options">${optsHtml}</div>
+            </div>
+        `;
+    }
+
+    function checkAnswer(element, index) {
+        const qData = wordQuestions[currentIdx];
+        const options = element.parentElement.getElementsByClassName('option');
+        
+        for(let opt of options) { opt.style.pointerEvents = 'none'; }
+
+        if(index === qData.correct) {
+            element.classList.add('correct');
+            score++;
+        } else {
+            element.classList.add('wrong');
+            options[qData.correct].classList.add('correct');
+        }
+        document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextQ() {
+        currentIdx++;
+        if(currentIdx < wordQuestions.length) {
+            renderQ();
+        } else {
+            document.getElementById('quiz-body').style.display = 'none';
+            document.getElementById('result-body').style.display = 'block';
+            document.getElementById('score-text').innerText = `حصلت على: ${score} من ${wordQuestions.length}`;
+            
+            const feedback = document.getElementById('feedback');
+            if(score === wordQuestions.length) {
+                feedback.innerText = "🥇 أداء مذهل وفخر تام! أنت تملك دراية إجرائية كاملة ببرنامج معالج النصوص وورد وعملياته الدقيقة.";
+            } else if (score >= 5) {
+                feedback.innerText = "👍 نتيجة جيدة جداً، متمكن من المسارات الأساسية ويمكنك تحسين مستواك أكثر عبر الممارسة.";
+            } else {
+                feedback.innerText = "📚 مستواك يتطلب إعادة تدريب مكرر على التبويبات والقوائم الوظيفية للبرنامج لتخطي لجان الامتحان.";
+            }
+        }
+    }
+
+    window.onload = renderQ;
+</script>
+</body>
+  </html>
+  
