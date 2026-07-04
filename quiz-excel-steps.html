@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكاة إجرائية Excel - أكاديمية النسر</title>
+    <style>
+        body { background-color: #1a2a33; color: white; font-family: 'Segoe UI', sans-serif; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .quiz-container { max-width: 800px; width: 100%; background: #243441; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .header { text-align: center; border-bottom: 2px solid #217346; padding-bottom: 15px; margin-bottom: 20px; }
+        .header h2 { color: #ffad33; margin: 5px 0; }
+        .question-box { display: none; }
+        .question-box.active { display: block; }
+        .scenario { background: #2c3e50; padding: 15px; border-radius: 8px; border-right: 4px solid #2ed573; font-size: 15px; color: #b0bec5; margin-bottom: 15px; line-height: 1.5; }
+        .question-text { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { background: #2c3e50; padding: 14px 18px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; font-size: 15px; }
+        .option:hover { background: #34495e; }
+        .option.correct { background: #2ed573 !important; border-color: #26af5f; }
+        .option.wrong { background: #ff4757 !important; border-color: #d63031; }
+        .btn { background-color: #ff9f43; color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; display: none; margin-top: 15px; font-weight: bold; }
+        .result-view { display: none; text-align: center; }
+        .home-btn { display: inline-block; margin-top: 20px; background-color: #34ace0; color: white; padding: 10px 25px; border-radius: 20px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h2>📊 محاكاة الإجراءات التطبيقية: Microsoft Excel</h2>
+        <p id="counter">السؤال 1 من 6</p>
+    </div>
+
+    <div id="quiz-body">
+        <div id="question-place"></div>
+        <button class="btn" id="next-btn" onclick="nextQ()">السؤال التالي ◀</button>
+    </div>
+
+    <div id="result-body" class="result-view">
+        <h3>📊 النتيجة النهائية لمحاكاة Excel إجرائياً</h3>
+        <p id="score-text" style="font-size: 22px; font-weight: bold; color: #ffad33;"></p>
+        <p id="feedback" style="color: #cfd8dc;"></p>
+        <a href="index.html" class="home-btn">🏠 العودة للرئيسية</a>
+    </div>
+</div>
+
+<script>
+    const excelQuestions = [
+        {
+            scenario: "📐 تقوم ببناء جدول لحساب الميزانية، وتريد البدء في كتابة صيغة جمع حسابية يدوية داخل خلية فارغة ليتعرف عليها البرنامج كمعادلة وليس كنص عادي.",
+            q: "🤔 ما هو الرمز الإجباري الذي يجب أن تبدأ به كتابتك داخل الخلية لبدء أي صيغة؟",
+            options: [
+                "🔲 الرمز وعلامة النسبة المئوية %",
+                "✅ رمز التساوي الفعلي =",
+                "🔲 رمز الدولار الأمريكي $",
+                "🔲 الرمز الإجرائي المعكوس #"
+            ],
+            correct: 1
+        },
+        {
+            scenario: "🏢 لديك جدول بيانات ضخم يحتوي على 2000 اسم موظف، وعند النزول للأسفل تختفي أسماء الأعمدة العلوية (اللقب، الاسم، الرتبة) مما يسبب ارتباكاً في الإدخال.",
+            q: "🤔 ما هي الخطوات الإجرائية الصحيحة لتثبيت السطر الأول ليظل ظاهراً دائماً أثناء التمرير؟",
+            options: [
+                "🔲 الانتقال لتبويب الشريط الرئيسي واختيار دمج وتوسيط الخلايا",
+                "🔲 تبويب (تخطيط الصفحة Page Layout) ➡️ اختيار الهوامش الضيقة",
+                "✅ تبويب (عرض View) ➡️ مجموعة (نافذة Window) ➡️ النقر على (تجميد الألواح Freeze Panes) واختيار تجميد الصف العلوي",
+                "🔲 النقر بالزر الأيمن على السطر الأول واختيار إخفاء مؤقت"
+            ],
+            correct: 2
+        },
+        {
+            scenario: "🔗 قمت بإنشاء عنوان عريض لجدول إحصائي وتريد دمج 5 خلايا متجاورة أفقياً (A1 إلى E1) لتصبح خلية واحدة واسعة يتوسطها النص تماماً.",
+            q: "🤔 أين تقع هذه الأداة الإجرائية في واجهة إكسيل؟",
+            options: [
+                "✅ تبويب (الشريط الرئيسي Home) ➡️ مجموعة (محاذاة Alignment) ➡️ النقر على أداة (دمج وتوسيط Merge & Center)",
+                "🔲 تبويب (بيانات Data) ➡️ مجموعة أدوات البيانات المتقدمة",
+                "🔲 تبويب (إدراج) ➡️ اختيار جدول محوري متطور",
+                "🔲 قائمة ملف ➡️ خيارات الحفظ والمزامنة"
+            ],
+            correct: 0
+        },
+        {
+            scenario: "💹 قمت بإدخال صيغة معقدة في الخلية الأولى لعامود حساب الضرائب، وتريد تطبيق نفس هذه المعادلة والصيغة تلقائياً على بقية خلايا العامود الباقية (100 موظف) في ثانية واحدة.",
+            q: "🤔 ما هو الإجراء الذكي والسريع المعتمد في إكسيل؟",
+            options: [
+                "🔲 إعادة كتابة الصيغة يدوياً في كل خلية على حدة لضمان الدقة",
+                "🔲 نسخ الخلية ولصقها في برنامج الوورد أولاً",
+                "✅ النقر على الخلية الأولى ➡️ ثم سحب (مقبض التعبئة التلقائية المربع الصغير) لأسفل الزاوية اليسرى/اليمنى للخلية عبر بقية السطور",
+                "🔲 الذهاب لتبويب صيغ واختيار التحقق من الأخطاء البنائية"
+            ],
+            correct: 2
+        },
+        {
+            scenario: "📊 قمت بإدراج تخطيط بياني دائري لعرض سعت التخزين المستهلكة، وتريد الآن إظهار النسب المئوية العددية فوق أجزاء الدائرة مباشرة لتسهيل قراءتها.",
+            q: "🤔 ما هي الخطوات الإجرائية لإضافة وتعديل هذه التسميات؟",
+            options: [
+                "🔲 النقر على قائمة ملف واختيار إعدادات الصفحة",
+                "✅ تحديد المخطط البياني ➡️ ظهور تبويب (تصميم المخطط Chart Design) ➡️ النقر على (إضافة عنصر مخطط) ثم اختيار (تسميات البيانات Data Labels)",
+                "🔲 الذهاب لتبويب مراجعة واختيار حماية ورقة العمل",
+                "🔲 كتابة الأرقام يدوياً باستخدام أداة WordArt فوق المخطط"
+            ],
+            correct: 1
+        },
+        {
+            scenario: "💵 قمت بكتابة أرقام مجردة في عامود (الراتب الأساسي) وتريد تحويل هيئة الأرقام لتظهر بجانبها العملة الرسمية تلقائياً (مثل د.ج أو $).",
+            q: "🤔 ما هو المسار الصحيح لعمل هذا التنسيق الرقمي؟",
+            options: [
+                "✅ تحديد الخلايا ➡️ تبويب (الشريط الرئيسي Home) ➡️ مجموعة (رقم Number) ➡️ واختيار تنسيق (عملة Currency)",
+                "🔲 الذهاب لتبويب إدراج واختيار رموز وعلامات خاصة لكل خلية",
+                "🔲 الدخول لتبويب عرض واختيار خطوط الشبكة الملونة",
+                "🔲 النقر المزدوج على الفاصل بين الأعمدة"
+            ],
+            correct: 0
+        }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    function renderQ() {
+        document.getElementById('counter').innerText = `السؤال ${currentIdx + 1} من ${excelQuestions.length}`;
+        document.getElementById('next-btn').style.display = 'none';
+        
+        const qData = excelQuestions[currentIdx];
+        const container = document.getElementById('question-place');
+        
+        let optsHtml = '';
+        qData.options.forEach((opt, index) => {
+            optsHtml += `<div class="option" onclick="checkAnswer(this, ${index})">${opt}</div>`;
+        });
+
+        container.innerHTML = `
+            <div class="question-box active">
+                <div class="scenario">${qData.scenario}</div>
+                <div class="question-text">${qData.q}</div>
+                <div class="options">${optsHtml}</div>
+            </div>
+        `;
+    }
+
+    function checkAnswer(element, index) {
+        const qData = excelQuestions[currentIdx];
+        const options = element.parentElement.getElementsByClassName('option');
+        
+        for(let opt of options) { opt.style.pointerEvents = 'none'; }
+
+        if(index === qData.correct) {
+            element.classList.add('correct');
+            score++;
+        } else {
+            element.classList.add('wrong');
+            options[qData.correct].classList.add('correct');
+        }
+        document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextQ() {
+        currentIdx++;
+        if(currentIdx < excelQuestions.length) {
+            renderQ();
+        } else {
+            document.getElementById('quiz-body').style.display = 'none';
+            document.getElementById('result-body').style.display = 'block';
+            document.getElementById('score-text').innerText = `حصلت على: ${score} من ${excelQuestions.length}`;
+            
+            const feedback = document.getElementById('feedback');
+            if(score === excelQuestions.length) {
+                feedback.innerText = "🦅 ممتاز وباهر جداً! أنت تملك المهارات الإجرائية الكاملة للتعامل مع جداول إكسيل المعقدة في المسابقة والعمل الإداري.";
+            } else if (score >= 4) {
+                feedback.innerText = "👍 نتيجة طيبة جداً، متمكن ومستوعب للمفاهيم الأساسية والأدوات الشائعة بنجاح.";
+            } else {
+                feedback.innerText = "📚 ننصحك بالرجوع لدروس إكسيل التطبيقية والتركيز على آليات التعامل مع البيانات والصيغ الحسابية لتطوير رصيدك.";
+            }
+        }
+    }
+
+    window.onload = renderQ;
+</script>
+</body>
+</html>
