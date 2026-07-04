@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكاديمية النسر - صفحة البداية</title>
+    <title>أكاديمية النسر - صفحة البداية المحدثة</title>
     <style>
         body {
             background-color: #1a2a33;
@@ -24,122 +24,51 @@
             border-radius: 24px;
             text-align: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            max-width: 580px;
+            max-width: 650px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .logo { 
-            width: 90px; 
-            margin-bottom: 15px; 
-        }
-        h1 { 
-            color: #ffad33; 
-            font-size: 28px; 
-            margin: 0 0 5px 0; 
-            font-weight: bold;
-        }
-        .welcome-msg { 
-            color: #cfd8dc; 
-            margin: 0 0 12px 0; 
-            font-size: 16px;
-        }
+        .logo { width: 90px; margin-bottom: 15px; }
+        h1 { color: #ffad33; font-size: 28px; margin: 0 0 5px 0; font-weight: bold; }
+        .welcome-msg { color: #cfd8dc; margin: 0 0 12px 0; font-size: 16px; }
         .subtitle {
-            color: #ff9f43;
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0 0 25px 0;
-            background: rgba(255, 159, 67, 0.1);
-            padding: 6px 15px;
-            border-radius: 20px;
-            display: inline-block;
+            color: #ff9f43; font-size: 16px; font-weight: 600; margin: 0 0 25px 0;
+            background: rgba(255, 159, 67, 0.1); padding: 6px 15px; border-radius: 20px; display: inline-block;
         }
         .section-title {
-            text-align: right;
-            color: #ffad33;
-            font-size: 15px;
-            font-weight: bold;
-            margin: 20px 0 10px 0;
-            padding-right: 5px;
-            border-right: 3px solid #ffad33;
+            text-align: right; color: #ffad33; font-size: 15px; font-weight: bold;
+            margin: 25px 0 12px 0; padding-right: 5px; border-right: 3px solid #ffad33;
         }
         .btn-card {
-            display: flex;
-            align-items: center;
-            background-color: #2c3e50;
-            margin: 12px 0;
-            padding: 16px 20px;
-            border-radius: 16px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
-            text-align: right;
-            box-sizing: border-box;
+            display: flex; align-items: center; background-color: #2c3e50; margin: 12px 0;
+            padding: 16px 20px; border-radius: 16px; text-decoration: none; color: white;
+            transition: all 0.2s ease; border: 2px solid transparent; text-align: right; box-sizing: border-box;
         }
-        .btn-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .btn-icon {
-            font-size: 24px;
-            margin-left: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-content {
-            flex-grow: 1;
-        }
-        .btn-title {
-            font-size: 17px;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-        .btn-desc {
-            font-size: 13px;
-            color: #b0bec5;
-        }
+        .btn-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn-icon { font-size: 24px; margin-left: 15px; display: flex; align-items: center; justify-content: center; }
+        .btn-content { flex-grow: 1; }
+        .btn-title { font-size: 17px; font-weight: bold; margin-bottom: 2px; }
+        .btn-desc { font-size: 13px; color: #b0bec5; }
         
-        /* تأثيرات الألوان عند تمرير الفأرة */
+        /* تأثيرات ألوان الحواف عند التمرير */
+        .btn-word:hover { border-color: #2b579a; }
+        .btn-excel:hover { border-color: #217346; }
+        .btn-powerpoint:hover { border-color: #b7472a; }
         .btn-h1:hover { border-color: #34ace0; }
         .btn-h2:hover { border-color: #ff9f43; }
         .btn-h3:hover { border-color: #2ed573; }
-        .btn-excel-lesson:hover { border-color: #4b7bec; }
-        .btn-excel-quiz:hover { border-color: #00d2d3; }
         .btn-storage:hover { border-color: #eccc68; }
         .btn-software:hover { border-color: #ff6b6b; }
         .btn-misc-quiz:hover { border-color: #70a1ff; }
 
-        .arrow-left {
-            font-size: 18px;
-            color: #78909c;
-        }
-        .footer {
-            margin-top: 30px;
-            border-top: 1px solid #2c3e50;
-            padding-top: 20px;
-        }
-        .motto {
-            font-size: 15px;
-            font-weight: bold;
-            color: #e0e0e0;
-            margin-bottom: 15px;
-        }
+        .arrow-left { font-size: 18px; color: #78909c; }
+        .footer { margin-top: 30px; border-top: 1px solid #2c3e50; padding-top: 20px; }
+        .motto { font-size: 15px; font-weight: bold; color: #e0e0e0; margin-bottom: 15px; }
         .telegram-link {
-            display: inline-block;
-            color: #26a69a;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            background: rgba(38, 166, 154, 0.08);
-            padding: 8px 16px;
-            border-radius: 30px;
-            transition: background 0.2s;
+            display: inline-block; color: #26a69a; text-decoration: none; font-size: 14px; font-weight: 500;
+            background: rgba(38, 166, 154, 0.08); padding: 8px 16px; border-radius: 30px; transition: background 0.2s;
         }
-        .telegram-link:hover {
-            background: rgba(38, 166, 154, 0.15);
-            color: #4db6ac;
-        }
+        .telegram-link:hover { background: rgba(38, 166, 154, 0.15); color: #4db6ac; }
     </style>
 </head>
 <body>
@@ -147,13 +76,45 @@
     <div class="container">
         <img src="logo.png" alt="🦅" class="logo">
         <h1>أكاديمية النسر</h1>
-        <p class="welcome-msg">مرحباً بك في منصة الاختبارات والمراجعات الذكية</p>
+        <p class="welcome-msg">مرحباً بك في منصة الاختبارات والمراجعات الذكية المتقدمة</p>
         <div class="subtitle">🎓 دورة التحضير لمسابقة الترقية جويلية 2026</div>
 
-        <!-- القسم الأول: الحصص الرئيسية والدروس -->
-        <div class="section-title">📚 الدروس وحصص المراجعة الشاملة</div>
+        <!-- القسم الجديد: تطبيقات محاكاة حزمة الأوفيس الإجرائية -->
+        <div class="section-title">🖥️ تطبيقات محاكاة محاور Office الإجرائية (جديد)</div>
+
+        <!-- تطبيق وورد -->
+        <a href="quiz-word.html" class="btn-card btn-word">
+            <div class="btn-icon">📝</div>
+            <div class="btn-content">
+                <div class="btn-title">محاكاة إجراءات Microsoft Word</div>
+                <div class="btn-desc">إجراءات القوائم، الخطوط، الفقرات، تنظيم النوافذ وتنسيق الأشكال</div>
+            </div>
+            <div class="arrow-left">◀</div>
+        </a>
+
+        <!-- تطبيق إكسيل -->
+        <a href="quiz-excel-steps.html" class="btn-card btn-excel">
+            <div class="btn-icon">📊</div>
+            <div class="btn-content">
+                <div class="btn-title">محاكاة إجراءات Microsoft Excel</div>
+                <div class="btn-desc">إدراج الصيغ، تجميد الألواح، دمج الخلايا، وتنسيقات التخطيطات</div>
+            </div>
+            <div class="arrow-left">◀</div>
+        </a>
+
+        <!-- تطبيق بوربوينت -->
+        <a href="quiz-powerpoint.html" class="btn-card btn-powerpoint">
+            <div class="btn-icon">📉</div>
+            <div class="btn-content">
+                <div class="btn-title">محاكاة إجراءات Microsoft PowerPoint</div>
+                <div class="btn-desc">ترتيب الشرائح، المراحل الانتقالية، الحركات المخصصة وإعدادات العرض</div>
+            </div>
+            <div class="arrow-left">◀</div>
+        </a>
+
+        <!-- القسم القديم: الحصص الرئيسية والدروس -->
+        <div class="section-title">📚 الحصص والمراجعات النظرية والشاملة</div>
         
-        <!-- الحصة الأولى -->
         <a href="exam.html" class="btn-card btn-h1">
             <div class="btn-icon">💻</div>
             <div class="btn-content">
@@ -163,7 +124,6 @@
             <div class="arrow-left">◀</div>
         </a>
 
-        <!-- الحصة الثانية -->
         <a href="review2.html" class="btn-card btn-h2">
             <div class="btn-icon">⚙️</div>
             <div class="btn-content">
@@ -173,75 +133,36 @@
             <div class="arrow-left">◀</div>
         </a>
 
-        <!-- الحصة الثالثة -->
-        <a href="review3.html" class="btn-card btn-h3">
-            <div class="btn-icon">📝</div>
-            <div class="btn-content">
-                <div class="btn-title">مراجعة الحصة الثالثة</div>
-                <div class="btn-desc">معالج النصوص (Microsoft Office Word)</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <!-- درس تعليم دوال الإكسيل -->
-        <a href="excel-lessons.html" class="btn-card btn-excel-lesson">
-            <div class="btn-icon">📖</div>
-            <div class="btn-content">
-                <div class="btn-title">تعليم دوال الإكسيل</div>
-                <div class="btn-desc">طرق الإدراج، السحب والتعبئة، والمقارنة بالفرنسية</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <!-- القسم الثاني: الإضافات والمتفرقات الجديدة -->
-        <div class="section-title">📂 محاور إضافية ومتفرقات (جديد)</div>
-
-        <!-- درس الملفات وإدارة التخزين الجديد -->
         <a href="storage-lessons.html" class="btn-card btn-storage">
             <div class="btn-icon">📁</div>
             <div class="btn-content">
                 <div class="btn-title">درس: الملفات والمجلدات وتسيير التخزين</div>
-                <div class="btn-desc">الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية</div>
+                <div class="btn-desc">الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية المطورة</div>
             </div>
             <div class="arrow-left">◀</div>
         </a>
 
-        <!-- درس فئات البرمجيات الجديد -->
         <a href="software-examples.html" class="btn-card btn-software">
             <div class="btn-icon">💿</div>
             <div class="btn-content">
                 <div class="btn-title">درس: فئات البرمجيات وأنظمتها القياسية</div>
-                <div class="btn-desc">المتصفحات، التعريفات، والبرمجيات مفتوحة ومغلقة المصدر</div>
+                <div class="btn-desc">المتصفحات، التعريفات، والتراخيص مفتوحة ومغلقة المصدر</div>
             </div>
             <div class="arrow-left">◀</div>
         </a>
 
-        <!-- القسم الثالث: الاختبارات التطبيقية -->
-        <div class="section-title">📊 الاختبارات والتطبيقات التفاعلية</div>
-
-        <!-- اختبار الحصة الرابعة (إكسيل) -->
-        <a href="review4.html" class="btn-card btn-excel-quiz">
-            <div class="btn-icon">📊</div>
-            <div class="btn-content">
-                <div class="btn-title">مراجعة الحصة الرابعة (Excel Quiz)</div>
-                <div class="btn-desc">اختبار تفاعلي (20 سؤالاً) في التبويبات والتنسيقات</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <!-- التطبيقات العامة المبسطة الجديدة للمبتدئين -->
         <a href="miscellaneous-quiz.html" class="btn-card btn-misc-quiz">
             <div class="btn-icon">🎯</div>
             <div class="btn-content">
-                <div class="btn-title">تطبيقات عامة ومبسطة (مستوى مبتدئ)</div>
-                <div class="btn-desc">10 أسئلة ميسرة وبدون تعقيدات حول التخزين والبرمجيات</div>
+                <div class="btn-title">تطبيقات عامة ومبسطة (20 سؤالاً)</div>
+                <div class="btn-desc">مجموعة ميسرة وموسعة حول التخزين والبرمجيات للمبتدئين</div>
             </div>
             <div class="arrow-left">◀</div>
         </a>
 
         <div class="footer">
             <div class="motto">💡 التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
-            <a href="https://t.me/اسم_قناتك_هنا" target="_blank" class="telegram-link">
+            <a href="https://t.me/🦅" target="_blank" class="telegram-link">
                 📢 قناة التلغرام: أكاديمية النسر للتدريب والتعليم التقني
             </a>
         </div>
