@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملفات والتخزين - أكاديمية النسر</title>
+    <style>
+        body {
+            background-color: #1a2a33;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 850px;
+            width: 100%;
+            background: #243441;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        .header h2 { color: #ffad33; margin: 5px 0; font-size: 26px; }
+        .card {
+            background: #2c3e50;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-right: 5px solid #ff9f43;
+        }
+        .card h3 { color: #ff9f43; margin-top: 0; font-size: 18px; margin-bottom: 12px; }
+        .card p, .card li { color: #cfd8dc; font-size: 15px; line-height: 1.6; }
+        ul { padding-right: 20px; margin: 8px 0; }
+        li { margin-bottom: 6px; }
+        .code {
+            background: #1a2a33;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #2ed573;
+            font-family: monospace;
+            direction: ltr;
+            display: inline-block;
+        }
+        /* تصميم أداة التحويل */
+        .converter-box {
+            background: #1a2a33;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid #34495e;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        input, select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #2c3e50;
+            background: #243441;
+            color: white;
+            font-size: 15px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .hint-text {
+            background: rgba(52, 172, 224, 0.1);
+            border-right: 4px solid #34ace0;
+            padding: 10px;
+            border-radius: 6px;
+            color: #34ace0;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        .home-btn {
+            display: inline-block;
+            margin-top: 15px;
+            background-color: #34ace0;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .home-btn:hover { background-color: #227093; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>📁 درس: الملفات، المجلدات وتسيير القرص الصلب</h2>
+    </div>
+
+    <!-- الملف والامتداد -->
+    <div class="card">
+        <h3>1. الملف وامتداده (File & Extension)</h3>
+        <p><strong>الملف:</strong> هو كيان منطقي يحتوي على مجموعة بيانات مخزنة (نصوص، صور، برمجيات) وله اسم وامتداد يفصل بينهما نقطة.</p>
+        <p><strong>الامتداد:</strong> يتكون من 3 أو 4 أحرف تحدد نوع الملف والبرنامج المسؤول عن تشغيله. أمثلة:</p>
+        <ul>
+            <li><strong>المستندات:</strong> <span class="code">.docx</span> (وورد)، <span class="code">.pdf</span> (ملف للقراءة فقط)، <span class="code">.xlsx</span> (إكسيل).</li>
+            <li><strong>الصور:</strong> <span class="code">.jpg</span> / <span class="code">.png</span> (الصور الشفافة).</li>
+            <li><strong>الفيديو والصوت:</strong> <span class="code">.mp4</span> (فيديو)، <span class="code">.mp3</span> (ملف صوتي).</li>
+            <li><strong>الملفات التشغيلية:</strong> <span class="code">.exe</span> (ملف لتشغيل وتثبيت التطبيقات على ويندوز).</li>
+        </ul>
+    </div>
+
+    <!-- المجلد ووظيفته -->
+    <div class="card">
+        <h3>2. المجلد ووظيفته (Folder)</h3>
+        <p><strong>المجلد:</strong> هو حاوية افتراضية تستخدم لتخزين وتنظيم الملفات أو مجلدات أخرى بداخله. ليس له امتداد ولا يستهلك مساحة من القرص الصلب بذاته، بل وظيفته الأساسية هي <strong>ترتيب وتنظيم ملفات المستخدم</strong> لتفادي الفوضى وتسهيل عملية البحث والوصول.</p>
+    </div>
+
+    <!-- مجلدات النظام وتسميتها -->
+    <div class="card">
+        <h3>3. مجلدات النظام الأساسية وقواعد التسمية</h3>
+        <p><strong>مجلدات النظام ووظائفها:</strong></p>
+        <ul>
+            <li><strong>سطح المكتب (Desktop):</strong> الواجهة الأساسية للوصول السريع للبرامج والملفات الحالية.</li>
+            <li><strong>سلة المهملات (Recycle Bin):</strong> مكان تخزين مؤقت للملفات المحذوفة لاسترجاعها أو حذفها نهائياً.</li>
+            <li><strong>ملفات المستخدم (User Files):</strong> تشمل (Documents, Downloads, Pictures) وتخصص لعزل ملفات كل مستخدم تلقائياً.</li>
+        </ul>
+        <p><strong>تسمية الملفات والمجلدات:</strong> يمكن للمنتخب تسمية الملف بأي اسم بشرط عدم احتواء الاسم على الرموز المحظورة في نظام التسيير وهي: <span class="code">\ / : * ? " < > |</span>.</p>
+    </div>
+
+    <!-- القرص الصلب والعمليات -->
+    <div class="card">
+        <h3>4. القرص الصلب: التهيئة والتقسيم</h3>
+        <ul>
+            <li><strong>التقسيم (Partitioning):</strong> تقسيم القرص الصلب الفيزيائي إلى عدة أقراص منطقية (مثل <span class="code">C:</span> و <span class="code">D:</span>). 
+                <br><em>فوائد التقسيم:</em> حماية بيانات المستخدم عند انهيار نظام التشغيل، تسهيل تنظيم الملفات، وإمكانية تثبيت أكثر من نظام تشغيل.
+            </li>
+            <li><strong>التهيئة (Formatting):</strong> عملية إعداد القرص الصلب لاستقبال البيانات عبر مسح كل ما يحتويه وتحديد نظام الملفات (مثل NTFS أو FAT32).</li>
+        </ul>
+    </div>
+
+    <!-- أداة تحويل سعات التخزين -->
+    <div class="card">
+        <h3>5. التدريب التفاعلي: محول وحدات التخزين الذكي</h3>
+        <p>أدخل القيمة واختر الوحدة للتحويل التلقائي إلى الميغابايت (MB) والجيجابايت (GB) لمعرفة الآلية رياضياً:</p>
+        
+        <div class="converter-box">
+            <div class="input-group">
+                <input type="number" id="storage-value" placeholder="أدخل القيمة هنا" oninput="convertUnits()">
+                <select id="storage-unit" onchange="convertUnits()">
+                    <option value="KB">كيلوبايت (KB)</option>
+                    <option value="MB">ميغابايت (MB)</option>
+                    <option value="GB">جيجابايت (GB)</option>
+                    <option value="TB">تيرابايت (TB)</option>
+                </select>
+            </div>
+            <div id="result-mb">النتيجة بالميغابايت: -</div>
+            <div id="result-gb">النتيجة بالجيجابايت: -</div>
+            <div id="convert-hint" class="hint-text"></div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="home-btn">العودة للرئيسية</a>
+    </div>
+</div>
+
+<script>
+function convertUnits() {
+    const val = parseFloat(document.getElementById('storage-value').value);
+    const unit = document.getElementById('storage-unit').value;
+    const hint = document.getElementById('convert-hint');
+    
+    if (isNaN(val) || val <= 0) {
+        document.getElementById('result-mb').innerText = "النتيجة بالميغابايت: -";
+        document.getElementById('result-gb').innerText = "النتيجة بالجيجابايت: -";
+        hint.style.display = 'none';
+        return;
+    }
+
+    let mb = 0, gb = 0, processText = "";
+
+    switch(unit) {
+        case "KB":
+            mb = val / 1024;
+            gb = val / (1024 * 1024);
+            processText = `💡 للتحويل من وحدة صغيرة (KB) إلى وحدة أكبر (MB)، قمنا بالقسمة على 1024. وللتحويل إلى (GB) قمنا بالقسمة على (1024 × 1024).`;
+            break;
+        case "MB":
+            mb = val;
+            gb = val / 1024;
+            processText = `💡 القيمة بالـ MB جاهزة. وللتحويل من (MB) إلى الوحدة الأكبر مباشرة (GB)، قمنا بالقسمة على 1024.`;
+            break;
+        case "GB":
+            mb = val * 1024;
+            gb = val;
+            processText = `💡 القيمة بالـ GB جاهزة. وللتحويل من وحدة كبيرة (GB) إلى وحدة أصغر مباشرة (MB)، قمنا بالضرب في 1024.`;
+            break;
+        case "TB":
+            mb = val * 1024 * 1024;
+            gb = val * 1024;
+            processText = `💡 للتحويل من وحدة كبيرة جداً (TB) إلى وحدات أصغر، نضرب في 1024 لكل خطوة نزولاً (نضرب في 1024 للوصول لـ GB وفي 1024 أخرى للوصول لـ MB).`;
+            break;
+    }
+
+    document.getElementById('result-mb').innerText = `النتيجة بالميغابايت: ${mb.toFixed(4)} MB`;
+    document.getElementById('result-gb').innerText = `النتيجة بالجيجابايت: ${gb.toFixed(4)} GB`;
+    hint.innerText = processText;
+    hint.style.display = 'block';
+}
+</script>
+</body>
+</html>
