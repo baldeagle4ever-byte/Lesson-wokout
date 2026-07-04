@@ -38,7 +38,7 @@
             margin-bottom: 20px;
             border-right: 5px solid #ff9f43;
         }
-        .card h3 { color: #ff9f43; margin-top: 0; font-size: 18px; margin-bottom: 12px; }
+        .card h3 { color: #ff9f43; margin-top: 0; font-size: 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .card p, .card li { color: #cfd8dc; font-size: 15px; line-height: 1.6; }
         ul { padding-right: 20px; margin: 8px 0; }
         li { margin-bottom: 6px; }
@@ -51,38 +51,68 @@
             direction: ltr;
             display: inline-block;
         }
-        /* تصميم أداة التحويل */
+        /* تصميم أداة التحويل الجديدة المتقدمة */
         .converter-box {
             background: #1a2a33;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 25px;
+            border-radius: 16px;
             margin-top: 15px;
             border: 1px solid #34495e;
         }
-        .input-group {
+        .converter-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
+            align-items: center;
+        }
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 140px;
+        }
+        .field-group label {
+            font-size: 13px;
+            color: #ff9f43;
+            margin-bottom: 6px;
+            font-weight: bold;
         }
         input, select {
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid #2c3e50;
             background: #243441;
             color: white;
             font-size: 15px;
-            flex: 1;
-            min-width: 120px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .arrow-divider {
+            font-size: 20px;
+            color: #ff9f43;
+            align-self: flex-end;
+            margin-bottom: 12px;
+        }
+        .result-display {
+            background: #243441;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2ed573;
+            text-align: center;
+            border: 1px dashed rgba(46, 213, 115, 0.3);
+            margin-bottom: 15px;
         }
         .hint-text {
             background: rgba(52, 172, 224, 0.1);
             border-right: 4px solid #34ace0;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
             color: #34ace0;
             font-size: 14px;
-            margin-top: 10px;
+            line-height: 1.5;
             display: none;
         }
         .home-btn {
@@ -103,120 +133,161 @@
 
 <div class="container">
     <div class="header">
-        <h2>📁 درس: الملفات، المجلدات وتسيير القرص الصلب</h2>
+        <h2>📁 درس: تسيير الملفات، المجلدات والقرص الصلب</h2>
     </div>
 
     <!-- الملف والامتداد -->
     <div class="card">
-        <h3>1. الملف وامتداده (File & Extension)</h3>
-        <p><strong>الملف:</strong> هو كيان منطقي يحتوي على مجموعة بيانات مخزنة (نصوص، صور، برمجيات) وله اسم وامتداد يفصل بينهما نقطة.</p>
-        <p><strong>الامتداد:</strong> يتكون من 3 أو 4 أحرف تحدد نوع الملف والبرنامج المسؤول عن تشغيله. أمثلة:</p>
+        <h3>📄 1. الملف وامتداده (File & Extension)</h3>
+        <p><strong>📑 الملف:</strong> هو كيان منطقي يحتوي على بيانات مخزنة داخل وسيط التخزين (نصوص، صور، مقاطع صوتية)، ويتميز دائمًا بوجود اسم وامتداد تفصل بينهما نقطة <span class="code">.</span></p>
+        <p><strong>🔍 الامتداد:</strong> عبارة عن رمز من 3 أو 4 أحرف يحدد نوع الملف والبرنامج المتوافق معه لفتحه. إليك أشهر الأمثلة القياسية:</p>
         <ul>
-            <li><strong>المستندات:</strong> <span class="code">.docx</span> (وورد)، <span class="code">.pdf</span> (ملف للقراءة فقط)، <span class="code">.xlsx</span> (إكسيل).</li>
-            <li><strong>الصور:</strong> <span class="code">.jpg</span> / <span class="code">.png</span> (الصور الشفافة).</li>
-            <li><strong>الفيديو والصوت:</strong> <span class="code">.mp4</span> (فيديو)، <span class="code">.mp3</span> (ملف صوتي).</li>
-            <li><strong>الملفات التشغيلية:</strong> <span class="code">.exe</span> (ملف لتشغيل وتثبيت التطبيقات على ويندوز).</li>
+            <li><strong>📝 المستندات والبحوث:</strong> <span class="code">.docx</span> (Word)، <span class="code">.xlsx</span> (Excel)، <span class="code">.pdf</span> (ملفات للقراءة المحفوظة).</li>
+            <li><strong>🖼️ الصور والرسوميات:</strong> <span class="code">.jpg</span> (الصور العادية)، <span class="code">.png</span> (الصور ذات الخلفية الشفافة).</li>
+            <li><strong>🎬 الملتيميديا والوسائط:</strong> <span class="code">.mp4</span> (مقاطع الفيديو)، <span class="code">.mp3</span> (الملفات الصوتية النظيفة).</li>
+            <li><strong>⚙️ الملفات التنفيذية:</strong> <span class="code">.exe</span> (الملف التشغيلي المباشر لتثبيت وتفعيل التطبيقات والبرامج).</li>
         </ul>
     </div>
 
     <!-- المجلد ووظيفته -->
     <div class="card">
-        <h3>2. المجلد ووظيفته (Folder)</h3>
-        <p><strong>المجلد:</strong> هو حاوية افتراضية تستخدم لتخزين وتنظيم الملفات أو مجلدات أخرى بداخله. ليس له امتداد ولا يستهلك مساحة من القرص الصلب بذاته، بل وظيفته الأساسية هي <strong>ترتيب وتنظيم ملفات المستخدم</strong> لتفادي الفوضى وتسهيل عملية البحث والوصول.</p>
+        <h3>🗂️ 2. المجلد ووظيفته التنظيمية (Folder)</h3>
+        <p><strong>📂 المجلد:</strong> عبارة عن حاوية رقمية افتراضية داخل نظام التشغيل تستخدم لتخزين وترتيب الملفات أو مجلدات أخرى فرعية بداخله. </p>
+        <p><strong>💡 ميزته ودوره الأساسي:</strong> لا يمتلك المجلد أي امتداد برمي، كما أنه <strong>لا يستهلك مساحة تخزينية</strong> من القرص الصلب بذاته، بل يكمن دوره الجوهري في <strong>ترتيب وتنظيم ملفات المستخدم</strong> بشكل هرمي يسهل فرزها، تصفحها والوصول السريع إليها وتجنب تراكمها العشوائي.</p>
     </div>
 
     <!-- مجلدات النظام وتسميتها -->
     <div class="card">
-        <h3>3. مجلدات النظام الأساسية وقواعد التسمية</h3>
-        <p><strong>مجلدات النظام ووظائفها:</strong></p>
+        <h3>🖥️ 3. مجلدات النظام الافتراضية وقواعد التسمية</h3>
+        <p><strong>🏢 مجلدات النظام المدمجة ووظائفها:</strong></p>
         <ul>
-            <li><strong>سطح المكتب (Desktop):</strong> الواجهة الأساسية للوصول السريع للبرامج والملفات الحالية.</li>
-            <li><strong>سلة المهملات (Recycle Bin):</strong> مكان تخزين مؤقت للملفات المحذوفة لاسترجاعها أو حذفها نهائياً.</li>
-            <li><strong>ملفات المستخدم (User Files):</strong> تشمل (Documents, Downloads, Pictures) وتخصص لعزل ملفات كل مستخدم تلقائياً.</li>
+            <li><strong>🖥️ سطح المكتب (Desktop):</strong> الواجهة الرسومية الأساسية التي تظهر مباشرة بعد إقلاع النظام، مخصصة للوصول السريع للملفات والبرامج اليومية.</li>
+            <li><strong>🗑️ سلة المهملات (Recycle Bin):</strong> المستودع المؤقت الذي تُحفظ فيه الملفات المحذوفة، مما يتيح فرصة استعادتها أو إفراغها للتخلص منها نهائيًا.</li>
+            <li><strong>👤 ملفات المستخدم الشخصية:</strong> تشمل مجلدات مثل الحفظ التلقائي للتحميلات <span class="code">Downloads</span>، المستندات <span class="code">Documents</span>، والصور لعزل بيانات كل مستخدم عن الآخر.</li>
         </ul>
-        <p><strong>تسمية الملفات والمجلدات:</strong> يمكن للمنتخب تسمية الملف بأي اسم بشرط عدم احتواء الاسم على الرموز المحظورة في نظام التسيير وهي: <span class="code">\ / : * ? " < > |</span>.</p>
+        <p><strong>🚫 شروط التسمية:</strong> يمكن استخدام أي لغة لتسمية الملفات والمجلدات بشرط <strong>عدم احتواء الاسم</strong> على أي من الرموز التسعة المحظورة في نظام ويندوز وهي: <span class="code">\ / : * ? " < > |</span> لأنها محجوزة لأوامر النظام.</p>
     </div>
 
     <!-- القرص الصلب والعمليات -->
     <div class="card">
-        <h3>4. القرص الصلب: التهيئة والتقسيم</h3>
+        <h3>💽 4. العمليات على القرص الصلب (Hard Disk)</h3>
         <ul>
-            <li><strong>التقسيم (Partitioning):</strong> تقسيم القرص الصلب الفيزيائي إلى عدة أقراص منطقية (مثل <span class="code">C:</span> و <span class="code">D:</span>). 
-                <br><em>فوائد التقسيم:</em> حماية بيانات المستخدم عند انهيار نظام التشغيل، تسهيل تنظيم الملفات، وإمكانية تثبيت أكثر من نظام تشغيل.
+            <li><strong>🛠️ التقسيم (Partitioning):</strong> عملية تجزئة المساحة الفيزيائية الإجمالية للقرص الصلب إلى عدة أقراص منطقية مستقلة تظهر كأحرف رمزية (مثل <span class="code">C:</span> و <span class="code">D:</span>). 
+                <br><em>✨ فوائد التقسيم:</em> حماية وتأمين بيانات المستخدم الشخصية من الضياع في حال انهيار نظام التشغيل المثبت على الـ C، تنظيم وتوزيع الملفات بشكل مستقل، وإمكانية تثبيت نظامي تشغيل مختلفين على نفس الحاسوب.
             </li>
-            <li><strong>التهيئة (Formatting):</strong> عملية إعداد القرص الصلب لاستقبال البيانات عبر مسح كل ما يحتويه وتحديد نظام الملفات (مثل NTFS أو FAT32).</li>
+            <li><strong>🧹 التهيئة (Formatting):</strong> مسح دائم ومطهر لكامل محتويات القسم أو القرص، وتجهيزه ببناء مسارات رقمية جديدة وفق نظام ملفات معتمد (مثل <span class="code">NTFS</span> أو <span class="code">FAT32</span>) لتهيئة استقبال البيانات.</li>
         </ul>
     </div>
 
-    <!-- أداة تحويل سعات التخزين -->
+    <!-- أداة تحويل سعات التخزين المطورة -->
     <div class="card">
-        <h3>5. التدريب التفاعلي: محول وحدات التخزين الذكي</h3>
-        <p>أدخل القيمة واختر الوحدة للتحويل التلقائي إلى الميغابايت (MB) والجيجابايت (GB) لمعرفة الآلية رياضياً:</p>
+        <h3>🧮 5. التدريب التفاعلي: محول وحدات التخزين الذكي (من ... إلى ...)</h3>
+        <p>🎛️ أدخل القيمة الحسابية وحدد وحدة البدء ووحدة الهدف لمشاهدة آلية وعملية التحويل خطوة بخطوة:</p>
         
         <div class="converter-box">
-            <div class="input-group">
-                <input type="number" id="storage-value" placeholder="أدخل القيمة هنا" oninput="convertUnits()">
-                <select id="storage-unit" onchange="convertUnits()">
-                    <option value="KB">كيلوبايت (KB)</option>
-                    <option value="MB">ميغابايت (MB)</option>
-                    <option value="GB">جيجابايت (GB)</option>
-                    <option value="TB">تيرابايت (TB)</option>
-                </select>
+            <div class="converter-row">
+                <div class="field-group">
+                    <label>🔢 القيمة المراد تحويلها:</label>
+                    <input type="number" id="storage-value" value="1" oninput="calculateConversion()">
+                </div>
+                
+                <div class="field-group">
+                    <label>📤 من وحدة:</label>
+                    <select id="from-unit" onchange="calculateConversion()">
+                        <option value="0">بايت (Byte)</option>
+                        <option value="1">كيلوبايت (KB)</option>
+                        <option value="2" selected>ميغابايت (MB)</option>
+                        <option value="3">جيجابايت (GB)</option>
+                        <option value="4">تيرابايت (TB)</option>
+                    </select>
+                </div>
+                
+                <div class="arrow-divider">⬅️</div>
+                
+                <div class="field-group">
+                    <label>📥 إلى وحدة:</label>
+                    <select id="to-unit" onchange="calculateConversion()">
+                        <option value="0">بايت (Byte)</option>
+                        <option value="1">كيلوبايت (KB)</option>
+                        <option value="2">ميغابايت (MB)</option>
+                        <option value="3" selected>جيجابايت (GB)</option>
+                        <option value="4">تيرابايت (TB)</option>
+                    </select>
+                </div>
             </div>
-            <div id="result-mb">النتيجة بالميغابايت: -</div>
-            <div id="result-gb">النتيجة بالجيجابايت: -</div>
+            
+            <div class="result-display" id="conversion-result">النتيجة: 0.0010 GB</div>
             <div id="convert-hint" class="hint-text"></div>
         </div>
     </div>
 
     <div style="text-align: center;">
-        <a href="index.html" class="home-btn">العودة للرئيسية</a>
+        <a href="index.html" class="home-btn">🏠 العودة لصفحة البداية</a>
     </div>
 </div>
 
 <script>
-function convertUnits() {
+function calculateConversion() {
     const val = parseFloat(document.getElementById('storage-value').value);
-    const unit = document.getElementById('storage-unit').value;
-    const hint = document.getElementById('convert-hint');
+    const fromUnitIdx = parseInt(document.getElementById('from-unit').value);
+    const toUnitIdx = parseInt(document.getElementById('to-unit').value);
+    const resultDiv = document.getElementById('conversion-result');
+    const hintDiv = document.getElementById('convert-hint');
     
-    if (isNaN(val) || val <= 0) {
-        document.getElementById('result-mb').innerText = "النتيجة بالميغابايت: -";
-        document.getElementById('result-gb').innerText = "النتيجة بالجيجابايت: -";
-        hint.style.display = 'none';
+    const unitNames = ["Byte", "KB", "MB", "GB", "TB"];
+    const unitLabels = ["بايت (Byte)", "كيلوبايت (KB)", "ميغابايت (MB)", "جيجابايت (GB)", "تيرابايت (TB)"];
+
+    if (isNaN(val) || val < 0) {
+        resultDiv.innerText = "⚠️ يرجى إدخال قيمة صحيحة وموجبة";
+        hintDiv.style.display = 'none';
         return;
     }
 
-    let mb = 0, gb = 0, processText = "";
-
-    switch(unit) {
-        case "KB":
-            mb = val / 1024;
-            gb = val / (1024 * 1024);
-            processText = `💡 للتحويل من وحدة صغيرة (KB) إلى وحدة أكبر (MB)، قمنا بالقسمة على 1024. وللتحويل إلى (GB) قمنا بالقسمة على (1024 × 1024).`;
-            break;
-        case "MB":
-            mb = val;
-            gb = val / 1024;
-            processText = `💡 القيمة بالـ MB جاهزة. وللتحويل من (MB) إلى الوحدة الأكبر مباشرة (GB)، قمنا بالقسمة على 1024.`;
-            break;
-        case "GB":
-            mb = val * 1024;
-            gb = val;
-            processText = `💡 القيمة بالـ GB جاهزة. وللتحويل من وحدة كبيرة (GB) إلى وحدة أصغر مباشرة (MB)، قمنا بالضرب في 1024.`;
-            break;
-        case "TB":
-            mb = val * 1024 * 1024;
-            gb = val * 1024;
-            processText = `💡 للتحويل من وحدة كبيرة جداً (TB) إلى وحدات أصغر، نضرب في 1024 لكل خطوة نزولاً (نضرب في 1024 للوصول لـ GB وفي 1024 أخرى للوصول لـ MB).`;
-            break;
+    if (fromUnitIdx === toUnitIdx) {
+        resultDiv.innerText = `النتيجة: ${val} ${unitNames[toUnitIdx]}`;
+        hintDiv.innerHTML = `⚙️ <strong>توضيح:</strong> الوحدات متطابقة! لا تتطلب إجراء أي عملية حسابية ضرب أو قسمة.`;
+        hintDiv.style.display = 'block';
+        return;
     }
 
-    document.getElementById('result-mb').innerText = `النتيجة بالميغابايت: ${mb.toFixed(4)} MB`;
-    document.getElementById('result-gb').innerText = `النتيجة بالجيجابايت: ${gb.toFixed(4)} GB`;
-    hint.innerText = processText;
-    hint.style.display = 'block';
+    // الفارق في المستويات بين الوحدتين
+    const levelDifference = toUnitIdx - fromUnitIdx;
+    let finalResult = val;
+    let explanation = "";
+
+    if (levelDifference > 0) {
+        // التحويل من وحدة صغيرة إلى وحدة أكبر -> قسـمـة
+        const divisor = Math.pow(1024, levelDifference);
+        finalResult = val / divisor;
+        
+        let stepsStr = "";
+        for(let i = 0; i < levelDifference; i++) {
+            stepsStr += " ÷ 1024";
+        }
+        explanation = `📉 <strong>طريقة التحويل (من وحدة أصغر إلى وحدة أكبر):</strong><br>
+        للانتقال من <strong>${unitLabels[fromUnitIdx]}</strong> إلى الوحدة الأكبر <strong>${unitLabels[toUnitIdx]}</strong>، نقوم بـ <strong>القسمة</strong> على النسبة الثابتة 1024.<br>
+        ⚙️ <strong>العملية الرياضية المعجلة:</strong> ${val} ${stepsStr} = <strong>${finalResult.toFixed(6)} ${unitNames[toUnitIdx]}</strong>`;
+    } else {
+        // التحويل من وحدة كبيرة إلى وحدة أصغر -> ضـرب
+        const multiplier = Math.pow(1024, Math.abs(levelDifference));
+        finalResult = val * multiplier;
+        
+        let stepsStr = "";
+        for(let i = 0; i < Math.abs(levelDifference); i++) {
+            stepsStr += " × 1024";
+        }
+        explanation = `📈 <strong>طريقة التحويل (من وحدة أكبر إلى وحدة أصغر):</strong><br>
+        للانتقال من <strong>${unitLabels[fromUnitIdx]}</strong> إلى الوحدة الأصغر <strong>${unitLabels[toUnitIdx]}</strong>، نقوم بـ <strong>الضرب</strong> في النسبة الثابتة 1024.<br>
+        ⚙️ <strong>العملية الرياضية المعجلة:</strong> ${val} ${stepsStr} = <strong>${finalResult.toLocaleString()} ${unitNames[toUnitIdx]}</strong>`;
+    }
+
+    resultDiv.innerText = `النتيجة: ${finalResult.toLocaleString(undefined, {maximumFractionDigits: 6})} ${unitNames[toUnitIdx]}`;
+    hintDiv.innerHTML = explanation;
+    hintDiv.style.display = 'block';
 }
+
+// تشغيل التحويل تلقائياً عند تحميل الصفحة لأول مرة
+window.onload = calculateConversion;
 </script>
 </body>
 </html>
