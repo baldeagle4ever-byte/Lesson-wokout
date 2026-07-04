@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيقات عامة - أكاديمية النسر</title>
+    <style>
+        body {
+            background-color: #1a2a33;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            max-width: 850px;
+            width: 100%;
+            background: #243441;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h2 { color: #ffad33; margin: 5px 0; font-size: 24px; }
+        .header p { color: #cfd8dc; font-size: 14px; margin: 5px 0 0 0; }
+        .progress-bar {
+            height: 6px;
+            background-color: #1a2a33;
+            border-radius: 3px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #ff9f43;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .question-box { display: none; }
+        .question-box.active { display: block; }
+        .question-text { font-size: 19px; font-weight: bold; margin-bottom: 20px; line-height: 1.6; }
+        .options-list { display: flex; flex-direction: column; gap: 12px; }
+        .option {
+            background: #2c3e50;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 2px solid transparent;
+            font-size: 16px;
+        }
+        .option:hover { background: #34495e; }
+        .option.correct { background: #2ed573 !important; border-color: #26af5f; color: white; }
+        .option.wrong { background: #ff4757 !important; border-color: #d63031; color: white; }
+        .actions { margin-top: 25px; text-align: left; }
+        .btn {
+            background-color: #ff9f43;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            display: none;
+        }
+        .results-window { display: none; text-align: center; padding: 20px; }
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #ffad33;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+        }
+        .score-circle .num { font-size: 32px; font-weight: bold; color: #ffad33; }
+        .home-btn {
+            display: inline-block;
+            margin-top: 25px;
+            background-color: #34ace0;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h2>🎯 تطبيقات عامة ومبسطة (مستوى مبتدئ)</h2>
+        <p id="question-counter">السؤال 1 من 10</p>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress" id="progress-line"></div>
+    </div>
+
+    <div id="quiz-window">
+        <div id="question-container"></div>
+        <div class="actions">
+            <button class="btn" id="next-button" onclick="nextQuestion()">التالي</button>
+        </div>
+    </div>
+
+    <div id="results-window" class="results-window">
+        <h2>📊 النتيجة النهائية لتطبيقاتك</h2>
+        <div class="score-circle">
+            <div class="num" id="final-score">0</div>
+            <div style="font-size: 12px; color: #aaa;">من 10</div>
+        </div>
+        <p id="feedback-text" style="font-size: 18px; color: #cfd8dc;"></p>
+        <a href="index.html" class="home-btn">العودة للرئيسية</a>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            q: "ما هو الامتداد الشهير لملفات الوثائق النصية لبرنامج Microsoft Word؟",
+            options: [".mp4", ".docx", ".jpg", ".mp3"],
+            correct: 1
+        },
+        {
+            q: "أي مما يلي يعتبر وظيفة أساسية للمجلد (Folder)؟",
+            options: ["تشغيل الألعاب", "تنظيم وترتيب ملفات المستخدم داخل الحاسوب", "فحص الفيروسات", "تعديل جودة الفيديو"],
+            correct: 1
+        },
+        {
+            q: "أين تذهب الملفات مباشرة عند حذفها بشكل مؤقت من نظام التشغيل؟",
+            options: ["سطح المكتب", "ملفات المستخدم", "سلة المهملات (Recycle Bin)", "لوحة التحكم"],
+            correct: 2
+        },
+        {
+            q: "أي من الرموز التالية يمنع استخدامها كلياً عند اختيار اسم لملف أو مجلد؟",
+            options: ["الرمز /", "الحرف A", "الرقم 5", "الشرطة -"],
+            correct: 0
+        },
+        {
+            q: "تقسيم القرص الصلب إلى أجزاء (C, D) يفيد بشكل أساسي في:",
+            options: ["زيادة حجم الشاشة", "حماية بيانات المستخدم وتنظيمها في حال انهيار نظام التشغيل", "تسريع إنترنت الجهاز", "الاستغناء عن الفأرة"],
+            correct: 1
+        },
+        {
+            q: "ما هو البرنامج الأساسي الذي بدونه لا يمكن لجهاز الكمبيوتر أن يعمل نهائياً؟",
+            options: ["مضاد الفيروسات", "متصفح الويب", "نظام التشغيل (Operating System)", "برنامج المونتاج"],
+            correct: 2
+        },
+        {
+            q: "يعتبر برنامج Google Chrome مثالاً شهيراً لـ:",
+            options: ["نظام تشغيل", "متصفح إنترنت", "برنامج تعديل صور", "برنامج تعريف طابعة"],
+            correct: 1
+        },
+        {
+            q: "ما وظيفة برامج تعريفات العتاد (Drivers) في الحاسب؟",
+            options: ["تشغيل الصوت فقط", "جعل نظام التشغيل يتعرف ويتوافق مع الملحقات المربوطة بالجهاز", "تصفح المواقع", "كتابة البحوث"],
+            correct: 1
+        },
+        {
+            q: "أي من البرامج التالية يعد مشغلاً ممتازاً للوسائط ومقاطع الفيديو بكافة امتداداتها؟",
+            options: ["VLC Media Player", "Adobe Photoshop", "Kaspersky", "GIMP"],
+            correct: 0
+        },
+        {
+            q: "البرامج المجانية التي يتاح الكود البرمجي الخاص بها للجميع للتعديل عليها تسمى برمجيات:",
+            options: ["مغلقة المصدر", "مفتوحة المصدر (Open-Source)", "تجارية مدفوعة", "محظورة ومؤقتة"],
+            correct: 1
+        }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    function renderQuestion() {
+        const totalQ = questions.length;
+        document.getElementById('question-counter').innerText = `السؤال ${currentIdx + 1} من ${totalQ}`;
+        document.getElementById('next-button').style.display = 'none';
+        
+        const progressPercent = (currentIdx / totalQ) * 100;
+        document.getElementById('progress-line').style.width = `${progressPercent}%`;
+
+        const q = questions[currentIdx];
+        const container = document.getElementById('question-container');
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+            optionsHtml += `<div class="option" onclick="checkAnswer(this, ${idx})">${opt}</div>`;
+        });
+
+        container.innerHTML = `
+            <div class="question-box active">
+                <div class="question-text">${q.q}</div>
+                <div class="options-list">${optionsHtml}</div>
+            </div>
+        `;
+    }
+
+    function checkAnswer(selectedElement, choiceIndex) {
+        const q = questions[currentIdx];
+        const options = selectedElement.parentElement.getElementsByClassName('option');
+        
+        for (let opt of options) {
+            opt.style.pointerEvents = 'none';
+        }
+
+        if (choiceIndex === q.correct) {
+            selectedElement.classList.add('correct');
+            score++;
+        } else {
+            selectedElement.classList.add('wrong');
+            options[q.correct].classList.add('correct');
+        }
+        
+        document.getElementById('next-button').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        if (currentIdx < questions.length) {
+            renderQuestion();
+        } else {
+            finishQuiz();
+        }
+    }
+
+    function finishQuiz() {
+        document.getElementById('progress-line').style.width = `100%`;
+        document.getElementById('quiz-window').style.display = 'none';
+        document.getElementById('results-window').style.display = 'block';
+        document.getElementById('final-score').innerText = score;
+        
+        const feedback = document.getElementById('feedback-text');
+        if (score >= 8) {
+            feedback.innerText = "عمل رائع ومتميز! لقد استوعبت المفاهيم الأساسية للتخزين والبرمجيات بنجاح. 🦅";
+        } else if (score >= 5) {
+            feedback.innerText = "نتيجة حسنة، يمكنك مراجعة الدروس مجدداً لضمان العلامة الكاملة في مسابقة الترقية.";
+        } else {
+            feedback.innerText = "ينصح بإعادة قراءة صفحات الشرح لمعرفة الفروق بين الامتدادات البرمجية بوضوح.";
+        }
+    }
+
+    window.onload = renderQuestion;
+</script>
+
+</body>
+</html>
