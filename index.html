@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>أكاديمية النسر للتعليم والتدريب التقني</title>
     
-    <!-- استدعاء خطوط قوقل الفاخرة -->
+    <!-- استدعاء خطوط قوقل الفاخرة المحدثة -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Reem+Kufi:wght@500;700;900&display=swap">
     
-    <!-- استدعاء مكتبة الأيقونات الاحترافية العالمية Bootstrap Icons -->
+    <!-- استدعاء مكتبة الأيقونات الاحترافية المحدثة لنقاء بصري أعلى -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
-    <!-- استدعاء مكتبة التنبيهات المنبثقة الفاخرة SweetAlert2 -->
+    <!-- استدعاء مكتبة التنبيهات الفاخرة SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -19,124 +19,131 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: background 0.3s, border-color 0.3s;
         }
 
-        /* جعل الصورة بالكامل خلفية للموقع مع تعتيمها قليلاً لراحة العين وبروز النصوص */
+        /* تحسين الخلفية العامة السينمائية */
         body {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('logo.png') no-repeat center center fixed;
+            background: linear-gradient(135deg, rgba(10, 15, 30, 0.92), rgba(15, 23, 42, 0.88)), url('logo.png') no-repeat center center fixed;
             background-size: cover;
-            color: #f8fafc;
+            color: #f1f5f9;
             font-family: 'Cairo', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 80px 12px 20px 12px; /* ترك مساحة علوية لزر القائمة الجانبية */
+            padding: 90px 14px 30px 14px;
+            overflow-x: hidden;
         }
 
-        /* زر تفعيل السلايد الجانبي العلوي */
+        /* زر تفعيل السلايد الجانبي العصري */
         .sidebar-toggle-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(245, 158, 11, 0.2);
-            border: 1px solid #f59e0b;
+            top: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.4);
             color: #f59e0b;
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
             z-index: 1000;
-            backdrop-filter: blur(8px);
-            transition: all 0.3s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .sidebar-toggle-btn:hover {
+            transform: scale(1.1) rotate(90deg);
             background: #f59e0b;
             color: #0f172a;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
         }
 
         /* هيكل السلايد الجانبي (Sidebar) */
         .side-navigation-bar {
             position: fixed;
             top: 0;
-            right: -300px; /* مخفي افتراضياً */
-            width: 300px;
+            right: -320px;
+            width: 320px;
             height: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-left: 2px solid rgba(245, 158, 11, 0.3);
+            background: rgba(11, 17, 32, 0.96);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-left: 1px solid rgba(245, 158, 11, 0.2);
             z-index: 2000;
-            padding: 30px 20px;
+            padding: 40px 24px;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            box-shadow: -15px 0 40px rgba(0,0,0,0.6);
         }
 
         .side-navigation-bar.active {
-            right: 0; /* إظهار */
+            right: 0;
         }
 
         .close-sidebar-btn {
             background: transparent;
             border: none;
-            color: #94a3b8;
-            font-size: 22px;
+            color: #64748b;
+            font-size: 26px;
             cursor: pointer;
             float: left;
-            transition: color 0.2s;
+            transition: transform 0.3s, color 0.3s;
         }
 
         .close-sidebar-btn:hover {
             color: #ef4444;
+            transform: scale(1.1) rotate(-90deg);
         }
 
         .sidebar-content {
-            margin-top: 50px;
+            margin-top: 60px;
             text-align: right;
         }
 
         .sidebar-content h2 {
             font-family: 'Reem Kufi', sans-serif;
             color: #f59e0b;
-            font-size: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px dashed rgba(245, 158, 11, 0.3);
-            padding-bottom: 10px;
+            font-size: 22px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(245, 158, 11, 0.1);
+            padding-bottom: 12px;
         }
 
         .sidebar-menu-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: #cbd5e1;
+            gap: 14px;
+            color: #94a3b8;
             text-decoration: none;
-            padding: 12px 10px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: all 0.2s;
-            font-size: 14px;
+            padding: 14px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: 600;
         }
 
         .sidebar-menu-item:hover {
-            background: rgba(245, 158, 11, 0.1);
+            background: rgba(245, 158, 11, 0.08);
             color: #f59e0b;
-            padding-right: 15px;
+            padding-right: 18px;
         }
 
-        /* غطاء الخلفية الشفاف عند فتح القائمة */
         .sidebar-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(4, 6, 12, 0.7);
+            backdrop-filter: blur(4px);
             z-index: 1500;
             display: none;
         }
@@ -145,444 +152,520 @@
             display: block;
         }
 
-        /* الحاوية الزجاجية الرئيسية للمحتوى */
+        /* الحاوية الزجاجية الرئيسية المحسنة جداً */
         .main-wrapper {
-            background: rgba(30, 41, 59, 0.65);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 2px dashed rgba(245, 158, 11, 0.25);
-            padding: 25px 20px;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            max-width: 900px;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 30px 20px;
+            border-radius: 32px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+            max-width: 950px;
             width: 100%;
             position: relative;
         }
 
-        /* تخصيص وعزل اللوغو الدائري فقط */
+        /* تخصيص وعزل اللوغو الدائري مع تأثير النيون النبضي */
         .academy-logo-container {
-            width: 140px;
-            height: 140px;
-            margin: -10px auto 15px auto;
+            width: 150px;
+            height: 150px;
+            margin: -20px auto 20px auto;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid #f59e0b;
-            box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+            border: 2px solid rgba(245, 158, 11, 0.6);
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.25), inset 0 0 15px rgba(245, 158, 11, 0.2);
             position: relative;
-            background: #111827;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #090d16;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* استغلال ميزة تدوير وقص اللوغو الدائري من وسط الصورة المرفقة مباشرة */
         .academy-logo-container img {
-            width: 250%; /* تكبير لتوسيط اللوغو الدائري وعزله */
+            width: 250%;
             height: auto;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -51.5%); /* ضبط الموضع بدقة على الدائرة الوسطى */
+            transform: translate(-50%, -51.5%);
             pointer-events: none;
         }
 
         .academy-logo-container:hover {
-            transform: scale(1.05) rotate(360deg); /* تأثير دوران كامل فخم للنسر عند تمرير الماوس */
+            transform: scale(1.08);
+            border-color: #f59e0b;
+            box-shadow: 0 0 45px rgba(245, 158, 11, 0.5);
         }
 
         .platform-header {
             text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 4px double #f59e0b;
-            padding-bottom: 20px;
+            margin-bottom: 35px;
         }
 
         .platform-header h1 {
             font-family: 'Reem Kufi', sans-serif;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
-            color: #f59e0b;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.4);
-            margin-bottom: 10px;
+            background: linear-gradient(to left, #ffffff, #f59e0b, #fff7ed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .dynamic-welcome {
-            font-size: 13px;
-            color: #cbd5e1;
+            font-size: 13.5px;
+            color: #94a3b8;
             line-height: 1.6;
+            background: rgba(30, 41, 59, 0.4);
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.03);
         }
 
+        /* تحسين مظهر شارات العناوين الجانبية للقسم */
         .section-badge {
-            font-family: 'Reem Kufi', sans-serif;
-            color: #f59e0b;
-            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            color: #94a3b8;
+            font-size: 14.5px;
             font-weight: 700;
-            margin: 25px 0 15px 0;
+            letter-spacing: 0.5px;
+            margin: 35px 0 18px 0;
             text-align: right;
-            border-right: 4px solid #f59e0b;
-            padding-right: 10px;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .section-badge::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to left, rgba(255,255,255,0.08), transparent);
         }
 
         .cards-layout {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
+            gap: 14px;
         }
 
+        /* إعادة بناء تصميم البطاقات بالكامل لمظهر تطبيقي احترافي */
         .interactive-card {
-            background: rgba(15, 23, 42, 0.65);
+            background: linear-gradient(135deg, rgba(22, 30, 49, 0.5), rgba(15, 23, 42, 0.3));
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 15px 18px;
-            border-radius: 14px;
+            padding: 18px 20px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
             color: #f8fafc;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* تأثير التوهج الخلفي المخفي لكل بطاقة */
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 100% 50%, var(--card-glow, rgba(245,158,11,0.06)), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
         .interactive-card:hover {
-            transform: translateY(-3px);
-            border-color: #f59e0b;
-            background: rgba(30, 41, 59, 0.85);
-            box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.2);
+            transform: translateY(-4px) scale(1.01);
+            border-color: var(--card-border, #f59e0b);
+            background: linear-gradient(135deg, rgba(22, 30, 49, 0.8), rgba(15, 23, 42, 0.6));
+            box-shadow: 0 12px 30px -10px var(--card-shadow, rgba(245,158,11,0.25));
+        }
+
+        .interactive-card:hover::before {
+            opacity: 1;
         }
 
         .card-body-wrapper {
             flex-grow: 1;
-            padding-right: 12px;
+            padding-right: 16px;
             text-align: right;
+            z-index: 2;
         }
 
         .card-body-wrapper h3 {
-            font-size: 14.5px;
+            font-size: 15.5px;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 3px;
-            transition: color 0.2s;
+            color: #f8fafc;
+            margin-bottom: 4px;
         }
 
         .interactive-card:hover .card-body-wrapper h3 {
-            color: #f59e0b;
+            color: var(--card-border, #f59e0b);
         }
 
         .card-body-wrapper p {
-            font-size: 12px;
-            color: #94a3b8;
-            line-height: 1.4;
+            font-size: 12.5px;
+            color: #64748b;
+            line-height: 1.5;
         }
 
+        /* ثورة في تصميم صناديق الأيقونات - مظهر زجاجي ملون ثلاثي الأبعاد */
         .visual-icon-box {
-            font-size: 22px;
+            font-size: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.02);
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--icon-bg, rgba(245, 158, 11, 0.06));
+            color: var(--icon-color, #f59e0b);
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            border: 1px solid var(--icon-border, rgba(245, 158, 11, 0.15));
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.05);
             order: 2;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .interactive-card:hover .visual-icon-box {
-            transform: scale(1.08) rotate(-5deg);
+            transform: scale(1.12) rotate(-6deg);
+            background: var(--icon-color, #f59e0b);
+            color: #0f172a !important;
+            box-shadow: 0 0 20px var(--icon-color, #f59e0b);
         }
 
+        /* مؤشر السهم الأنيق الصغير */
         .arrow-indicator {
-            color: #475569;
-            font-size: 13px;
-            transition: transform 0.3s, color 0.3s;
+            color: #334155;
+            font-size: 14px;
+            transition: all 0.3s;
             order: 0;
+            z-index: 2;
         }
 
         .interactive-card:hover .arrow-indicator {
-            transform: translateX(-4px);
-            color: #f59e0b;
+            transform: translateX(-6px);
+            color: var(--card-border, #f59e0b);
+        }
+
+        /* تخصيص ألوان النيون لكل قسم على حدة */
+        .theme-blue {
+            --card-border: #38bdf8; --card-shadow: rgba(56, 189, 248, 0.25); --card-glow: rgba(56, 189, 248, 0.08);
+            --icon-bg: rgba(56, 189, 248, 0.06); --icon-color: #38bdf8; --icon-border: rgba(56, 189, 248, 0.15);
+        }
+        .theme-orange {
+            --card-border: #fb923c; --card-shadow: rgba(251, 146, 60, 0.25); --card-glow: rgba(251, 146, 60, 0.08);
+            --icon-bg: rgba(251, 146, 60, 0.06); --icon-color: #fb923c; --icon-border: rgba(251, 146, 60, 0.15);
+        }
+        .theme-red {
+            --card-border: #f87171; --card-shadow: rgba(248, 113, 113, 0.3); --card-glow: rgba(248, 113, 113, 0.1);
+            --icon-bg: rgba(248, 113, 113, 0.06); --icon-color: #f87171; --icon-border: rgba(248, 113, 113, 0.15);
+        }
+        .theme-word {
+            --card-border: #2b579a; --card-shadow: rgba(43, 87, 154, 0.3); --card-glow: rgba(43, 87, 154, 0.08);
+            --icon-bg: rgba(43, 87, 154, 0.08); --icon-color: #5c8bdf; --icon-border: rgba(43, 87, 154, 0.2);
+        }
+        .theme-excel {
+            --card-border: #217346; --card-shadow: rgba(33, 115, 70, 0.3); --card-glow: rgba(33, 115, 70, 0.08);
+            --icon-bg: rgba(33, 115, 70, 0.08); --icon-color: #4ade80; --icon-border: rgba(33, 115, 70, 0.2);
+        }
+        .theme-ppt {
+            --card-border: #d24726; --card-shadow: rgba(210, 71, 38, 0.3); --card-glow: rgba(210, 71, 38, 0.08);
+            --icon-bg: rgba(210, 71, 38, 0.08); --icon-color: #f472b6; --icon-border: rgba(210, 71, 38, 0.2);
+        }
+        .theme-green {
+            --card-border: #4ade80; --card-shadow: rgba(74, 222, 128, 0.25); --card-glow: rgba(74, 222, 128, 0.08);
+            --icon-bg: rgba(74, 222, 128, 0.06); --icon-color: #4ade80; --icon-border: rgba(74, 222, 128, 0.15);
+        }
+        .theme-yellow {
+            --card-border: #facc15; --card-shadow: rgba(250, 204, 21, 0.25); --card-glow: rgba(250, 204, 21, 0.08);
+            --icon-bg: rgba(250, 204, 21, 0.06); --icon-color: #facc15; --icon-border: rgba(250, 204, 21, 0.15);
+        }
+        .theme-purple {
+            --card-border: #c084fc; --card-shadow: rgba(192, 132, 252, 0.25); --card-glow: rgba(192, 132, 252, 0.08);
+            --icon-bg: rgba(192, 132, 252, 0.06); --icon-color: #c084fc; --icon-border: rgba(192, 132, 252, 0.15);
+        }
+        .theme-teal {
+            --card-border: #2dd4bf; --card-shadow: rgba(45, 212, 191, 0.25); --card-glow: rgba(45, 212, 191, 0.08);
+            --icon-bg: rgba(45, 212, 191, 0.06); --icon-color: #2dd4bf; --icon-border: rgba(45, 212, 191, 0.15);
         }
 
         .platform-footer {
-            margin-top: 35px;
+            margin-top: 45px;
             text-align: center;
-            border-top: 1px dashed rgba(255,255,255,0.1);
-            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 25px;
         }
 
+        /* تحسين زر التلجرام الطائر */
         .telegram-anchor {
-            background: linear-gradient(45deg, #1e3a8a, #0369a1);
-            border: 1px dashed #22c55e;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border: 1px solid rgba(255,255,255,0.1);
             color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 50px;
+            padding: 14px 28px;
+            border-radius: 20px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            font-size: 13px;
-            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.2);
+            gap: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 10px 25px -5px rgba(3, 105, 161, 0.4);
             transition: all 0.3s;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             width: 100%;
             justify-content: center;
-            max-width: 450px;
+            max-width: 480px;
         }
 
         .telegram-anchor:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(3, 105, 161, 0.6);
         }
 
         .visitor-panel {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-size: 11.5px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 12.5px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            color: #94a3b8;
+            gap: 8px;
+            color: #64748b;
         }
 
-        /* التوافق مع وضع سطح المكتب */
+        /* توافق الشاشات المتوسطة والكبيرة */
         @media (min-width: 680px) {
             body {
-                padding: 40px 20px;
+                padding: 50px 24px;
             }
             .main-wrapper {
-                padding: 40px 35px;
-                border-radius: 28px;
+                padding: 45px 40px;
+                border-radius: 40px;
             }
             .academy-logo-container {
                 width: 160px;
                 height: 160px;
             }
             .platform-header h1 {
-                font-size: 32px;
-            }
-            .dynamic-welcome {
-                font-size: 14.5px;
-            }
-            .section-badge {
-                font-size: 18px;
+                font-size: 34px;
             }
             .cards-layout {
                 grid-template-columns: 1fr 1fr;
-                gap: 16px;
+                gap: 18px;
             }
             .interactive-card[href="exam.html"] {
                 grid-column: span 2;
             }
             .card-body-wrapper h3 {
-                font-size: 15.5px;
+                font-size: 16.5px;
             }
             .card-body-wrapper p {
-                font-size: 12.5px;
-            }
-            .visual-icon-box {
-                width: 50px;
-                height: 50px;
-                font-size: 25px;
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- زر التحكم وفتح السلايد الجانبي -->
+<!-- زر السلايد الجانبي -->
 <div class="sidebar-toggle-btn" onclick="toggleSidebar()">
-    <i class="bi bi-list"></i>
+    <i class="bi bi-grid-3x3-gap-fill"></i>
 </div>
 
-<!-- الغطاء الشفاف الخلفي -->
+<!-- الغطاء الشفاف -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-<!-- السلايد الجانبي المطور -->
+<!-- السلايد الجانبي -->
 <div class="side-navigation-bar" id="sidebarMenu">
-    <button class="close-sidebar-btn" onclick="toggleSidebar()"><i class="bi bi-x-circle-fill"></i></button>
+    <button class="close-sidebar-btn" onclick="toggleSidebar()"><i class="bi bi-x-lg"></i></button>
     <div class="sidebar-content">
         <h2>لوحة التحكم والمساعدة</h2>
-        <a href="#" class="sidebar-menu-item" onclick="changeUser()"><i class="bi bi-person-bounding-box" style="color: #f59e0b;"></i> تغيير اسم المستخدم</a>
-        <a href="exam.html" class="sidebar-menu-item"><i class="bi bi-award" style="color: #ef4444;"></i> الامتحان الشامل المباشر</a>
-        <a href="excel-lessons.html" class="sidebar-menu-item"><i class="bi bi-journal-code" style="color: #4ade80;"></i> مراجع الحصص التدريبية</a>
-        <a href="https://t.me" target="_blank" class="sidebar-menu-item"><i class="bi bi-telegram" style="color: #38bdf8;"></i> الدعم الفني عبر التليجرام</a>
-        <div style="margin-top: 40px; font-size: 11px; color: #64748b; text-align: center; line-height: 1.5;">
-            أكاديمية النسر للتدريب التقني <br> إصدار التطوير الاحترافي 2026 ©
+        <a href="#" class="sidebar-menu-item" onclick="changeUser()"><i class="bi bi-person-gear"></i> تغيير اسم المستخدم</a>
+        <a href="exam.html" class="sidebar-menu-item"><i class="bi bi-shield-lock"></i> الامتحان الشامل المباشر</a>
+        <a href="excel-lessons.html" class="sidebar-menu-item"><i class="bi bi-folder2-open"></i> مراجع الحصص التدريبية</a>
+        <a href="https://t.me" target="_blank" class="sidebar-menu-item"><i class="bi bi-send-check"></i> الدعم الفني المباشر</a>
+        <div style="margin-top: 50px; font-size: 12px; color: #475569; text-align: center; line-height: 1.6;">
+            أكاديمية النسر للتدريب التقني <br> بيئة مطورة فائقة الأداء 2026 ©
         </div>
     </div>
 </div>
 
 <div class="main-wrapper">
-    <!-- اللوغو الدائري المعزول برمجياً بدقة عالية -->
+    <!-- حاوية اللوغو الدائري المعزول -->
     <div class="academy-logo-container">
         <img src="logo.png" alt="شعار أكاديمية النسر">
     </div>
 
     <div class="platform-header">
         <h1>أكاديمية النسر للتعليم والتدريب التقني</h1>
-        <div class="dynamic-welcome" id="welcomeBox">جاري تخصيص بيئة التصفح...</div>
+        <div class="dynamic-welcome" id="welcomeBox">جاري التحقق من أمن الجلسة الحالية...</div>
     </div>
 
-    <!-- القسم الأول: مراجعات الحصص والامتحانات الشاملة -->
-    <div class="section-badge"><i class="bi bi-collection-play-fill"></i> مراجعة الحصص والامتحانات الشاملة</div>
+    <!-- القسم الأول: المراجعات والامتحانات الشاملة -->
+    <div class="section-badge">مراجعة الحصص والامتحانات الشاملة</div>
     <div class="cards-layout">
-        <a href="مراجعة.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="مراجعة.html" class="interactive-card theme-blue">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>مراجعة وتقييم الحصة الأولى</h3>
                 <p>مفاهيم عتاد الحاسوب، والشبكات الأساسية والـ IP وعناوين الـ DNS.</p>
             </div>
-            <div class="visual-icon-box" style="color: #38bdf8;"><i class="bi bi-laptop"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-pc-display-horizontal"></i></div>
         </a>
-        <a href="review2.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="review2.html" class="interactive-card theme-orange">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>مراجعة وتقييم الحصة الثانية</h3>
                 <p>أنظمة التشغيل، تسيير الملفات والمجلدات، ووحدات التخزين الرقمي والأمن الرقمي.</p>
             </div>
-            <div class="visual-icon-box" style="color: #fb923c;"><i class="bi bi-hdd-network-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-database-check"></i></div>
         </a>
-        <a href="exam.html" class="interactive-card" style="border-color: rgba(239, 68, 68, 0.4);">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="exam.html" class="interactive-card theme-red">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>الامتحان الشامل الرسمي للرتبة</h3>
                 <p>الاختبار الشامل النهائي والجامع لمحاكاة مسابقة الترقية جويلية 2026 الفعلي.</p>
             </div>
-            <div class="visual-icon-box" style="color: #ef4444; background: rgba(239, 68, 68, 0.05);"><i class="bi bi-trophy-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-fire"></i></div>
         </a>
     </div>
 
     <!-- القسم الثاني: تطبيقات محاكاة محاور Office الإجرائية -->
-    <div class="section-badge"><i class="bi bi-cpu-fill"></i> تطبيقات محاكاة محاور Office الإجرائية</div>
+    <div class="section-badge">تطبيقات محاكاة محاور Office الإجرائية</div>
     <div class="cards-layout">
-        <a href="quiz-word.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="quiz-word.html" class="interactive-card theme-word">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>محاكاة إجراءات Microsoft Word</h3>
                 <p>إجراءات القوائم، تنسيق الخطوط، الفقرات، تنظيم النوافذ وهوامش التوثيق.</p>
             </div>
-            <div class="visual-icon-box" style="color: #2b579a;"><i class="bi bi-file-earmark-word-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-filetype-docx"></i></div>
         </a>
-        <a href="quiz-excel-steps.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="quiz-excel-steps.html" class="interactive-card theme-excel">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>محاكاة إجراءات Microsoft Excel</h3>
                 <p>إدراج الصيغ، تجميد الألواح والأعمدة، دمج الخلايا، وتخطيطات الرسوم البيانية.</p>
             </div>
-            <div class="visual-icon-box" style="color: #217346;"><i class="bi bi-file-earmark-excel-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-filetype-xlsx"></i></div>
         </a>
-        <a href="quiz-powerpoint.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="quiz-powerpoint.html" class="interactive-card theme-ppt">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>محاكاة إجراءات Microsoft PowerPoint</h3>
-                <p>ترتيب وفرز الشرائح، المراهل الانتقالية، الحركات المخصصة وضبط العرض التلقائي.</p>
+                <p>ترتيب وفرز الشرائح، المراحل الانتقالية، الحركات المخصصة وضبط العرض التلقائي.</p>
             </div>
-            <div class="visual-icon-box" style="color: #d24726;"><i class="bi bi-file-earmark-ppt-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-filetype-pptx"></i></div>
         </a>
     </div>
 
     <!-- القسم الثالث: الدروس التدريبية المخصصة -->
-    <div class="section-badge"><i class="bi bi-book-half"></i> الدروس التدريبية الملحقة والمراجعات</div>
+    <div class="section-badge">الدروس التدريبية الملحقة والمراجعات</div>
     <div class="cards-layout">
-        <a href="excel-lessons.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="excel-lessons.html" class="interactive-card theme-green">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>درس: تداول الجداول الحسابية المتقدمة Excel</h3>
                 <p>الدوال الأساسية والمركبة والشرطية مع النماذج التطبيقية والإدارية.</p>
             </div>
-            <div class="visual-icon-box" style="color: #4ade80;"><i class="bi bi-lightning-charge-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-journal-bookmark-fill"></i></div>
         </a>
-        <a href="storage-lessons.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="storage-lessons.html" class="interactive-card theme-yellow">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>درس: الملفات والمجلدات وتسيير التخزين</h3>
                 <p>الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية المطورة.</p>
             </div>
-            <div class="visual-icon-box" style="color: #fef08a;"><i class="bi bi-folder-symlink-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-device-ssd"></i></div>
         </a>
-        <a href="software-examples.html" class="interactive-card">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="software-examples.html" class="interactive-card theme-purple">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>درس: فئات البرمجيات وأنظمتها القياسية</h3>
                 <p>المتصفحات، التعريفات، والتراخيص المفتوحة والمغلقة المصدر.</p>
             </div>
-            <div class="visual-icon-box" style="color: #c084fc;"><i class="bi bi-shield-lock-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-braces-asterisk"></i></div>
         </a>
-        <a href="miscellaneous-quiz.html" class="interactive-card" style="border-style: dashed;">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="miscellaneous-quiz.html" class="interactive-card theme-teal">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>تطبيقات عامة ومبسطة (20 سؤالاً)</h3>
                 <p>مجموعة ميسرة وموسعة حول التخزين والبرمجيات للمبتدئين.</p>
             </div>
-            <div class="visual-icon-box" style="color: #2dd4bf;"><i class="bi bi-patch-question-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-layers-half"></i></div>
         </a>
     </div>
 
     <!-- القسم الرابع: المواضيع النموذجية الخمسة المقترحة -->
-    <div class="section-badge"><i class="bi bi-file-earmark-check-fill"></i> المواضيع النموذجية المقترحة الجديدة</div>
+    <div class="section-badge">المواضيع النموذجية المقترحة الجديدة</div>
     <div class="cards-layout">
-        <a href="subject1.html" class="interactive-card" style="border-right: 4px solid #38bdf8;">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="subject1.html" class="interactive-card theme-blue">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>الموضوع المقترح رقم 01</h3>
                 <p>أنظمة التشغيل، واجهة وورد، ودالة الجمع، والبريد الإلكتروني وتنسيقاته.</p>
             </div>
-            <div class="visual-icon-box" style="color: #38bdf8;"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-sticky"></i></div>
         </a>
-        <a href="subject2.html" class="interactive-card" style="border-right: 4px solid #4ade80;">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="subject2.html" class="interactive-card theme-green">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>الموضوع المقترح رقم 02</h3>
                 <p>مفاهيم الشبكات (LAN/WAN)، سلامة كلمات المرور، ودالة الشرط البسيط.</p>
             </div>
-            <div class="visual-icon-box" style="color: #4ade80;"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-sticky"></i></div>
         </a>
-        <a href="subject3.html" class="interactive-card" style="border-right: 4px solid #fb923c;">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="subject3.html" class="interactive-card theme-orange">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>الموضوع المقترح رقم 03</h3>
                 <p>الذاكرة والتخزين، حماية المستندات، والشرط المركب والتهديدات السيبرانية.</p>
             </div>
-            <div class="visual-icon-box" style="color: #fb923c;"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-sticky"></i></div>
         </a>
-        <a href="subject4.html" class="interactive-card" style="border-right: 4px solid #f87171;">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="subject4.html" class="interactive-card theme-red">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>الموضوع المقترح رقم 04</h3>
                 <p>وحدات الإدخال والإخراج، تسيير الملفات، ودوال المتوسط الحسابي والإجمالي.</p>
             </div>
-            <div class="visual-icon-box" style="color: #f87171;"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-sticky"></i></div>
         </a>
-        <a href="subject5.html" class="interactive-card" style="border-right: 4px solid #2dd4bf;">
-            <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
+        <a href="subject5.html" class="interactive-card theme-teal">
+            <span class="arrow-indicator"><i class="bi bi-arrow-left-short"></i></span>
             <div class="card-body-wrapper">
                 <h3>الموضوع المقترح رقم 05</h3>
                 <p>تحسين أداء نظام الحاسوب، امتدادات الملفات، والشرط المتقدم للموظفين والغيابات.</p>
             </div>
-            <div class="visual-icon-box" style="color: #2dd4bf;"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div class="visual-icon-box"><i class="bi bi-sticky"></i></div>
         </a>
     </div>
 
     <!-- تذييل الصفحة -->
     <div class="platform-footer">
         <a href="https://t.me" class="telegram-anchor" target="_blank">
-            <span>قناة التلجرام: أكاديمية النسر للتدريب والتعليم التقني</span>
+            <span>الانضمام إلى قناة الأكاديمية الرسمية عبر التلجرام</span>
             <span><i class="bi bi-telegram"></i></span>
         </a>
         <br>
         <div class="visitor-panel">
-            <i class="bi bi-eye-fill" style="color: #38bdf8;"></i>
-            <span>إحصائيات زيارات المنصة الإجمالية:</span>
-            <span id="global-count" style="color: #4ade80; font-weight: bold;">نشط الآن 🟢</span>
+            <i class="bi bi-activity" style="color: #4ade80;"></i>
+            <span>حالة البيئة الحالية:</span>
+            <span id="global-count" style="color: #4ade80; font-weight: 700;">خوادم مستقرة 🟢</span>
         </div>
     </div>
 </div>
 
 <script>
-// دالة إظهار وإخفاء السلايد الجانبي
+// دالة التحكم في السلايد الجانبي
 function toggleSidebar() {
     document.getElementById("sidebarMenu").classList.toggle("active");
     document.getElementById("sidebarOverlay").classList.toggle("active");
@@ -601,13 +684,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function askForName() {
     Swal.fire({
-        title: 'مرحباً بك في أكاديمية النسر',
-        text: 'يرجى كتابة اسمك الكريم لتخصيص لوحة التحكم والامتحانات باسمك:',
+        title: 'مرحباً بك في الأكاديمية',
+        text: 'يرجى كتابة اسمك الثلاثي الكريم لتخصيص محاكي الامتحانات:',
         input: 'text',
-        inputPlaceholder: 'اكتب اسمك الثلاثي الكريم...',
-        confirmButtonText: 'تأكيد الالتزام والولوج 🚀',
+        inputPlaceholder: 'اكتب اسمك هنا...',
+        confirmButtonText: 'ولوج المنصة التقنية 🚀',
         confirmButtonColor: '#f59e0b',
-        background: '#1e293b',
+        background: '#0f172a',
         color: '#f8fafc',
         allowOutsideClick: false,
         inputValidator: (value) => {
@@ -633,20 +716,20 @@ function changeUser() {
 function renderWelcome(name, element) {
     if(!element) return;
     const ua = navigator.userAgent;
-    let browser = "المتصفح الآمن";
-    let os = "نظام التشغيل";
+    let browser = "متصفح آمن";
+    let os = "نظام تشغيل";
 
-    if (ua.indexOf("Win") !== -1) os = "نظام Windows";
-    else if (ua.indexOf("Android") !== -1) os = "جهاز Android";
-    else if (ua.indexOf("iPhone") !== -1 || ua.indexOf("iPad") !== -1) os = "جهاز iOS";
+    if (ua.indexOf("Win") !== -1) os = "Windows";
+    else if (ua.indexOf("Android") !== -1) os = "Android";
+    else if (ua.indexOf("iPhone") !== -1 || ua.indexOf("iPad") !== -1) os = "iOS";
 
-    if (ua.indexOf("Chrome") !== -1) browser = "Google Chrome";
+    if (ua.indexOf("Chrome") !== -1) browser = "Chrome";
     else if (ua.indexOf("Safari") !== -1) browser = "Safari";
-    else if (ua.indexOf("Firefox") !== -1) browser = "Mozilla Firefox";
+    else if (ua.indexOf("Firefox") !== -1) browser = "Firefox";
 
-    element.innerHTML = `مرحباً بك يا أستاذ <strong>${name}</strong> في منصتك التعليمية المخصصة لمسابقة جويلية 2026.
-    <br><span style="font-size: 11.5px; color: #cbd5e1; font-weight: normal; display: inline-block; margin-top: 6px;">
-    <i class="bi bi-shield-fill-check" style="color:#2dd4bf"></i> جرى تأمين اتصالك بنجاح عبر <span style="color:#f59e0b">${browser}</span> على <span style="color:#f59e0b">${os}</span>
+    element.innerHTML = `مرحباً بك يا أستاذ <strong>${name}</strong> في منصتك المخصصة لمسابقة جويلية 2026.
+    <br><span style="font-size: 11.5px; color: #64748b; font-weight: normal; display: inline-block; margin-top: 6px;">
+    <i class="bi bi-cpu" style="color:#f59e0b"></i> مستقر على <span style="color:#cbd5e1">${browser} (${os})</span>
     </span>`;
 }
 </script>
