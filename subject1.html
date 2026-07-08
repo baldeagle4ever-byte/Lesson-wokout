@@ -29,14 +29,112 @@
     .header-ministry { 
         text-align: center; 
         margin-bottom: 40px; 
-        border-bottom: 4px double #ff9f43; /* خط مزدوج ذهبي وزاري */
+        border-bottom: 4px double #ff9f43;
         padding-bottom: 25px; 
     }
-    .header-ministry h1 { 
+    .header-ministry h1, .header-ministry h2 { 
         font-family: 'Reem Kufi', sans-serif; 
         color: #ffad33; 
-        font-size: 1.5rem; 
-        margin-bottom: 8px; 
+        font-size: 1.2rem; 
+        margin-bottom: 8px;
+    }
+
+    .header-ministry h1 {
+        font-size: 1.5rem;
+    }
+
+    .meta-table {
+        width: 100%;
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .meta-table td {
+        padding: 8px;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+    }
+    
+    /* أقسام التمارين */
+    .exercise-section {
+        margin: 30px 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.02);
+        border-right: 4px solid #ff9f43;
+        border-radius: 8px;
+    }
+
+    .exercise-header {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #ffad33;
+        margin-bottom: 15px;
+    }
+
+    .question-text {
+        display: block;
+        margin: 15px 0;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .options-list {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+    }
+
+    .options-list li {
+        margin: 12px 0;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 6px;
+        border: 1px solid rgba(255, 173, 51, 0.2);
+    }
+
+    .options-list label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: #e2e8f0;
+        transition: color 0.3s;
+    }
+
+    .options-list input[type="radio"] {
+        margin-left: 10px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .options-list li:hover {
+        background: rgba(255, 173, 51, 0.08);
+        border-color: rgba(255, 173, 51, 0.4);
+    }
+
+    .justification {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: rgba(46, 204, 113, 0.1);
+        border-left: 4px solid #2ecc71;
+        border-radius: 6px;
+        color: #cbd5e1;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .correct-ans {
+        background: rgba(46, 204, 113, 0.15) !important;
+        border-color: #2ecc71 !important;
+        color: #2ecc71 !important;
+    }
+
+    .wrong-ans {
+        background: rgba(231, 76, 60, 0.15) !important;
+        border-color: #e74c3c !important;
+        color: #e74c3c !important;
     }
     
     /* صندوق علامات الطالب المطور والمشع بالنجاح */
@@ -61,12 +159,48 @@
         border: 2px solid #e74c3c; 
         color: white;
     }
+
+    .btn-action {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 25px 0;
+        background: linear-gradient(135deg, #ff9f43 0%, #ffad33 100%);
+        color: #111e25;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-action:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(255, 159, 67, 0.3);
+    }
+
+    .back-home {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        padding: 12px 20px;
+        color: #ffad33;
+        text-decoration: none;
+        border: 1px solid #ffad33;
+        border-radius: 6px;
+        transition: all 0.3s;
+    }
+
+    .back-home:hover {
+        background: rgba(255, 173, 51, 0.1);
+    }
     
     @keyframes slideIn {
         from { transform: translateY(20px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
-</style>
+    </style>
 
 </head>
 <body>
@@ -89,49 +223,49 @@
             <!-- التمرين الأول -->
             <div class="exercise-section">
                 <div class="exercise-header">التمرين الأول: المكونات المادية وأنظمة التخزين (05 نقاط)</div>
-                <span class="question-text">في إطار صيانة وتجهيز أجهزة الحاسوب على مستوى إدارة المؤسسة التربوية، ما هي الفائدة البيداغوجية والتقنية الأساسية من إجراء عملية تجزئة القرص الصلب (Hard Disk Partitioning)؟</span>
+                <span class="question-text">في إطار صيانة وتجهيز أجهزة الحاسوب على مستوى إدارة المؤسسة التربوية، ما هي الفائدة الرئيسية لتجزئة القرص الصلب؟</span>
                 <ul class="options-list">
-                    <li><label id="l_q0_o0"><input type="radio" name="q0" value="0" required> الرفع الفوري والتلقائي من سعة التخزين الإجمالية المادية للقرص الصلب.</label></li>
-                    <li><label id="l_q0_o1"><input type="radio" name="q0" value="1"> فصل ملفات نظام التشغيل عن وثائق وبيانات المستخدم لتسهيل عملية الصيانة وحماية البيانات عند الانهيار.</label></li>
-                    <li><label id="l_q0_o2"><input type="radio" name="q0" value="2"> حظر الفيروسات والبرمجيات الخبيثة من الانتقال عبر وسائط التخزين الخارجية.</label></li>
+                    <li><label id="l_q0_o0"><input type="radio" name="q0" value="0" required> الرفع الفوري والتلقائي من سعة التخزين الإجمالية المادية للجهاز</label></li>
+                    <li><label id="l_q0_o1"><input type="radio" name="q0" value="1"> فصل ملفات نظام التشغيل عن وثائق وبيانات المستخدم لتسهيل عملية الصيانة</label></li>
+                    <li><label id="l_q0_o2"><input type="radio" name="q0" value="2"> حظر الفيروسات والبرمجيات الخبيثة من الانتقال عبر وسائط التخزين الخارجية</label></li>
                 </ul>
-                <div class="justification" id="j_q0">التبرير الرسمي: التجزئة تمكن من عزل نظام التشغيل (غالباً في الـ C:) عن الملفات الإدارية، مما يتيح فرمتة النظام وإعادة تثبيته دون المساس بالبيانات المتواجدة في الأقسام الأخرى.</div>
+                <div class="justification" id="j_q0">التبرير الرسمي: التجزئة تمكن من عزل نظام التشغيل (غالباً في الـ C:) عن الملفات الإدارية والشخصية، مما يسهل عملية إصلاح النظام أو إعادة تثبيته دون فقدان البيانات المهمة.</div>
             </div>
 
             <!-- التمرين الثاني -->
             <div class="exercise-section">
                 <div class="exercise-header">التمرين الثاني: برمجية معالج النصوص Word (05 نقاط)</div>
-                <span class="question-text">تُتيح أداة معالجة النصوص Microsoft Word ميزة "إعداد الصفحة" (Mise en page). ما هي الإعدادات التي يتم ضبطها مباشرة من خلال هذه التبويب قبل طباعة التقارير الإدارية؟</span>
+                <span class="question-text">تُتيح أداة معالجة النصوص Microsoft Word ميزة "إعداد الصفحة" (Mise en page). ما هي الإعدادات التي يتم التحكم فيها من خلال هذه الميزة؟</span>
                 <ul class="options-list">
-                    <li><label id="l_q1_o0"><input type="radio" name="q1" value="0" required> ضبط حجم ولون الخط وعمليات التنسيق الشرطي للفقرات المكتوبة.</label></li>
-                    <li><label id="l_q1_o1"><input type="radio" name="q1" value="1"> تحديد هوامش المستند (Marges)، اتجاه الورقة (أفقي أو عمودي)، وحجم ورق الطباعة المستهدف.</label></li>
-                    <li><label id="l_q1_o2"><input type="radio" name="q1" value="2"> الربط المباشر مع قاعدة البيانات الخارجية لإجراء عملية دمج المراسلات.</label></li>
+                    <li><label id="l_q1_o0"><input type="radio" name="q1" value="0" required> ضبط حجم ولون الخط وعمليات التنسيق الشرطي للفقرات المكتوبة في المستند</label></li>
+                    <li><label id="l_q1_o1"><input type="radio" name="q1" value="1"> تحديد هوامش المستند (Marges)، اتجاه الورقة (أفقي أو عمودي)، وحجم الورقة نفسها</label></li>
+                    <li><label id="l_q1_o2"><input type="radio" name="q1" value="2"> الربط المباشر مع قاعدة البيانات الخارجية لإجراء عملية دمج المراسلات</label></li>
                 </ul>
-                <div class="justification" id="j_q1">التبرير الرسمي: تبويب إعداد الصفحة يختص بالهندسة الفراغية للورقة (الأبعاد والحدود) لضمان اتساقها الشكلي قبل الإرسال للمطبوعات.</div>
+                <div class="justification" id="j_q1">التبرير الرسمي: تبويب إعداد الصفحة يختص بالهندسة الفراغية للورقة (الأبعاد والحدود والهوامش والاتجاه)، أما تنسيق النصوص والخطوط فهو من مهام تبويب "الصفحة الرئيسية" الآخر.</div>
             </div>
 
             <!-- التمرين الثالث -->
             <div class="exercise-section">
                 <div class="exercise-header">التمرين الثالث: برمجية المجدول الإلكتروني Excel (05 نقاط)</div>
-                <span class="question-text">أراد أستاذ حساب قيمة الزيادة المقدرة بـ 15% لراتب موظف يتواجد في الخلية B2 في جدول كشف الرواتب، ما هي الصيغة الرياضية الصحيحة والواجب كتابتها في برنامج Excel؟</span>
+                <span class="question-text">أراد أستاذ حساب قيمة الزيادة المقدرة بـ 15% لراتب موظف يتواجد في الخلية B2 في جدول كشف الرواتب. أي من الصيغ التالية صحيحة؟</span>
                 <ul class="options-list">
                     <li><label id="l_q2_o0"><input type="radio" name="q2" value="0" required> B2 * 15%</label></li>
                     <li><label id="l_q2_o1"><input type="radio" name="q2" value="1"> =B2 * 15%</label></li>
                     <li><label id="l_q2_o2"><input type="radio" name="q2" value="2"> =SUM(B2:15%)</label></li>
                 </ul>
-                <div class="justification" id="j_q2">التبرير الرسمي: أي عملية حسابية أو دالة برمجية في بيئة المجدولات يجب أن تبتدئ برمز التساوي (=) ليفهمها المحرك الحسابي كمعادلة وليس كنص ثابت.</div>
+                <div class="justification" id="j_q2">التبرير الرسمي: أي عملية حسابية أو دالة برمجية في بيئة المجدولات يجب أن تبتدئ برمز المساواة (=)، وبدونه يُعتبر نصاً عادياً ولا يتم حسابه. كما أن الصيغة SUM لا تدعم النسب المئوية مباشرة.</div>
             </div>
 
             <!-- التمرين الرابع -->
             <div class="exercise-section">
                 <div class="exercise-header">التمرين الرابع: الشبكات والاتصالات الرقمية (05 نقاط)</div>
-                <span class="question-text">عند إرسال بريد إلكتروني جماعي يحتوي على جداول توجيهية لمدراء المدارس، ما هو الحقل الذي يُدرج فيه عناوين المستلمين لضمان عدم رؤية بعضهم البعض (حفاظاً على خصوصية العناوين)؟</span>
+                <span class="question-text">عند إرسال بريد إلكتروني جماعي يحتوي على جداول توجيهية لمدراء المدارس، ما هو الحقل الذي يُستخدم لإرسال نسخة مخفية لا يراها باقي المستقبلين؟</span>
                 <ul class="options-list">
                     <li><label id="l_q3_o0"><input type="radio" name="q3" value="0" required> حقل المرسل إليه الأساسي (To / À)</label></li>
                     <li><label id="l_q3_o1"><input type="radio" name="q3" value="1"> حقل النسخة المطابقة (Cc)</label></li>
                     <li><label id="l_q3_o2"><input type="radio" name="q3" value="2"> حقل النسخة المطابقة المخفية (Bcc / Cci)</label></li>
                 </ul>
-                <div class="justification" id="j_q3">التبرير الرسمي: الحقل Cci (Copie Conforme Invisible) يمرر البريد لكافة الأطراف المدرجة داخله مع حجب هوياتهم وعناوينهم الإلكترونية تماماً عن بقية المستلمين لدواعي أمنية وسيبرانية.</div>
+                <div class="justification" id="j_q3">التبرير الرسمي: الحقل Cci (Copie Conforme Invisible) يمرر البريد لكافة الأطراف المدرجة داخله مع إخفاء أسماؤهم عن بعضهم البعض، بينما Cc يظهر جميع المستقبلين لكل طرف.</div>
             </div>
 
             <button type="submit" class="btn-action">تسليم ورقة الإجابة وتصحيح الموضوع</button>
@@ -167,45 +301,44 @@
             const sBox = document.getElementById('scoreBox');
             sBox.style.display = 'block';
             if (points >= 10) {
-    sBox.className = "score-board pass";
-    sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: ناجح(ة) في الاختبار المقترح.`;
-    
-    // 1. إطلاق القصاصات الورقية الملونة المتطايرة احتفالاً بالنجاح (Confetti)
-    confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 }
-    });
+                sBox.className = "score-board pass";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: ناجح(ة) في الاختبار المقترح.`;
+                
+                // إطلاق القصاصات الورقية الملونة المتطايرة احتفالاً بالنجاح
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
 
-    // 2. إظهار نافذة تهنئة فخمة ومخصصة باسم الطالب المخزن سابقاً
-    const savedName = localStorage.getItem("academy_user_name") || "أيها البطل";
-    Swal.fire({
-        title: `تهانينا الفائقة، أستاذ ${savedName}! 🎉`,
-        html: `لقد اجتزت الموضوع المقترح بنجاح باهر.<br><br><b style="font-size: 22px; color: #2ecc71;">العلامة: ${points} / 20</b>`,
-        icon: 'success',
-        confirmButtonText: 'ممتاز، واصل التقدم 💪',
-        confirmButtonColor: '#2ecc71',
-        background: '#243441',
-        color: '#ffffff'
-    });
-} else {
-    sBox.className = "score-board fail";
-    sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: راسب(ة)، يرجى مراجعة التبريرات المرفقة باللون الأزرق.`;
-    
-    // إظهار نافذة دعم بيداغوجية أنيقة في حال عدم توفق الطالب
-    const savedName = localStorage.getItem("academy_user_name") || "أيها الأستاذ";
-    Swal.fire({
-        title: `محاولة جيدة، أستاذ ${savedName}`,
-        html: `للأسف لم تتجاوز عتبة النجاح هذه المرة.<br><b style="font-size: 18px; color: #ff4757;">العلامة: ${points} / 20</b><br><br>💡 لا تقلق، تصفح الإجابات المرفقة بالأسفل بتمعن لإصلاح الأخطاء في المحاولة القادمة.`,
-        icon: 'info',
-        confirmButtonText: 'موافق، سأراجع الأخطاء 🎯',
-        confirmButtonColor: '#ff9f43',
-        background: '#243441',
-        color: '#ffffff'
-    });
-}
-
+                // إظهار نافذة تهنئة فخمة ومخصصة باسم الطالب المخزن سابقاً
+                const savedName = localStorage.getItem("academy_user_name") || "أيها البطل";
+                Swal.fire({
+                    title: `تهانينا الفائقة، أستاذ ${savedName}! 🎉`,
+                    html: `لقد اجتزت الموضوع المقترح بنجاح باهر.<br><br><b style="font-size: 22px; color: #2ecc71;">العلامة: ${points} / 20</b>`,
+                    icon: 'success',
+                    confirmButtonText: 'ممتاز، واصل التقدم 💪',
+                    confirmButtonColor: '#2ecc71',
+                    background: '#243441',
+                    color: '#ffffff'
+                });
+            } else {
+                sBox.className = "score-board fail";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: راسب(ة)، يرجى مراجعة التبريرات المرفقة باللون الأخضر.`;
+                
+                // إظهار نافذة دعم بيداغوجية أنيقة في حال عدم توفق الطالب
+                const savedName = localStorage.getItem("academy_user_name") || "أيها الأستاذ";
+                Swal.fire({
+                    title: `محاولة جيدة، أستاذ ${savedName}`,
+                    html: `للأسف لم تتجاوز عتبة النجاح هذه المرة.<br><b style="font-size: 18px; color: #ff4757;">العلامة: ${points} / 20</b><br><br>💡 لا تقلق، تصفح التبريرات الخضراء وحاول مرة أخرى.`,
+                    icon: 'info',
+                    confirmButtonText: 'موافق، سأراجع الأخطاء 🎯',
+                    confirmButtonColor: '#ff9f43',
+                    background: '#243441',
+                    color: '#ffffff'
+                });
+            }
+        });
     </script>
 </body>
-  </html>
-  
+</html>
