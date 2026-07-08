@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموضوع رقم 01 - تكنولوجيا الإعلام والاتصال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background: #f1f5f9; padding: 30px; color: #0f172a; }
+        .official-paper { background: #ffffff; max-width: 850px; margin: 0 auto; padding: 50px; box-shadow: 0 0 20px rgba(0,0,0,0.05); border: 1px solid #cbd5e1; position: relative; }
+        .header-ministry { text-align: center; margin-bottom: 35px; border-bottom: 3px double #000; padding-bottom: 20px; }
+        .header-ministry h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
+        .header-ministry h1 { font-size: 1.35rem; font-weight: 700; margin: 12px 0; letter-spacing: 0.5px; }
+        .meta-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .meta-table td { border: 1px solid #000; padding: 8px 12px; font-weight: bold; font-size: 1rem; width: 50%; }
+        .exercise-section { margin-top: 30px; }
+        .exercise-header { font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 15px; }
+        .question-text { font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; display: block; line-height: 1.6; }
+        .options-list { list-style: none; padding-right: 20px; }
+        .options-list li { margin-bottom: 10px; }
+        .options-list label { display: flex; align-items: center; gap: 10px; font-size: 1rem; cursor: pointer; padding: 6px; border-radius: 4px; }
+        .btn-action { display: block; width: 100%; background: #0f172a; color: white; border: 1px solid #0f172a; padding: 12px; font-size: 1.1rem; font-weight: 700; margin-top: 40px; cursor: pointer; border-radius: 4px; }
+        .btn-action:hover { background: #1e293b; }
+        .correct-ans { background-color: #d1fae5 !important; border: 1px solid #10b981 !important; color: #065f46; font-weight: bold; }
+        .wrong-ans { background-color: #fee2e2 !important; border: 1px solid #ef4444 !important; color: #991b1b; }
+        .justification { display: none; font-size: 0.95rem; color: #2563eb; background: #f8fafc; padding: 10px; border-right: 4px solid #2563eb; margin-top: 10px; }
+        .score-board { display: none; margin-top: 25px; padding: 20px; text-align: center; font-size: 1.4rem; font-weight: 900; border-radius: 4px; }
+        .pass { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
+        .fail { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
+        .back-home { display: block; text-align: center; margin-top: 30px; text-decoration: none; color: #64748b; font-weight: bold; font-size: 0.95rem; }
+        .back-home:hover { color: #0f172a; }
+    </style>
+</head>
+<body>
+
+    <div class="official-paper">
+        <div class="header-ministry">
+            <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+            <h2>وزارة التربية الوطنية</h2>
+            <h2>الديوان الوطني للامتحانات والمسابقات</h2>
+            <h1>الامتحان المهني للالتحاق برتب الترقية لقطاع التربية الوطنية</h1>
+            <table class="meta-table">
+                <tr>
+                    <td>الاختبار في: تكنولوجيا الإعلام والاتصال</td>
+                    <td>المدة: ساعتان</td>
+                </tr>
+            </table>
+        </div>
+
+        <form id="subject1Form">
+            <!-- التمرين الأول -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الأول: المكونات المادية وأنظمة التخزين (05 نقاط)</div>
+                <span class="question-text">في إطار صيانة وتجهيز أجهزة الحاسوب على مستوى إدارة المؤسسة التربوية، ما هي الفائدة البيداغوجية والتقنية الأساسية من إجراء عملية تجزئة القرص الصلب (Hard Disk Partitioning)؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q0_o0"><input type="radio" name="q0" value="0" required> الرفع الفوري والتلقائي من سعة التخزين الإجمالية المادية للقرص الصلب.</label></li>
+                    <li><label id="l_q0_o1"><input type="radio" name="q0" value="1"> فصل ملفات نظام التشغيل عن وثائق وبيانات المستخدم لتسهيل عملية الصيانة وحماية البيانات عند الانهيار.</label></li>
+                    <li><label id="l_q0_o2"><input type="radio" name="q0" value="2"> حظر الفيروسات والبرمجيات الخبيثة من الانتقال عبر وسائط التخزين الخارجية.</label></li>
+                </ul>
+                <div class="justification" id="j_q0">التبرير الرسمي: التجزئة تمكن من عزل نظام التشغيل (غالباً في الـ C:) عن الملفات الإدارية، مما يتيح فرمتة النظام وإعادة تثبيته دون المساس بالبيانات المتواجدة في الأقسام الأخرى.</div>
+            </div>
+
+            <!-- التمرين الثاني -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الثاني: برمجية معالج النصوص Word (05 نقاط)</div>
+                <span class="question-text">تُتيح أداة معالجة النصوص Microsoft Word ميزة "إعداد الصفحة" (Mise en page). ما هي الإعدادات التي يتم ضبطها مباشرة من خلال هذه التبويب قبل طباعة التقارير الإدارية؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q1_o0"><input type="radio" name="q1" value="0" required> ضبط حجم ولون الخط وعمليات التنسيق الشرطي للفقرات المكتوبة.</label></li>
+                    <li><label id="l_q1_o1"><input type="radio" name="q1" value="1"> تحديد هوامش المستند (Marges)، اتجاه الورقة (أفقي أو عمودي)، وحجم ورق الطباعة المستهدف.</label></li>
+                    <li><label id="l_q1_o2"><input type="radio" name="q1" value="2"> الربط المباشر مع قاعدة البيانات الخارجية لإجراء عملية دمج المراسلات.</label></li>
+                </ul>
+                <div class="justification" id="j_q1">التبرير الرسمي: تبويب إعداد الصفحة يختص بالهندسة الفراغية للورقة (الأبعاد والحدود) لضمان اتساقها الشكلي قبل الإرسال للمطبوعات.</div>
+            </div>
+
+            <!-- التمرين الثالث -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الثالث: برمجية المجدول الإلكتروني Excel (05 نقاط)</div>
+                <span class="question-text">أراد أستاذ حساب قيمة الزيادة المقدرة بـ 15% لراتب موظف يتواجد في الخلية B2 في جدول كشف الرواتب، ما هي الصيغة الرياضية الصحيحة والواجب كتابتها في برنامج Excel؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q2_o0"><input type="radio" name="q2" value="0" required> B2 * 15%</label></li>
+                    <li><label id="l_q2_o1"><input type="radio" name="q2" value="1"> =B2 * 15%</label></li>
+                    <li><label id="l_q2_o2"><input type="radio" name="q2" value="2"> =SUM(B2:15%)</label></li>
+                </ul>
+                <div class="justification" id="j_q2">التبرير الرسمي: أي عملية حسابية أو دالة برمجية في بيئة المجدولات يجب أن تبتدئ برمز التساوي (=) ليفهمها المحرك الحسابي كمعادلة وليس كنص ثابت.</div>
+            </div>
+
+            <!-- التمرين الرابع -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الرابع: الشبكات والاتصالات الرقمية (05 نقاط)</div>
+                <span class="question-text">عند إرسال بريد إلكتروني جماعي يحتوي على جداول توجيهية لمدراء المدارس، ما هو الحقل الذي يُدرج فيه عناوين المستلمين لضمان عدم رؤية بعضهم البعض (حفاظاً على خصوصية العناوين)؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q3_o0"><input type="radio" name="q3" value="0" required> حقل المرسل إليه الأساسي (To / À)</label></li>
+                    <li><label id="l_q3_o1"><input type="radio" name="q3" value="1"> حقل النسخة المطابقة (Cc)</label></li>
+                    <li><label id="l_q3_o2"><input type="radio" name="q3" value="2"> حقل النسخة المطابقة المخفية (Bcc / Cci)</label></li>
+                </ul>
+                <div class="justification" id="j_q3">التبرير الرسمي: الحقل Cci (Copie Conforme Invisible) يمرر البريد لكافة الأطراف المدرجة داخله مع حجب هوياتهم وعناوينهم الإلكترونية تماماً عن بقية المستلمين لدواعي أمنية وسيبرانية.</div>
+            </div>
+
+            <button type="submit" class="btn-action">تسليم ورقة الإجابة وتصحيح الموضوع</button>
+        </form>
+
+        <div id="scoreBox" class="score-board"></div>
+        <a href="index.html" class="back-home">⬅️ العودة إلى قائمة المواضيع الرئيسية</a>
+    </div>
+
+    <script>
+        const answers = { q0: 1, q1: 1, q2: 1, q3: 2 };
+        document.getElementById('subject1Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let points = 0;
+            for(let key in answers) {
+                const selected = document.querySelector(`input[name="${key}"]:checked`);
+                const correctVal = answers[key];
+                document.getElementById(`j_${key}`).style.display = 'block';
+                for(let i=0; i<3; i++) {
+                    document.getElementById(`l_${key}_o${i}`).className = '';
+                }
+                if(selected) {
+                    const userVal = parseInt(selected.value);
+                    if(userVal === correctVal) {
+                        points += 5;
+                        document.getElementById(`l_${key}_o${userVal}`).className = 'correct-ans';
+                    } else {
+                        document.getElementById(`l_${key}_o${userVal}`).className = 'wrong-ans';
+                        document.getElementById(`l_${key}_o${correctVal}`).className = 'correct-ans';
+                    }
+                }
+            }
+            const sBox = document.getElementById('scoreBox');
+            sBox.style.display = 'block';
+            if(points >= 10) {
+                sBox.className = "score-board pass";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: ناجح(ة) في الاختبار المقترح.`;
+            } else {
+                sBox.className = "score-board fail";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: راسب(ة)، يرجى مراجعة التبريرات المرفقة باللون الأزرق.`;
+            }
+            window.scrollTo({ top: sBox.offsetTop - 30, behavior: 'smooth' });
+        });
+    </script>
+</body>
+  </html>
+  
