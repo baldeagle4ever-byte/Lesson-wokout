@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموضوع رقم 02 - تكنولوجيا الإعلام والاتصال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background: #f1f5f9; padding: 30px; color: #0f172a; }
+        .official-paper { background: #ffffff; max-width: 850px; margin: 0 auto; padding: 50px; box-shadow: 0 0 20px rgba(0,0,0,0.05); border: 1px solid #cbd5e1; position: relative; }
+        .header-ministry { text-align: center; margin-bottom: 35px; border-bottom: 3px double #000; padding-bottom: 20px; }
+        .header-ministry h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
+        .header-ministry h1 { font-size: 1.35rem; font-weight: 700; margin: 12px 0; letter-spacing: 0.5px; }
+        .meta-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .meta-table td { border: 1px solid #000; padding: 8px 12px; font-weight: bold; font-size: 1rem; width: 50%; }
+        .exercise-section { margin-top: 30px; }
+        .exercise-header { font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 15px; }
+        .question-text { font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; display: block; line-height: 1.6; }
+        .options-list { list-style: none; padding-right: 20px; }
+        .options-list li { margin-bottom: 10px; }
+        .options-list label { display: flex; align-items: center; gap: 10px; font-size: 1rem; cursor: pointer; padding: 6px; border-radius: 4px; }
+        .btn-action { display: block; width: 100%; background: #0f172a; color: white; border: 1px solid #0f172a; padding: 12px; font-size: 1.1rem; font-weight: 700; margin-top: 40px; cursor: pointer; border-radius: 4px; }
+        .btn-action:hover { background: #1e293b; }
+        .correct-ans { background-color: #d1fae5 !important; border: 1px solid #10b981 !important; color: #065f46; font-weight: bold; }
+        .wrong-ans { background-color: #fee2e2 !important; border: 1px solid #ef4444 !important; color: #991b1b; }
+        .justification { display: none; font-size: 0.95rem; color: #2563eb; background: #f8fafc; padding: 10px; border-right: 4px solid #2563eb; margin-top: 10px; }
+        .score-board { display: none; margin-top: 25px; padding: 20px; text-align: center; font-size: 1.4rem; font-weight: 900; border-radius: 4px; }
+        .pass { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
+        .fail { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
+        .back-home { display: block; text-align: center; margin-top: 30px; text-decoration: none; color: #64748b; font-weight: bold; font-size: 0.95rem; }
+        .back-home:hover { color: #0f172a; }
+    </style>
+</head>
+<body>
+
+    <div class="official-paper">
+        <div class="header-ministry">
+            <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+            <h2>وزارة التربية الوطنية</h2>
+            <h2>الديوان الوطني للامتحانات والمسابقات</h2>
+            <h1>الامتحان المهني للالتحاق برتب الترقية لقطاع التربية الوطنية</h1>
+            <table class="meta-table">
+                <tr>
+                    <td>الاختبار في: تكنولوجيا الإعلام والاتصال</td>
+                    <td>المدة: ساعتان</td>
+                </tr>
+            </table>
+        </div>
+
+        <form id="subject2Form">
+            <!-- التمرين الأول -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمين الأول: البرمجيات ونظم التشغيل (05 نقاط)</div>
+                <span class="question-text">أي من البرمجيات والأنظمة التالية يُصنف تقنياً كـ "برنامج تطبيقي" (Application Software) وليس كـ "نظام تشغيل" (Operating System)؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q0_o0"><input type="radio" name="q0" value="0" required> Linux Ubuntu</label></li>
+                    <li><label id="l_q0_o1"><input type="radio" name="q0" value="1"> Microsoft Word</label></li>
+                    <li><label id="l_q0_o2"><input type="radio" name="q0" value="2"> Windows 11</label></li>
+                </ul>
+                <div class="justification" id="j_q0">التبرير الرسمي: برمجية Word هي تطبيق لمعالجة النصوص والتحرير المكتبي، بينما اللينكس والويندوز هما نظاما تشغيل أساسيان يديران عتاد وموارد الحاسوب كلياً.</div>
+            </div>
+
+            <!-- التمرين الثاني -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الثاني: برمجية معالج النصوص Word (05 نقاط)</div>
+                <span class="question-text">عند الرغبة في إعداد شهادات شكر وتقدير جماعية لموظفي المؤسسة التربوية بالاعتماد على ميزة دمج المراسلات (Publipostage)، ماذا يُمثل ملف قاعدة البيانات المربوط؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q1_o0"><input type="radio" name="q1" value="0" required> المستند الرئيسي الذي يحمل التنسيق الثابت ونص الشهادة المشترك.</label></li>
+                    <li><label id="l_q1_o1"><input type="radio" name="q1" value="1"> مصدر البيانات المتغيرة (Source de données) الذي يحتوي على قائمة الحقول (كالأسماء والرتب).</label></li>
+                    <li><label id="l_q1_o2"><input type="radio" name="q1" value="2"> الملف البرمجي التنفيذي المسؤول عن طباعة المخرجات الورقية.</label></li>
+                </ul>
+                <div class="justification" id="j_q1">التبرير الرسمي: تعتمد عملية دمج المراسلات على ركنين: ملف رئيسي ثابت وملف بيانات متغير (مصدر البيانات) لتوليد وثائق مخصصة لكل موظف تلقائياً.</div>
+            </div>
+
+            <!-- التمرين الثالث -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الثالث: برمجية المجدول الإلكتروني Excel (05 نقاط)</div>
+                <span class="question-text">في جدول تتبع علامات ونتائج الامتحانات الفصلية للمؤسسة، ما هي الدالة الإحصائية الصحيحة التي تُستخدم لحساب "عدد الخلايا الرقمية" فقط داخل نطاق محدد؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q2_o0"><input type="radio" name="q2" value="0" required> دالة =COUNTA()</label></li>
+                    <li><label id="l_q2_o1"><input type="radio" name="q2" value="1"> دالة =COUNT()</label></li>
+                    <li><label id="l_q2_o2"><input type="radio" name="q2" value="2"> دالة =COUNTBLANK()</label></li>
+                </ul>
+                <div class="justification" id="j_q2">التبرير الرسمي: الدالة COUNT مخصصة فقط لحساب الخلايا الممتلئة بأرقام، بينما COUNTA تحسب الخلايا غير الفارغة (أرقام أو نصوص)، وCOUNTBLANK تحسب الخلايا الفارغة.</div>
+            </div>
+
+            <!-- التمرين الرابع -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الرابع: الشبكات والاتصالات الرقمية (05 نقاط)</div>
+                <span class="question-text">تتصل الحواسيب داخل شبكة الإدارة المحلية للمؤسسة وفق طوبولوجيات هندسية متعددة، ما هي الهيكلية (Topology) الأكثر كفاءة حالياً والتي يؤدي تعطل جهاز واحد فيها إلى عدم تأثر بقية أجهزة الشبكة؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q3_o0"><input type="radio" name="q3" value="0" required> الهيكلية الخطية المتسلسلة (Bus Topology)</label></li>
+                    <li><label id="l_q3_o1"><input type="radio" name="q3" value="1"> الهيكلية الحلقية (Ring Topology)</label></li>
+                    <li><label id="l_q3_o2"><input type="radio" name="q3" value="2"> الهيكلية النجمية المركزية (Star Topology)</label></li>
+                </ul>
+                <div class="justification" id="j_q3">التبرير الرسمي: الهيكلية النجمية تعتمد على ربط كل حاسوب بشكل منفصل بجهاز مركزي (Switch/Hub)، مما يمنع سقوط الشبكة عند تضرر كابل أو حاسوب فرعي.</div>
+            </div>
+
+            <button type="submit" class="btn-action">تسليم ورقة الإجابة وتصحيح الموضوع</button>
+        </form>
+
+        <div id="scoreBox" class="score-board"></div>
+        <a href="index.html" class="back-home">⬅️ العودة إلى قائمة المواضيع الرئيسية</a>
+    </div>
+
+    <script>
+        const answers = { q0: 1, q1: 1, q2: 1, q3: 2 };
+        document.getElementById('subject2Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let points = 0;
+            for(let key in answers) {
+                const selected = document.querySelector(`input[name="${key}"]:checked`);
+                const correctVal = answers[key];
+                document.getElementById(`j_${key}`).style.display = 'block';
+                for(let i=0; i<3; i++) {
+                    document.getElementById(`l_${key}_o${i}`).className = '';
+                }
+                if(selected) {
+                    const userVal = parseInt(selected.value);
+                    if(userVal === correctVal) {
+                        points += 5;
+                        document.getElementById(`l_${key}_o${userVal}`).className = 'correct-ans';
+                    } else {
+                        document.getElementById(`l_${key}_o${userVal}`).className = 'wrong-ans';
+                        document.getElementById(`l_${key}_o${correctVal}`).className = 'correct-ans';
+                    }
+                }
+            }
+            const sBox = document.getElementById('scoreBox');
+            sBox.style.display = 'block';
+            if(points >= 10) {
+                sBox.className = "score-board pass";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: ناجح(ة) في الاختبار المقترح.`;
+            } else {
+                sBox.className = "score-board fail";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: راسب(ة)، يرجى مراجعة التبريرات المرفقة باللون الأزرق.`;
+            }
+            window.scrollTo({ top: sBox.offsetTop - 30, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
