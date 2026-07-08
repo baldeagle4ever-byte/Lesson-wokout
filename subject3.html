@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموضوع رقم 03 - تكنولوجيا الإعلام والاتصال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background: #f1f5f9; padding: 30px; color: #0f172a; }
+        .official-paper { background: #ffffff; max-width: 850px; margin: 0 auto; padding: 50px; box-shadow: 0 0 20px rgba(0,0,0,0.05); border: 1px solid #cbd5e1; position: relative; }
+        .header-ministry { text-align: center; margin-bottom: 35px; border-bottom: 3px double #000; padding-bottom: 20px; }
+        .header-ministry h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
+        .header-ministry h1 { font-size: 1.35rem; font-weight: 700; margin: 12px 0; letter-spacing: 0.5px; }
+        .meta-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .meta-table td { border: 1px solid #000; padding: 8px 12px; font-weight: bold; font-size: 1rem; width: 50%; }
+        .exercise-section { margin-top: 30px; }
+        .exercise-header { font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 15px; }
+        .question-text { font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; display: block; line-height: 1.6; }
+        .options-list { list-style: none; padding-right: 20px; }
+        .options-list li { margin-bottom: 10px; }
+        .options-list label { display: flex; align-items: center; gap: 10px; font-size: 1rem; cursor: pointer; padding: 6px; border-radius: 4px; }
+        .btn-action { display: block; width: 100%; background: #0f172a; color: white; border: 1px solid #0f172a; padding: 12px; font-size: 1.1rem; font-weight: 700; margin-top: 40px; cursor: pointer; border-radius: 4px; }
+        .btn-action:hover { background: #1e293b; }
+        .correct-ans { background-color: #d1fae5 !important; border: 1px solid #10b981 !important; color: #065f46; font-weight: bold; }
+        .wrong-ans { background-color: #fee2e2 !important; border: 1px solid #ef4444 !important; color: #991b1b; }
+        .justification { display: none; font-size: 0.95rem; color: #2563eb; background: #f8fafc; padding: 10px; border-right: 4px solid #2563eb; margin-top: 10px; }
+        .score-board { display: none; margin-top: 25px; padding: 20px; text-align: center; font-size: 1.4rem; font-weight: 900; border-radius: 4px; }
+        .pass { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
+        .fail { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
+        .back-home { display: block; text-align: center; margin-top: 30px; text-decoration: none; color: #64748b; font-weight: bold; font-size: 0.95rem; }
+        .back-home:hover { color: #0f172a; }
+    </style>
+</head>
+<body>
+
+    <div class="official-paper">
+        <div class="header-ministry">
+            <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+            <h2>وزارة التربية الوطنية</h2>
+            <h2>الديوان الوطني للامتحانات والمسابقات</h2>
+            <h1>الامتحان المهني للالتحاق برتب الترقية لقطاع التربية الوطنية</h1>
+            <table class="meta-table">
+                <tr>
+                    <td>الاختبار في: تكنولوجيا الإعلام والاتصال</td>
+                    <td>المدة: ساعتان</td>
+                </tr>
+            </table>
+        </div>
+
+        <form id="subject3Form">
+            <!-- التمرين الأول -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الأول: المكونات المادية وأنظمة الذاكرة (05 نقاط)</div>
+                <span class="question-text">تفقد الذاكرة الحية (RAM) جميع محتوياتها من البيانات والمعلومات بمجرد انقطاع التيار الكهربائي أو إعادة تشغيل الحاسوب، ما هو السبب التقني وراء استخدامها الدائم في الحواسب؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q0_o0"><input type="radio" name="q0" value="0" required> قدرتها الهائلة على الاحتفاظ بالملفات والوثائق لفترات طويلة وبأحجام ضخمة جداً.</label></li>
+                    <li><label id="l_q0_o1"><input type="radio" name="q0" value="1"> سرعتها الفائقة في معالجة وتبادل البيانات مباشرة مع وحدة المعالجة المركزية (CPU).</label></li>
+                    <li><label id="l_q0_o2"><input type="radio" name="q0" value="2"> احتوائها على التعليمات البرمجية الأساسية لإقلاع اللوحة الأم (BIOS).</label></li>
+                </ul>
+                <div class="justification" id="j_q0">التبرير الرسمي: الذاكرة RAM تعمل كوسيط فائق السرعة لتخزين البيانات المؤقتة التي يحتاجها المعالج حالياً، وبدونها تتباطأ سرعة الحاسوب بشكل حاد.</div>
+            </div>
+
+            <!-- التمرين الثاني -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الثاني: برمجية معالج النصوص Word (05 نقاط)</div>
+                <span class="question-text">لحماية التقارير والقرارات الإدارية الحساسة الصادرة عن المؤسسة التعليمية من التزوير أو التبذيل غير المصرح به، ما هي أفضل ميزة أمان يوفرها برنامج Word لحفظ الوثيقة بشكل ثابت وغير قابل للتعديل المباشر؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q1_o0"><input type="radio" name="q1" value="0" required> تفعيل ميزة التدقيق الإملائي والنحوي التلقائي للمستند.</label></li>
+                    <li><label id="l_q1_o1"><input type="radio" name="q1" value="1"> حفظ الملف بتنسيق الامتداد الآمن والجاهز للقراءة والطباعة فقط (.pdf).</label></li>
+                    <li><label id="l_q1_o2"><input type="radio" name="q1" value="2"> إضافة علامات جدولة مخصصة على طول هوامش الفقرات.</label></li>
+                </ul>
+                <div class="justification" id="j_q1">التبرير الرسمي: ملفات PDF صممت لحفظ الهيكل البصري والنصي للمستندات وتصعيب التلاعب بمحتواها، مما يجعلها الصيغة القياسية للمراسلات الرسمية.</div>
+            </div>
+
+            <!-- التمرين الثالث -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الثالث: برمجية المجدول الإلكتروني Excel (05 نقاط)</div>
+                <span class="question-text">في جدول إعداد الميزانية المالية للمؤسسة التربوية، ما هي الصيغة التعبيرية والشرطية الصحيحة التي تطبع كلمة "فائض" إذا تجاوز المدخول بالخلية A1 المصروف بالخلية B1، وتطبع كلمة "عجز" في الحالة العكسية؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q2_o0"><input type="radio" name="q2" value="0" required> =IF(A1>B1; "فائض"; "عجز")</label></li>
+                    <li><label id="l_q2_o1"><input type="radio" name="q2" value="1"> =IF(A1>B1, 'فائض', 'عجز')</label></li>
+                    <li><label id="l_q2_o2"><input type="radio" name="q2" value="2"> =IF(A1>B1 : "فائض" : "عجز")</label></li>
+                </ul>
+                <div class="justification" id="j_q2">التبرير الرسمي: البنية النحوية البرمجية لدالة الشرط المعتمدة في النسخ القياسية لـ Excel تتطلب فصلاً منقوطاً (;) بين أجزاء الشرط، مع إدراج المخرجات النصية بين علامتي تنصيص مزدوجة (" ").</div>
+            </div>
+
+            <!-- التمرين الرابع -->
+            <div class="exercise-section">
+                <div class="exercise-header">التمرين الرابع: الشبكات وأمن المعلومات (05 نقاط)</div>
+                <span class="question-text">يتعرض نظام معلومات الإدارة الرقمية بالمؤسسات أحياناً لتهديدات سيبرانية خبيثة، ما هو النظام البرمجي أو المادي (Hardware/Software) الذي يعمل كحاجز وقائي لمراقبة وفحص حزم البيانات الصادرة والواردة عبر شبكة الإنترنت؟</span>
+                <ul class="options-list">
+                    <li><label id="l_q3_o0"><input type="radio" name="q3" value="0" required> بروتوكول تهيئة المضيف الديناميكي (DHCP)</label></li>
+                    <li><label id="l_q3_o1"><input type="radio" name="q3" value="1"> جدار الحماية الأمنية (Firewall)</label></li>
+                    <li><label id="l_q3_o2"><input type="radio" name="q3" value="2"> نظام محاذاة العناوين وعناوين الـ IP</label></li>
+                </ul>
+                <div class="justification" id="j_q3">التبرير الرسمي: جدار الحماية (Firewall) هو خط الدفاع الأساسي للشبكة؛ حيث يقوم بفلترة البيانات وحظر الاتصالات غير المصرح بها أو المشبوهة المتجهة نحو خوادم أو حواسب المؤسسة.</div>
+            </div>
+
+            <button type="submit" class="btn-action">تسليم ورقة الإجابة وتصحيح الموضوع</button>
+        </form>
+
+        <div id="scoreBox" class="score-board"></div>
+        <a href="index.html" class="back-home">⬅️ العودة إلى قائمة المواضيع الرئيسية</a>
+    </div>
+
+    <script>
+        const answers = { q0: 1, q1: 1, q2: 0, q3: 1 };
+        document.getElementById('subject3Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let points = 0;
+            for(let key in answers) {
+                const selected = document.querySelector(`input[name="${key}"]:checked`);
+                const correctVal = answers[key];
+                document.getElementById(`j_${key}`).style.display = 'block';
+                for(let i=0; i<3; i++) {
+                    document.getElementById(`l_${key}_o${i}`).className = '';
+                }
+                if(selected) {
+                    const userVal = parseInt(selected.value);
+                    if(userVal === correctVal) {
+                        points += 5;
+                        document.getElementById(`l_${key}_o${userVal}`).className = 'correct-ans';
+                    } else {
+                        document.getElementById(`l_${key}_o${userVal}`).className = 'wrong-ans';
+                        document.getElementById(`l_${key}_o${correctVal}`).className = 'correct-ans';
+                    }
+                }
+            }
+            const sBox = document.getElementById('scoreBox');
+            sBox.style.display = 'block';
+            if(points >= 10) {
+                sBox.className = "score-board pass";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: ناجح(ة) في الاختبار المقترح.`;
+            } else {
+                sBox.className = "score-board fail";
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: راسب(ة)، يرجى مراجعة التبريرات المرفقة باللون الأزرق.`;
+            }
+            window.scrollTo({ top: sBox.offsetTop - 30, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
