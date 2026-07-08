@@ -15,52 +15,179 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        /* التنسيق الجمالي البصري المتقدم والتوافق التلقائي */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        /* جعل الصورة بالكامل خلفية للموقع مع تعتيمها قليلاً لراحة العين وبروز النصوص */
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('logo.png') no-repeat center center fixed;
+            background-size: cover;
             color: #f8fafc;
             font-family: 'Cairo', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px 12px; /* ملاءمة الهواتف الصغيرة */
+            padding: 80px 12px 20px 12px; /* ترك مساحة علوية لزر القائمة الجانبية */
         }
 
-        /* الحاوية الزجاجية المرنة */
+        /* زر تفعيل السلايد الجانبي العلوي */
+        .sidebar-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid #f59e0b;
+            color: #f59e0b;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+        }
+
+        .sidebar-toggle-btn:hover {
+            background: #f59e0b;
+            color: #0f172a;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+
+        /* هيكل السلايد الجانبي (Sidebar) */
+        .side-navigation-bar {
+            position: fixed;
+            top: 0;
+            right: -300px; /* مخفي افتراضياً */
+            width: 300px;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 2px solid rgba(245, 158, 11, 0.3);
+            z-index: 2000;
+            padding: 30px 20px;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .side-navigation-bar.active {
+            right: 0; /* إظهار */
+        }
+
+        .close-sidebar-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 22px;
+            cursor: pointer;
+            float: left;
+            transition: color 0.2s;
+        }
+
+        .close-sidebar-btn:hover {
+            color: #ef4444;
+        }
+
+        .sidebar-content {
+            margin-top: 50px;
+            text-align: right;
+        }
+
+        .sidebar-content h2 {
+            font-family: 'Reem Kufi', sans-serif;
+            color: #f59e0b;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed rgba(245, 158, 11, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 12px 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar-menu-item:hover {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            padding-right: 15px;
+        }
+
+        /* غطاء الخلفية الشفاف عند فتح القائمة */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* الحاوية الزجاجية الرئيسية للمحتوى */
         .main-wrapper {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px dashed rgba(245, 158, 11, 0.3);
-            padding: 25px 20px; /* تقليص الحواف في الموبايل */
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 2px dashed rgba(245, 158, 11, 0.25);
+            padding: 25px 20px;
             border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            max-width: 900px; /* تكبير المساحة الإجمالية لتناسب الشاشات العريضة */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            max-width: 900px;
             width: 100%;
             position: relative;
-            overflow: hidden;
-            transition: padding 0.3s, border-radius 0.3s;
         }
 
-        .main-wrapper::before {
-            content: '';
+        /* تخصيص وعزل اللوغو الدائري فقط */
+        .academy-logo-container {
+            width: 140px;
+            height: 140px;
+            margin: -10px auto 15px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #f59e0b;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+            position: relative;
+            background: #111827;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* استغلال ميزة تدوير وقص اللوغو الدائري من وسط الصورة المرفقة مباشرة */
+        .academy-logo-container img {
+            width: 250%; /* تكبير لتوسيط اللوغو الدائري وعزله */
+            height: auto;
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -51.5%); /* ضبط الموضع بدقة على الدائرة الوسطى */
             pointer-events: none;
         }
 
-        /* ترويسة الأكاديمية */
+        .academy-logo-container:hover {
+            transform: scale(1.05) rotate(360deg); /* تأثير دوران كامل فخم للنسر عند تمرير الماوس */
+        }
+
         .platform-header {
             text-align: center;
             margin-bottom: 25px;
@@ -70,7 +197,7 @@
 
         .platform-header h1 {
             font-family: 'Reem Kufi', sans-serif;
-            font-size: 24px; /* مرن تلقائياً */
+            font-size: 24px;
             font-weight: 900;
             color: #f59e0b;
             text-shadow: 0 4px 10px rgba(0,0,0,0.4);
@@ -83,7 +210,6 @@
             line-height: 1.6;
         }
 
-        /* أوسمة وعناوين الفئات الفرعية */
         .section-badge {
             font-family: 'Reem Kufi', sans-serif;
             color: #f59e0b;
@@ -98,16 +224,14 @@
             gap: 8px;
         }
 
-        /* شبكة البطاقات - التكيف التلقائي (هاتف = عمود واحد | حاسوب = عمودين) */
         .cards-layout {
             display: grid;
-            grid-template-columns: 1fr; /* الافتراضي للهواتف */
+            grid-template-columns: 1fr;
             gap: 12px;
         }
 
-        /* تصميم البطاقات التفاعلية */
         .interactive-card {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.65);
             border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 15px 18px;
             border-radius: 14px;
@@ -122,8 +246,8 @@
         .interactive-card:hover {
             transform: translateY(-3px);
             border-color: #f59e0b;
-            background: rgba(30, 41, 59, 0.8);
-            box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.15);
+            background: rgba(30, 41, 59, 0.85);
+            box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.2);
         }
 
         .card-body-wrapper {
@@ -150,7 +274,6 @@
             line-height: 1.4;
         }
 
-        /* صناديق الأيقونات */
         .visual-icon-box {
             font-size: 22px;
             display: flex;
@@ -161,7 +284,7 @@
             height: 44px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            order: 2; /* تأكيد بقائها في أقصى اليمين */
+            order: 2;
         }
 
         .interactive-card:hover .visual-icon-box {
@@ -172,7 +295,7 @@
             color: #475569;
             font-size: 13px;
             transition: transform 0.3s, color 0.3s;
-            order: 0; /* تأكيد بقائها في أقصى اليسار */
+            order: 0;
         }
 
         .interactive-card:hover .arrow-indicator {
@@ -180,7 +303,6 @@
             color: #f59e0b;
         }
 
-        /* تذييل الصفحة */
         .platform-footer {
             margin-top: 35px;
             text-align: center;
@@ -203,7 +325,7 @@
             box-shadow: 0 4px 12px rgba(3, 105, 161, 0.2);
             transition: all 0.3s;
             margin-bottom: 15px;
-            width: 100%; /* تملأ الشاشة في الهواتف */
+            width: 100%;
             justify-content: center;
             max-width: 450px;
         }
@@ -225,7 +347,7 @@
             color: #94a3b8;
         }
 
-        /* 🖥️ شاشات الحاسوب ووضع سطح المكتب التلقائي (Media Queries) */
+        /* التوافق مع وضع سطح المكتب */
         @media (min-width: 680px) {
             body {
                 padding: 40px 20px;
@@ -233,6 +355,10 @@
             .main-wrapper {
                 padding: 40px 35px;
                 border-radius: 28px;
+            }
+            .academy-logo-container {
+                width: 160px;
+                height: 160px;
             }
             .platform-header h1 {
                 font-size: 32px;
@@ -243,12 +369,10 @@
             .section-badge {
                 font-size: 18px;
             }
-            /* توزيع البطاقات لتبدو مصفوفة في عمودين متناسقين بشكل رائع وعريض */
             .cards-layout {
                 grid-template-columns: 1fr 1fr;
                 gap: 16px;
             }
-            /* جعل امتحان الرتبة الشامل ممتداً على العرض كاملاً للتميز */
             .interactive-card[href="exam.html"] {
                 grid-column: span 2;
             }
@@ -268,10 +392,38 @@
 </head>
 <body>
 
+<!-- زر التحكم وفتح السلايد الجانبي -->
+<div class="sidebar-toggle-btn" onclick="toggleSidebar()">
+    <i class="bi bi-list"></i>
+</div>
+
+<!-- الغطاء الشفاف الخلفي -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- السلايد الجانبي المطور -->
+<div class="side-navigation-bar" id="sidebarMenu">
+    <button class="close-sidebar-btn" onclick="toggleSidebar()"><i class="bi bi-x-circle-fill"></i></button>
+    <div class="sidebar-content">
+        <h2>لوحة التحكم والمساعدة</h2>
+        <a href="#" class="sidebar-menu-item" onclick="changeUser()"><i class="bi bi-person-bounding-box" style="color: #f59e0b;"></i> تغيير اسم المستخدم</a>
+        <a href="exam.html" class="sidebar-menu-item"><i class="bi bi-award" style="color: #ef4444;"></i> الامتحان الشامل المباشر</a>
+        <a href="excel-lessons.html" class="sidebar-menu-item"><i class="bi bi-journal-code" style="color: #4ade80;"></i> مراجع الحصص التدريبية</a>
+        <a href="https://t.me" target="_blank" class="sidebar-menu-item"><i class="bi bi-telegram" style="color: #38bdf8;"></i> الدعم الفني عبر التليجرام</a>
+        <div style="margin-top: 40px; font-size: 11px; color: #64748b; text-align: center; line-height: 1.5;">
+            أكاديمية النسر للتدريب التقني <br> إصدار التطوير الاحترافي 2026 ©
+        </div>
+    </div>
+</div>
+
 <div class="main-wrapper">
+    <!-- اللوغو الدائري المعزول برمجياً بدقة عالية -->
+    <div class="academy-logo-container">
+        <img src="logo.png" alt="شعار أكاديمية النسر">
+    </div>
+
     <div class="platform-header">
         <h1>أكاديمية النسر للتعليم والتدريب التقني</h1>
-        <div class="dynamic-welcome" id="welcomeBox">جاري فحص وتخصيص بيئة الاتصال الآمنة...</div>
+        <div class="dynamic-welcome" id="welcomeBox">جاري تخصيص بيئة التصفح...</div>
     </div>
 
     <!-- القسم الأول: مراجعات الحصص والامتحانات الشاملة -->
@@ -326,7 +478,7 @@
             <span class="arrow-indicator"><i class="bi bi-chevron-left"></i></span>
             <div class="card-body-wrapper">
                 <h3>محاكاة إجراءات Microsoft PowerPoint</h3>
-                <p>ترتيب وفرز الشرائح، المراحل الانتقالية، الحركات المخصصة وضبط العرض التلقائي.</p>
+                <p>ترتيب وفرز الشرائح، المراهل الانتقالية، الحركات المخصصة وضبط العرض التلقائي.</p>
             </div>
             <div class="visual-icon-box" style="color: #d24726;"><i class="bi bi-file-earmark-ppt-fill"></i></div>
         </a>
@@ -424,58 +576,59 @@
         <div class="visitor-panel">
             <i class="bi bi-eye-fill" style="color: #38bdf8;"></i>
             <span>إحصائيات زيارات المنصة الإجمالية:</span>
-            <span id="global-count" style="color: #4ade80; font-weight: bold;">جاري العد...</span>
+            <span id="global-count" style="color: #4ade80; font-weight: bold;">نشط الآن 🟢</span>
         </div>
     </div>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. حساب عدد زوار المنصة الفعلي
-    fetch('https://api.countapi.xyz/hit/eagle_academy_2026/main_index')
-        .then(res => res.json())
-        .then(data => {
-            const el = document.getElementById("global-count");
-            if(el && data.value) el.innerText = data.value.toLocaleString() + " زيارة حقيقية";
-        })
-        .catch(() => {
-            const el = document.getElementById("global-count");
-            if(el) el.innerText = "نشط الآن 🟢";
-        });
+// دالة إظهار وإخفاء السلايد الجانبي
+function toggleSidebar() {
+    document.getElementById("sidebarMenu").classList.toggle("active");
+    document.getElementById("sidebarOverlay").classList.toggle("active");
+}
 
-    // 2. إدارة وتخصيص تجربة اسم الطالب وقراءة بيانات المتصفح
+document.addEventListener("DOMContentLoaded", function() {
     let userName = localStorage.getItem("academy_user_name");
     const welcomeBox = document.getElementById("welcomeBox");
 
     if (!userName) {
-        setTimeout(() => {
-            Swal.fire({
-                title: 'مرحباً بك في أكاديمية النسر',
-                text: 'يرجى كتابة اسمك الكريم لتخصيص لوحة التحكم والامتحانات باسمك:',
-                input: 'text',
-                inputPlaceholder: 'اكتب اسمك الثلاثي الكريم...',
-                confirmButtonText: 'تأكيد الالتزام والولوج 🚀',
-                confirmButtonColor: '#f59e0b',
-                background: '#1e293b',
-                color: '#f8fafc',
-                allowOutsideClick: false,
-                inputValidator: (value) => {
-                    if (!value || value.trim() === "") {
-                        return 'الاسم ضروري لإدراج هويتك بالمنصة!';
-                    }
-                }
-            }).then((result) => {
-                if (result.value) {
-                    let name = result.value.trim();
-                    localStorage.setItem("academy_user_name", name);
-                    renderWelcome(name, welcomeBox);
-                }
-            });
-        }, 500);
+        askForName();
     } else {
         renderWelcome(userName, welcomeBox);
     }
 });
+
+function askForName() {
+    Swal.fire({
+        title: 'مرحباً بك في أكاديمية النسر',
+        text: 'يرجى كتابة اسمك الكريم لتخصيص لوحة التحكم والامتحانات باسمك:',
+        input: 'text',
+        inputPlaceholder: 'اكتب اسمك الثلاثي الكريم...',
+        confirmButtonText: 'تأكيد الالتزام والولوج 🚀',
+        confirmButtonColor: '#f59e0b',
+        background: '#1e293b',
+        color: '#f8fafc',
+        allowOutsideClick: false,
+        inputValidator: (value) => {
+            if (!value || value.trim() === "") {
+                return 'الاسم ضروري لإدراج هويتك بالمنصة!';
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            let name = result.value.trim();
+            localStorage.setItem("academy_user_name", name);
+            renderWelcome(name, document.getElementById("welcomeBox"));
+        }
+    });
+}
+
+function changeUser() {
+    toggleSidebar();
+    localStorage.removeItem("academy_user_name");
+    askForName();
+}
 
 function renderWelcome(name, element) {
     if(!element) return;
@@ -486,14 +639,13 @@ function renderWelcome(name, element) {
     if (ua.indexOf("Win") !== -1) os = "نظام Windows";
     else if (ua.indexOf("Android") !== -1) os = "جهاز Android";
     else if (ua.indexOf("iPhone") !== -1 || ua.indexOf("iPad") !== -1) os = "جهاز iOS";
-    else if (ua.indexOf("Linux") !== -1) os = "نظام Linux";
 
     if (ua.indexOf("Chrome") !== -1) browser = "Google Chrome";
     else if (ua.indexOf("Safari") !== -1) browser = "Safari";
     else if (ua.indexOf("Firefox") !== -1) browser = "Mozilla Firefox";
 
     element.innerHTML = `مرحباً بك يا أستاذ <strong>${name}</strong> في منصتك التعليمية المخصصة لمسابقة جويلية 2026.
-    <br><span style="font-size: 11.5px; color: #94a3b8; font-weight: normal; display: inline-block; margin-top: 6px;">
+    <br><span style="font-size: 11.5px; color: #cbd5e1; font-weight: normal; display: inline-block; margin-top: 6px;">
     <i class="bi bi-shield-fill-check" style="color:#2dd4bf"></i> جرى تأمين اتصالك بنجاح عبر <span style="color:#f59e0b">${browser}</span> على <span style="color:#f59e0b">${os}</span>
     </span>`;
 }
