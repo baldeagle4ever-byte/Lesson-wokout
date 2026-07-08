@@ -9,31 +9,65 @@
     <title>الموضوع رقم 01 - تكنولوجيا الإعلام والاتصال</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        body { background: #f1f5f9; padding: 30px; color: #0f172a; }
-        .official-paper { background: #ffffff; max-width: 850px; margin: 0 auto; padding: 50px; box-shadow: 0 0 20px rgba(0,0,0,0.05); border: 1px solid #cbd5e1; position: relative; }
-        .header-ministry { text-align: center; margin-bottom: 35px; border-bottom: 3px double #000; padding-bottom: 20px; }
-        .header-ministry h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
-        .header-ministry h1 { font-size: 1.35rem; font-weight: 700; margin: 12px 0; letter-spacing: 0.5px; }
-        .meta-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .meta-table td { border: 1px solid #000; padding: 8px 12px; font-weight: bold; font-size: 1rem; width: 50%; }
-        .exercise-section { margin-top: 30px; }
-        .exercise-header { font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 15px; }
-        .question-text { font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; display: block; line-height: 1.6; }
-        .options-list { list-style: none; padding-right: 20px; }
-        .options-list li { margin-bottom: 10px; }
-        .options-list label { display: flex; align-items: center; gap: 10px; font-size: 1rem; cursor: pointer; padding: 6px; border-radius: 4px; }
-        .btn-action { display: block; width: 100%; background: #0f172a; color: white; border: 1px solid #0f172a; padding: 12px; font-size: 1.1rem; font-weight: 700; margin-top: 40px; cursor: pointer; border-radius: 4px; }
-        .btn-action:hover { background: #1e293b; }
-        .correct-ans { background-color: #d1fae5 !important; border: 1px solid #10b981 !important; color: #065f46; font-weight: bold; }
-        .wrong-ans { background-color: #fee2e2 !important; border: 1px solid #ef4444 !important; color: #991b1b; }
-        .justification { display: none; font-size: 0.95rem; color: #2563eb; background: #f8fafc; padding: 10px; border-right: 4px solid #2563eb; margin-top: 10px; }
-        .score-board { display: none; margin-top: 25px; padding: 20px; text-align: center; font-size: 1.4rem; font-weight: 900; border-radius: 4px; }
-        .pass { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
-        .fail { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
-        .back-home { display: block; text-align: center; margin-top: 30px; text-decoration: none; color: #64748b; font-weight: bold; font-size: 0.95rem; }
-        .back-home:hover { color: #0f172a; }
-    </style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Reem+Kufi:wght@700&display=swap');
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    body { background: #111e25; padding: 30px 15px; color: #f8fafc; }
+    
+    /* محاكاة الورقة الرسمية المطورة */
+    .official-paper { 
+        background: #243441; 
+        max-width: 850px; 
+        margin: 0 auto; 
+        padding: 45px; 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+        border: 2px dashed rgba(255, 173, 51, 0.2); 
+        border-radius: 16px;
+    }
+    
+    /* الترويسة الوزارية التقليدية المزدوجة الزخرفة */
+    .header-ministry { 
+        text-align: center; 
+        margin-bottom: 40px; 
+        border-bottom: 4px double #ff9f43; /* خط مزدوج ذهبي وزاري */
+        padding-bottom: 25px; 
+    }
+    .header-ministry h1 { 
+        font-family: 'Reem Kufi', sans-serif; 
+        color: #ffad33; 
+        font-size: 1.5rem; 
+        margin-bottom: 8px; 
+    }
+    
+    /* صندوق علامات الطالب المطور والمشع بالنجاح */
+    .score-board { 
+        padding: 20px; 
+        border-radius: 14px; 
+        text-align: center; 
+        font-weight: bold; 
+        font-size: 18px; 
+        margin-top: 30px; 
+        display: none;
+        animation: slideIn 0.5s ease-out;
+    }
+    .score-board.pass { 
+        background: linear-gradient(135deg, #1e3c2b 0%, #2ecc71 100%); 
+        border: 2px solid #2ecc71; 
+        color: white;
+        box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+    }
+    .score-board.fail { 
+        background: linear-gradient(135deg, #4c1d1d 0%, #e74c3c 100%); 
+        border: 2px solid #e74c3c; 
+        color: white;
+    }
+    
+    @keyframes slideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+</style>
+
 </head>
 <body>
 
