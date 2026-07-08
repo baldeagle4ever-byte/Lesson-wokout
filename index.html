@@ -4,290 +4,758 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أكاديمية النسر - المنصة الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #1a2a33;
-            color: white;
-            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        * {
             margin: 0;
-            padding: 30px 15px;
+            padding: 0;
             box-sizing: border-box;
         }
-        .container {
-            background-color: #243441;
-            padding: 35px 25px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 600px;
-            width: 100%;
-        }
-        .welcome-text {
-            color: #cfd8dc;
-            font-size: 16px;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        .badge-title {
-            background-color: #2c3e50;
-            padding: 12px 20px;
-            border-radius: 25px;
-            color: #ff9f43;
-            font-size: 16px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 30px;
-            border: 1px solid #34495e;
-        }
-        
-        .section-title {
-            color: #ff9f43;
-            font-size: 16px;
-            font-weight: 700;
-            margin: 25px 0 15px 0;
-            text-align: right;
-            border-right: 4px solid #ff9f43;
-            padding-right: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* تصميم البطاقات الموحد المستوحى من المنصة الأصلية */
-        .card-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
+            animation: backgroundPulse 15s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        /* Grid Pattern Overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(3deg); opacity: 0.8; }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            animation: float 20s infinite;
+            z-index: -1;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 22s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 28s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 6s; animation-duration: 24s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 8s; animation-duration: 26s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 10s; animation-duration: 23s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 12s; animation-duration: 27s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 14s; animation-duration: 21s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 16s; animation-duration: 29s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            position: relative;
+        }
+
+        .logo-wrapper {
+            display: inline-block;
+            position: relative;
             margin-bottom: 25px;
         }
-        .main-card {
-            background: #253846;
-            border: 1px solid #2d4352;
-            padding: 20px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: white;
-            text-align: right;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-        }
-        .main-card:hover {
-            transform: translateY(-2px);
-            border-color: #34ace0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .card-highlight {
-            border: 2px solid #4a69bd;
-        }
-        .card-content {
-            flex-grow: 1;
-            padding-right: 15px;
-        }
-        .card-content h3 {
-            margin: 0 0 6px 0;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-        }
-        .card-content p {
-            margin: 0;
-            font-size: 13px;
-            color: #95a5a6;
-            line-height: 1.5;
-        }
-        .arrow-icon {
-            color: #57606f;
-            font-size: 14px;
-            padding-left: 5px;
-        }
-        .card-icon {
-            font-size: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .logo-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
         }
 
-        /* تذييل الصفحة وقناة التلجرام */
-        .footer-note {
-            color: #ff9f43;
-            font-size: 14px;
-            margin: 25px 0 15px 0;
+        .logo-ring::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+            animation: rotate 15s linear infinite reverse;
         }
-        .telegram-btn {
-            background: #1b313f;
-            border: 1px solid #27ae60;
-            color: #2ecc71;
-            padding: 12px;
-            border-radius: 25px;
-            text-decoration: none;
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .logo {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 70px;
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5), 
+                        inset 0 0 30px rgba(255, 255, 255, 0.3);
+            animation: logoPulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 20px 60px rgba(255, 215, 0, 0.7); }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            font-weight: 800;
+            animation: fadeInDown 1s ease;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            color: #a8b2d1;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease 0.2s both;
+        }
+
+        .badge-container {
+            display: inline-flex;
+            align-items: center;
             gap: 10px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            animation: slideIn 1s ease 0.5s both, badgeGlow 3s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 8px 35px rgba(255, 215, 0, 0.6); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 35px;
+            padding: 20px 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border-radius: 20px;
+            border-right: 6px solid #ffd700;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-header:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-icon {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        .section-title {
+            font-size: 1.9em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .new-badge {
+            background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            margin-right: 15px;
+            animation: newPulse 2s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        @keyframes newPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 10px 0;
+        }
+
+        /* Card Design */
+        .card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 35px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
+            transition: left 0.6s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
+        }
+
+        .card-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 237, 78, 0.1) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-icon-wrapper {
+            transform: rotate(10deg) scale(1.1);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 237, 78, 0.2) 100%);
+        }
+
+        .card-icon {
+            font-size: 2.5em;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85em;
             font-weight: bold;
-            font-size: 14px;
+            animation: badgePulse 2s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            z-index: 1;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            color: #ffd700;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-title {
+            transform: translateX(-5px);
+        }
+
+        .card-description {
+            color: #b8c5d6;
+            font-size: 1em;
+            line-height: 1.7;
+        }
+
+        /* Special Card Types */
+        .card.exam {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25) 0%, rgba(255, 237, 78, 0.15) 100%);
+            border: 3px solid #ffd700;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .card.exam .card-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 237, 78, 0.2) 100%);
+            border-color: #ffd700;
+        }
+
+        .card.new {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(129, 199, 132, 0.1) 100%);
+            border: 2px solid #4caf50;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .card.new .card-icon-wrapper {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(129, 199, 132, 0.2) 100%);
+            border-color: #4caf50;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 60px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-quote {
+            font-size: 1.6em;
+            color: #ffd700;
+            margin-bottom: 25px;
+            font-style: italic;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #0088cc 0%, #00a8e6 100%);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
+            animation: buttonPulse 2s ease-in-out infinite;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.6);
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(0, 136, 204, 0.6); }
+        }
+
+        /* Staggered Animation Delays */
+        .card:nth-child(1) { animation: fadeInUp 0.8s ease 0.1s both; }
+        .card:nth-child(2) { animation: fadeInUp 0.8s ease 0.2s both; }
+        .card:nth-child(3) { animation: fadeInUp 0.8s ease 0.3s both; }
+        .card:nth-child(4) { animation: fadeInUp 0.8s ease 0.4s both; }
+        .card:nth-child(5) { animation: fadeInUp 0.8s ease 0.5s both; }
+        .card:nth-child(6) { animation: fadeInUp 0.8s ease 0.6s both; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+        }
+
+        /* Loading State */
+        .loading-skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
 
-<div class="container">
-    <div class="welcome-text">مرحباً بك في منصة الاختبارات والمراجعات الذكية المتقدمة</div>
-    <div class="badge-title">🎓 دورة التحضير لمسابقة الترقية جويلية 2026</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-wrapper">
+            <div class="logo-ring"></div>
+            <div class="logo">🦅</div>
+        </div>
+        <h1>أكاديمية النسر</h1>
+        <p class="subtitle">المنصة الذكية للتعليم والتدريب</p>
+        <div class="badge-container">
+            <i class="fas fa-graduation-cap"></i>
+            <span>دورة التحضير لمسابقة الترقية جويلية 2026</span>
+            <i class="fas fa-star"></i>
+        </div>
+    </header>
 
-    <!-- القسم الأول: مراجعات الحصص والامتحانات الشاملة -->
-    <div class="section-title">📚 مراجعة الحصص والامتحانات الشاملة</div>
-    <div class="card-list">
-        <a href="مراجعة.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>مراجعة وتقييم الحصة الأولى</h3>
-                <p>مفاهيم عتاد الحاسوب والشبكات الأساسية والـ IP.</p>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Reviews Section -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-sync-alt section-icon"></i>
+                <h2 class="section-title">مراجعة الحصص والامتحانات الشاملة</h2>
             </div>
-            <div class="card-icon">🎯</div>
-        </a>
-        <a href="review2.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>مراجعة وتقييم الحصة الثانية</h3>
-                <p>أنظمة التشغيل، تسيير الملفات، والأمن الرقمي.</p>
+            <div class="cards-grid">
+                <a href="مراجعة.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-bullseye card-icon"></i>
+                    </div>
+                    <h3 class="card-title">مراجعة وتقييم الحصة الأولى</h3>
+                    <p class="card-description">مفاهيم عتاد الحاسوب والشبكات الأساسية والـ IP مع تمارين تطبيقية</p>
+                </a>
+                <a href="review2.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-bullseye card-icon"></i>
+                    </div>
+                    <h3 class="card-title">مراجعة وتقييم الحصة الثانية</h3>
+                    <p class="card-description">أنظمة التشغيل، تسيير الملفات، والأمن الرقمي الشامل</p>
+                </a>
+                <a href="exam.html" class="card exam">
+                    <span class="card-badge"><i class="fas fa-fire"></i> مهم جداً</span>
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-trophy card-icon"></i>
+                    </div>
+                    <h3 class="card-title">الامتحان الشامل الرسمي للرتبة</h3>
+                    <p class="card-description">الاختبار الشامل النهائي لمحاكاة مسابقة الترقية الفعلية 100%</p>
+                </a>
             </div>
-            <div class="card-icon">🎯</div>
-        </a>
-        <a href="exam.html" class="main-card" style="border-color: #b7472a;">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>الامتحان الشامل الرسمي للرتبة</h3>
-                <p>الاختبار الشامل النهائي لمحاكاة مسابقة الترقية الفعلي.</p>
+        </section>
+
+        <!-- Office Applications Section -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-laptop-code section-icon"></i>
+                <h2 class="section-title">
+                    تطبيقات محاكاة محاور Office الإجرائية
+                    <span class="new-badge"><i class="fas fa-sparkles"></i> جديد</span>
+                </h2>
             </div>
-            <div class="card-icon">🏆</div>
-        </a>
+            <div class="cards-grid">
+                <a href="quiz-word.html" class="card new">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-word card-icon" style="color: #2b579a;"></i>
+                    </div>
+                    <h3 class="card-title">محاكاة إجراءات Microsoft Word</h3>
+                    <p class="card-description">إجراءات القوائم، الخطوط، الفقرات، تنظيم النوافذ وتنسيق الأشكال الاحترافي</p>
+                </a>
+                <a href="quiz-excel-steps.html" class="card new">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-excel card-icon" style="color: #217346;"></i>
+                    </div>
+                    <h3 class="card-title">محاكاة إجراءات Microsoft Excel</h3>
+                    <p class="card-description">إدراج الصيغ، تجميد الألواح، دمج الخلايا، وتنسيقات التخطيطات المتقدمة</p>
+                </a>
+                <a href="quiz-powerpoint.html" class="card new">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-powerpoint card-icon" style="color: #d24726;"></i>
+                    </div>
+                    <h3 class="card-title">محاكاة إجراءات Microsoft PowerPoint</h3>
+                    <p class="card-description">ترتيب الشرائح، المراحل الانتقالية، الحركات المخصصة وإعدادات العرض</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Lessons Section -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-book-open section-icon"></i>
+                <h2 class="section-title">الدروس التدريبية الملحقة والمراجعات</h2>
+            </div>
+            <div class="cards-grid">
+                <a href="excel-lessons.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-cogs card-icon"></i>
+                    </div>
+                    <h3 class="card-title">درس: تداول الجداول الحسابية المتقدمة Excel</h3>
+                    <p class="card-description">الدوال الأساسية والمركبة والشرطية مع النماذج التطبيقية والإدارية العملية</p>
+                </a>
+                <a href="storage-lessons.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-folder-tree card-icon"></i>
+                    </div>
+                    <h3 class="card-title">درس: الملفات والمجلدات وتسيير التخزين</h3>
+                    <p class="card-description">الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية المطورة</p>
+                </a>
+                <a href="software-examples.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-compact-disc card-icon"></i>
+                    </div>
+                    <h3 class="card-title">درس: فئات البرمجيات وأنظمتها القياسية</h3>
+                    <p class="card-description">المتصفحات، التعريفات، والتراخيص مفتوحة ومغلقة المصدر الشاملة</p>
+                </a>
+                <a href="miscellaneous-quiz.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-target card-icon"></i>
+                    </div>
+                    <h3 class="card-title">تطبيقات عامة ومبسطة (20 سؤالاً)</h3>
+                    <p class="card-description">مجموعة ميسرة وموسعة حول التخزين والبرمجيات للمبتدئين</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-edit section-icon"></i>
+                <h2 class="section-title">المواضيع النموذجية المقترحة الجديدة</h2>
+            </div>
+            <div class="cards-grid">
+                <a href="subject1.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-alt card-icon"></i>
+                    </div>
+                    <h3 class="card-title">الموضوع المقترح رقم 01</h3>
+                    <p class="card-description">أنظمة التشغيل، واجهة وورد، ودالة الجمع، والبريد الإلكتروني الشامل</p>
+                </a>
+                <a href="subject2.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-alt card-icon"></i>
+                    </div>
+                    <h3 class="card-title">الموضوع المقترح رقم 02</h3>
+                    <p class="card-description">مفاهيم الشبكات (LAN/WAN)، كلمات المرور، ودالة الشرط البسيط</p>
+                </a>
+                <a href="subject3.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-alt card-icon"></i>
+                    </div>
+                    <h3 class="card-title">الموضوع المقترح رقم 03</h3>
+                    <p class="card-description">الذاكرة والتخزين، حماية المستندات، والشرط المركب والأمن السيبراني</p>
+                </a>
+                <a href="subject4.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-alt card-icon"></i>
+                    </div>
+                    <h3 class="card-title">الموضوع المقترح رقم 04</h3>
+                    <p class="card-description">وحدات الإدخال والإخراج، تسيير الملفات، ودوال المتوسط الحسابي</p>
+                </a>
+                <a href="subject5.html" class="card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-file-alt card-icon"></i>
+                    </div>
+                    <h3 class="card-title">الموضوع المقترح رقم 05</h3>
+                    <p class="card-description">تحسين أداء نظام الحاسوب، امتدادات الملفات، والشرط المتقدم للموظفين</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-quote">
+                <i class="fas fa-lightbulb"></i>
+                التعلم يبدأ بخطوة: تعلم، طبق، أبدع
+                <i class="fas fa-lightbulb"></i>
+            </p>
+            <a href="#" class="telegram-btn">
+                <i class="fab fa-telegram-plane fa-lg"></i>
+                <span>قناة التلجرام: أكاديمية النسر للتدريب والتعليم التقني</span>
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </footer>
     </div>
 
-    <!-- القسم الثاني: تطبيقات محاكاة محاور Office الإجرائية -->
-    <div class="section-title">💻 تطبيقات محاكاة محاور Office الإجرائية (جديد)</div>
-    <div class="card-list">
-        <a href="quiz-word.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>محاكاة إجراءات Microsoft Word</h3>
-                <p>إجراءات القوائم، الخطوط، الفقرات، تنظيم النوافذ وتنسيق الأشكال</p>
-            </div>
-            <div class="card-icon">📝</div>
-        </a>
-        <a href="quiz-excel-steps.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>محاكاة إجراءات Microsoft Excel</h3>
-                <p>إدراج الصيغ، تجميد الألواح، دمج الخلايا، وتنسيقات التخطيطات</p>
-            </div>
-            <div class="card-icon">📊</div>
-        </a>
-        <a href="quiz-powerpoint.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>محاكاة إجراءات Microsoft PowerPoint</h3>
-                <p>ترتيب الشرائح، المراحل الانتقالية، الحركات المخصصة وإعدادات العرض</p>
-            </div>
-            <div class="card-icon">📉</div>
-        </a>
-    </div>
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
 
-    <!-- القسم الثالث: الدروس التدريبية المخصصة المسترجعة بالكامل -->
-    <div class="section-title">📖 الدروس التدريبية الملحقة والمراجعات</div>
-    <div class="card-list">
-        <a href="excel-lessons.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>درس: تداول الجداول الحسابية المتقدمة Excel</h3>
-                <p>الدوال الأساسية والمركبة والشرطية مع النماذج التطبيقية والإدارية.</p>
-            </div>
-            <div class="card-icon">⚙️</div>
-        </a>
-        <a href="storage-lessons.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>درس: الملفات والمجلدات وتسيير التخزين</h3>
-                <p>الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية المطورة</p>
-            </div>
-            <div class="card-icon">📁</div>
-        </a>
-        <a href="software-examples.html" class="main-card">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>درس: فئات البرمجيات وأنظمتها القياسية</h3>
-                <p>المتصفحات، التعريفات، والتراخيص مفتوحة ومغلقة المصدر</p>
-            </div>
-            <div class="card-icon">💿</div>
-        </a>
-        <a href="miscellaneous-quiz.html" class="main-card card-highlight">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>تطبيقات عامة ومبسطة (20 سؤالاً)</h3>
-                <p>مجموعة ميسرة وموسعة حول التخزين والبرمجيات للمبتدئين</p>
-            </div>
-            <div class="card-icon">🎯</div>
-        </a>
-    </div>
-
-    <!-- القسم الرابع: المواضيع النموذجية الخمسة المقترحة المضافة حديثاً -->
-    <div class="section-title">📝 المواضيع النموذجية المقترحة الجديدة</div>
-    <div class="card-list">
-        <a href="subject1.html" class="main-card" style="border-right: 4px solid #34ace0;">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>الموضوع المقترح رقم 01</h3>
-                <p>أنظمة التشغيل، واجهة وورد، ودالة الجمع، والبريد الإلكتروني.</p>
-            </div>
-            <div class="card-icon">📑</div>
-        </a>
-        <a href="subject2.html" class="main-card" style="border-right: 4px solid #2ed573;">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>الموضوع المقترح رقم 02</h3>
-                <p>مفاهيم الشبكات (LAN/WAN)، كلمات المرور، ودالة الشرط البسيط.</p>
-            </div>
-            <div class="card-icon">📑</div>
-        </a>
-        <a href="subject3.html" class="main-card" style="border-right: 4px solid #ff9f43;">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>الموضوع المقترح رقم 03</h3>
-                <p>الذاكرة والتخزين، حماية المستندات، والشرط المركب والأمن السيبراني.</p>
-            </div>
-            <div class="card-icon">📑</div>
-        </a>
-        <a href="subject4.html" class="main-card" style="border-right: 4px solid #b7472a;">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>الموضوع المقترح رقم 04</h3>
-                <p>وحدات الإدخال والإخراج، تسيير الملفات، ودوال المتوسط الحسابي.</p>
-            </div>
-            <div class="card-icon">📑</div>
-        </a>
-        <a href="subject5.html" class="main-card" style="border-right: 4px solid #22a6b3;">
-            <span class="arrow-icon">◀</span>
-            <div class="card-content">
-                <h3>الموضوع المقترح رقم 05</h3>
-                <p>تحسين أداء نظام الحاسوب، امتدادات الملفات، والشرط المتقدم للموظفين.</p>
-            </div>
-            <div class="card-icon">📑</div>
-        </a>
-    </div>
-
-    <div class="footer-note">💡 التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
-    <a href="#" class="telegram-btn">
-        <span>قناة التلجرام: أكاديمية النسر للتدريب والتعليم التقني</span>
-        <span>📢</span>
-    </a>
-</div>
-
+        // Add parallax effect to particles
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 5;
+                const xOffset = (0.5 - x) * speed;
+                const yOffset = (0.5 - y) * speed;
+                particle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+    </script>
 </body>
 </html>
