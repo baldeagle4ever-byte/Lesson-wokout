@@ -2,512 +2,161 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>أكاديمية النسر - المنصة الذكية</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            min-height: 100vh;
-            color: #fff;
-            overflow-x: hidden;
-            padding-bottom: 20px;
-        }
-
-        /* Header - Compact */
-        .header {
-            text-align: center;
-            padding: 20px 15px 15px;
-            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(102,126,234,0.1) 100%);
-            border-bottom: 2px solid rgba(255,215,0,0.3);
-        }
-
-        .logo {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            font-size: 35px;
-            box-shadow: 0 5px 20px rgba(255,215,0,0.4);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .header h1 {
-            font-size: 1.5em;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .header .subtitle {
-            font-size: 0.85em;
-            color: #a8b2d1;
-            margin-bottom: 8px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3));
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.75em;
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-
-        /* Container */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-        /* Section */
-        .section {
-            margin-bottom: 25px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
-            padding: 12px 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border-right: 4px solid #ffd700;
-        }
-
-        .section-icon {
-            font-size: 1.3em;
-            color: #ffd700;
-        }
-
-        .section-title {
-            font-size: 1em;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .new-badge {
-            background: linear-gradient(135deg, #4caf50, #81c784);
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-size: 0.7em;
-            margin-right: auto;
-        }
-
-        /* Cards Grid - Optimized for Mobile */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 15px;
-            border: 1px solid rgba(255,215,0,0.2);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: #fff;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:active {
-            transform: scale(0.98);
-        }
-
-        .card-icon-wrapper {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,237,78,0.1));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-
-        .card-icon {
-            font-size: 1.3em;
-        }
-
-        .card-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .card-title {
-            font-size: 0.9em;
-            font-weight: 600;
-            color: #ffd700;
-            margin-bottom: 4px;
-            line-height: 1.3;
-        }
-
-        .card-description {
-            font-size: 0.75em;
-            color: #b8c5d6;
-            line-height: 1.4;
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-size: 0.65em;
-            font-weight: bold;
-        }
-
-        /* Special Cards */
-        .card.exam {
-            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,237,78,0.1));
-            border: 2px solid #ffd700;
-        }
-
-        .card.new {
-            background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(129,199,132,0.1));
-            border: 1px solid #4caf50;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: 30px;
-            padding: 25px 15px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
-            border-radius: 15px;
-            border: 1px solid rgba(255,215,0,0.2);
-            text-align: center;
-        }
-
-        .footer-quote {
-            font-size: 0.9em;
-            color: #ffd700;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            color: #fff;
-            font-size: 0.9em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .social-btn:active {
-            transform: scale(0.98);
-        }
-
-        .telegram-btn {
-            background: linear-gradient(135deg, #0088cc, #00a8e6);
-            box-shadow: 0 5px 15px rgba(0,136,204,0.3);
-        }
-
-        .facebook-btn {
-            background: linear-gradient(135deg, #1877f2, #42a5f5);
-            box-shadow: 0 5px 15px rgba(24,119,242,0.3);
-        }
-
-        .social-icon {
-            font-size: 1.2em;
-        }
-
-        /* Tablet and Up */
-        @media (min-width: 600px) {
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .logo {
-                width: 90px;
-                height: 90px;
-                font-size: 45px;
-            }
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading Animation */
-        .card:nth-child(1) { animation: slideIn 0.5s ease 0.1s both; }
-        .card:nth-child(2) { animation: slideIn 0.5s ease 0.2s both; }
-        .card:nth-child(3) { animation: slideIn 0.5s ease 0.3s both; }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أكاديمية النسر - المنصة الاحترافية</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">🦅</div>
-        <h1>أكاديمية النسر</h1>
-        <p class="subtitle">المنصة الذكية</p>
-        <div class="badge">
-            <i class="fas fa-graduation-cap"></i>
-            دورة التحضير لمسابقة الترقية جويلية 2026
-            <i class="fas fa-star"></i>
-        </div>
-    </header>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Reviews Section -->
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-sync-alt section-icon"></i>
-                <h2 class="section-title">مراجعة الحصص والامتحانات الشاملة</h2>
-            </div>
-            <div class="cards-grid">
-                <a href="مراجعة.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-bullseye card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">مراجعة الحصة الأولى</h3>
-                        <p class="card-description">مفاهيم عتاد الحاسوب والشبكات الأساسية والـ IP</p>
-                    </div>
-                </a>
-                <a href="review2.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-bullseye card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">مراجعة الحصة الثانية</h3>
-                        <p class="card-description">أنظمة التشغيل، تسيير الملفات، والأمن الرقمي</p>
-                    </div>
-                </a>
-                <a href="exam.html" class="card exam">
-                    <span class="card-badge"><i class="fas fa-fire"></i> مهم</span>
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-trophy card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">الامتحان الشامل الرسمي</h3>
-                        <p class="card-description">الاختبار النهائي لمحاكاة مسابقة الترقية</p>
-                    </div>
-                </a>
-            </div>
-        </section>
+<div class="container">
+    <div class="welcome-text">مرحباً بك في منصة الاختبارات والمراجعات الذكية المتقدمة</div>
+    <div class="badge-title"><i class="bi bi-mortarboard-fill"></i> دورة التحضير لمسابقة الترقية جويلية 2026</div>
 
-        <!-- Office Section -->
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-laptop-code section-icon"></i>
-                <h2 class="section-title">
-                    تطبيقات Office الإجرائية
-                    <span class="new-badge">جديد</span>
-                </h2>
+    <div class="section-title">📊 مراجعة الحصص والامتحانات الشاملة</div>
+    <div class="card-list">
+        <a href="مراجعة.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>مراجعة وتقييم الحصة الأولى</h3>
+                <p>مفاهيم عتاد الحاسوب والشبكات الأساسية والـ IP.</p>
             </div>
-            <div class="cards-grid">
-                <a href="quiz-word.html" class="card new">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-word card-icon" style="color: #2b579a;"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Microsoft Word</h3>
-                        <p class="card-description">القوائم، الخطوط، الفقرات، وتنسيق الأشكال</p>
-                    </div>
-                </a>
-                <a href="quiz-excel-steps.html" class="card new">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-excel card-icon" style="color: #217346;"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Microsoft Excel</h3>
-                        <p class="card-description">الصيغ، تجميد الألواح، دمج الخلايا</p>
-                    </div>
-                </a>
-                <a href="quiz-powerpoint.html" class="card new">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-powerpoint card-icon" style="color: #d24726;"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Microsoft PowerPoint</h3>
-                        <p class="card-description">الشرائح، الانتقالات، الحركات والعرض</p>
-                    </div>
-                </a>
+            <div class="card-icon" style="color: #34ace0;"><i class="bi bi-bullseye"></i></div>
+        </a>
+        <a href="review2.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>مراجعة وتقييم الحصة الثانية</h3>
+                <p>أنظمة التشغيل، تسيير الملفات، والأمن الرقمي.</p>
             </div>
-        </section>
-
-        <!-- Lessons Section -->
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-book-open section-icon"></i>
-                <h2 class="section-title">الدروس والمراجعات</h2>
+            <div class="card-icon" style="color: #ff9f43;"><i class="bi bi-bullseye"></i></div>
+        </a>
+        <a href="exam.html" class="main-card" style="border-color: #b7472a;">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>الامتحان الشامل الرسمي للرتبة</h3>
+                <p>الاختبار الشامل النهائي لمحاكاة مسابقة الترقية الفعلي.</p>
             </div>
-            <div class="cards-grid">
-                <a href="excel-lessons.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-cogs card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Excel المتقدم</h3>
-                        <p class="card-description">الدوال الأساسية والمركبة والشرطية</p>
-                    </div>
-                </a>
-                <a href="storage-lessons.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-folder-tree card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">الملفات والتخزين</h3>
-                        <p class="card-description">الامتدادات، القرص الصلب، تحويل الوحدات</p>
-                    </div>
-                </a>
-                <a href="software-examples.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-compact-disc card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">فئات البرمجيات</h3>
-                        <p class="card-description">المتصفحات، التعريفات، والتراخيص</p>
-                    </div>
-                </a>
-                <a href="miscellaneous-quiz.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-target card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">تطبيقات عامة (20 سؤال)</h3>
-                        <p class="card-description">مجموعة موسعة للمبتدئين</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Subjects Section -->
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-edit section-icon"></i>
-                <h2 class="section-title">المواضيع المقترحة</h2>
-            </div>
-            <div class="cards-grid">
-                <a href="subject1.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-alt card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">الموضوع 01</h3>
-                        <p class="card-description">أنظمة التشغيل، وورد، الجمع، البريد</p>
-                    </div>
-                </a>
-                <a href="subject2.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-alt card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">الموضوع 02</h3>
-                        <p class="card-description">الشبكات، كلمات المرور، الشرط البسيط</p>
-                    </div>
-                </a>
-                <a href="subject3.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-alt card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">الموضوع 03</h3>
-                        <p class="card-description">الذاكرة، الحماية، الشرط المركب</p>
-                    </div>
-                </a>
-                <a href="subject4.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-alt card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">الموضوع 04</h3>
-                        <p class="card-description">الإدخال/الإخراج، الملفات، المتوسط</p>
-                    </div>
-                </a>
-                <a href="subject5.html" class="card">
-                    <div class="card-icon-wrapper">
-                        <i class="fas fa-file-alt card-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">الموضوع 05</h3>
-                        <p class="card-description">تحسين الأداء، الامتدادات، الشرط المتقدم</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Footer with Social Links -->
-        <footer class="footer">
-            <p class="footer-quote">
-                <i class="fas fa-lightbulb"></i>
-                التعلم يبدأ بخطوة: تعلم، طبق، أبدع
-                <i class="fas fa-lightbulb"></i>
-            </p>
-            <div class="social-links">
-                <a href="https://t.me/eagleinfoservices" target="_blank" class="social-btn telegram-btn">
-                    <i class="fab fa-telegram-plane social-icon"></i>
-                    <span>قناة التلغرام</span>
-                </a>
-                <a href="https://www.facebook.com/share/1DuP6puhJk/" target="_blank" class="social-btn facebook-btn">
-                    <i class="fab fa-facebook-f social-icon"></i>
-                    <span>صفحة الفيسبوك</span>
-                </a>
-            </div>
-        </footer>
+            <div class="card-icon" style="color: #ff4757;"><i class="bi bi-trophy-fill"></i></div>
+        </a>
     </div>
+
+    <div class="section-title">💻 تطبيقات محاكاة محاور Office الإجرائية</div>
+    <div class="card-list">
+        <a href="quiz-word.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>محاكاة إجراءات Microsoft Word</h3>
+                <p>إجراءات القوائم، الخطوط، الفقرات، تنظيم النوافذ وتنسيق الأشكال</p>
+            </div>
+            <div class="card-icon" style="color: #2b579a;"><i class="bi bi-file-earmark-word-fill"></i></div>
+        </a>
+        <a href="quiz-excel-steps.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>محاكاة إجراءات Microsoft Excel</h3>
+                <p>إدراج الصيغ، تجميد الألواح، دمج الخلايا، وتنسيقات التخطيطات</p>
+            </div>
+            <div class="card-icon" style="color: #217346;"><i class="bi bi-file-earmark-excel-fill"></i></div>
+        </a>
+        <a href="quiz-powerpoint.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>محاكاة إجراءات Microsoft PowerPoint</h3>
+                <p>ترتيب الشرائح، المراحل الانتقالية، الحركات المخصصة وإعدادات العرض</p>
+            </div>
+            <div class="card-icon" style="color: #d24726;"><i class="bi bi-file-earmark-ppt-fill"></i></div>
+        </a>
+    </div>
+
+    <div class="section-title">📖 الدروس التدريبية الملحقة والمراجعات</div>
+    <div class="card-list">
+        <a href="excel-lessons.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>درس: تداول الجداول الحسابية المتقدمة Excel</h3>
+                <p>الدوال الأساسية والمركبة والشرطية مع النماذج التطبيقية والإدارية.</p>
+            </div>
+            <div class="card-icon" style="color: #2ecc71;"><i class="bi bi-gear-fill"></i></div>
+        </a>
+        <a href="storage-lessons.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>درس: الملفات والمجلدات وتسيير التخزين</h3>
+                <p>الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية المطورة</p>
+            </div>
+            <div class="card-icon" style="color: #eccc68;"><i class="bi bi-folder-fill"></i></div>
+        </a>
+        <a href="software-examples.html" class="main-card">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>درس: فئات البرمجيات وأنظمتها القياسية</h3>
+                <p>المتصفحات، التعريفات، والتراخيص مفتوحة ومغلقة المصدر</p>
+            </div>
+            <div class="card-icon" style="color: #9b59b6;"><i class="bi bi-disc-fill"></i></div>
+        </a>
+        <a href="miscellaneous-quiz.html" class="main-card" style="border: 1px dashed #34ace0;">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>تطبيقات عامة ومبسطة (20 سؤالاً)</h3>
+                <p>مجموعة ميسرة وموسعة حول التخزين والبرمجيات للمبتدئين</p>
+            </div>
+            <div class="card-icon" style="color: #1abc9c;"><i class="bi bi-patch-question-fill"></i></div>
+        </a>
+    </div>
+
+    <div class="section-title">📝 المواضيع النموذجية المقترحة الجديدة</div>
+    <div class="card-list">
+        <a href="subject1.html" class="main-card" style="border-right: 4px solid #34ace0;">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>الموضوع المقترح رقم 01</h3>
+                <p>أنظمة التشغيل، واجهة وورد، ودالة الجمع، والبريد الإلكتروني.</p>
+            </div>
+            <div class="card-icon" style="color: #34ace0;"><i class="bi bi-file-earmark-text-fill"></i></div>
+        </a>
+        <a href="subject2.html" class="main-card" style="border-right: 4px solid #2ed573;">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>الموضوع المقترح رقم 02</h3>
+                <p>مفاهيم الشبكات (LAN/WAN)، كلمات المرور، ودالة الشرط البسيط.</p>
+            </div>
+            <div class="card-icon" style="color: #2ed573;"><i class="bi bi-file-earmark-text-fill"></i></div>
+        </a>
+        <a href="subject3.html" class="main-card" style="border-right: 4px solid #ff9f43;">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>الموضوع المقترح رقم 03</h3>
+                <p>الذاكرة والتخزين، حماية المستندات، والشرط المركب والأمن السيبراني.</p>
+            </div>
+            <div class="card-icon" style="color: #ff9f43;"><i class="bi bi-file-earmark-text-fill"></i></div>
+        </a>
+        <a href="subject4.html" class="main-card" style="border-right: 4px solid #ff4757;">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>الموضوع المقترح رقم 04</h3>
+                <p>وحدات الإدخال والإخراج، تسيير الملفات، ودوال المتوسط الحسابي.</p>
+            </div>
+            <div class="card-icon" style="color: #ff4757;"><i class="bi bi-file-earmark-text-fill"></i></div>
+        </a>
+        <a href="subject5.html" class="main-card" style="border-right: 4px solid #22a6b3;">
+            <span class="arrow-icon"><i class="bi bi-chevron-left"></i></span>
+            <div class="card-content">
+                <h3>الموضوع المقترح رقم 05</h3>
+                <p>تحسين أداء نظام الحاسوب، امتدادات الملفات، والشرط المتقدم للموظفين.</p>
+            </div>
+            <div class="card-icon" style="color: #22a6b3;"><i class="bi bi-file-earmark-text-fill"></i></div>
+        </a>
+    </div>
+
+    <div class="footer-note">💡 التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
+    <a href="#" class="telegram-btn">
+        <span>قناة التلجرام: أكاديمية النسر للتدريب والتعليم التقني</span>
+        <span><i class="bi bi-telegram"></i></span>
+    </a>
+</div>
+
 </body>
 </html>
