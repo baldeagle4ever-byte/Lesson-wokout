@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>أكاديمية النسر - المنصة الذكية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -18,549 +19,292 @@
             min-height: 100vh;
             color: #fff;
             overflow-x: hidden;
-            position: relative;
+            padding-bottom: 20px;
         }
 
-        /* Animated Background Pattern */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
-            animation: backgroundPulse 15s ease-in-out infinite;
-            z-index: -2;
-        }
-
-        /* Grid Pattern Overlay */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-        }
-
-        @keyframes backgroundPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.1) rotate(3deg); opacity: 0.8; }
-        }
-
-        /* Floating Particles */
-        .particle {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-            animation: float 20s infinite;
-            z-index: -1;
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 22s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 28s; }
-        .particle:nth-child(4) { left: 40%; animation-delay: 6s; animation-duration: 24s; }
-        .particle:nth-child(5) { left: 50%; animation-delay: 8s; animation-duration: 26s; }
-        .particle:nth-child(6) { left: 60%; animation-delay: 10s; animation-duration: 23s; }
-        .particle:nth-child(7) { left: 70%; animation-delay: 12s; animation-duration: 27s; }
-        .particle:nth-child(8) { left: 80%; animation-delay: 14s; animation-duration: 21s; }
-        .particle:nth-child(9) { left: 90%; animation-delay: 16s; animation-duration: 29s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-
-        /* Header Section */
+        /* Header - Compact */
         .header {
             text-align: center;
-            padding: 50px 20px 30px;
-            position: relative;
-        }
-
-        .logo-wrapper {
-            display: inline-block;
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .logo-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
-            border: 3px solid rgba(255, 215, 0, 0.3);
-            border-radius: 50%;
-            animation: rotate 20s linear infinite;
-        }
-
-        .logo-ring::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            border-radius: 50%;
-            animation: rotate 15s linear infinite reverse;
-        }
-
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+            padding: 20px 15px 15px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(102,126,234,0.1) 100%);
+            border-bottom: 2px solid rgba(255,215,0,0.3);
         }
 
         .logo {
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 70px;
-            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5), 
-                        inset 0 0 30px rgba(255, 255, 255, 0.3);
-            animation: logoPulse 2s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            margin: 0 auto 10px;
+            font-size: 35px;
+            box-shadow: 0 5px 20px rgba(255,215,0,0.4);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .logo::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 20px 60px rgba(255, 215, 0, 0.7); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .header h1 {
-            font-size: 3em;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
-            font-weight: 800;
-            animation: fadeInDown 1s ease;
+            margin-bottom: 5px;
+            font-weight: 700;
         }
 
         .header .subtitle {
-            font-size: 1.4em;
+            font-size: 0.85em;
             color: #a8b2d1;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease 0.2s both;
+            margin-bottom: 8px;
         }
 
-        .badge-container {
+        .badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-size: 1.1em;
-            margin-top: 20px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            animation: slideIn 1s ease 0.5s both, badgeGlow 3s ease-in-out infinite;
-            backdrop-filter: blur(10px);
+            gap: 5px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3));
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            border: 1px solid rgba(255,215,0,0.3);
         }
 
-        @keyframes badgeGlow {
-            0%, 100% { box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); }
-            50% { box-shadow: 0 8px 35px rgba(255, 215, 0, 0.6); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Main Container */
+        /* Container */
         .container {
-            max-width: 1400px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
 
-        /* Section Styling */
+        /* Section */
         .section {
-            margin-bottom: 60px;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 25px;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 35px;
-            padding: 20px 35px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-            border-radius: 20px;
-            border-right: 6px solid #ffd700;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .section-header:hover {
-            transform: translateX(-10px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-right: 4px solid #ffd700;
         }
 
         .section-icon {
-            font-size: 2.5em;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: iconBounce 2s ease-in-out infinite;
-        }
-
-        @keyframes iconBounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(5deg); }
+            font-size: 1.3em;
+            color: #ffd700;
         }
 
         .section-title {
-            font-size: 1.9em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1em;
+            font-weight: 600;
+            color: #fff;
         }
 
         .new-badge {
-            background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
-            padding: 8px 20px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            padding: 3px 10px;
+            border-radius: 10px;
             font-size: 0.7em;
-            margin-right: 15px;
-            animation: newPulse 2s ease-in-out infinite;
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            margin-right: auto;
         }
 
-        @keyframes newPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Cards Grid */
+        /* Cards Grid - Optimized for Mobile */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            padding: 10px 0;
+            grid-template-columns: 1fr;
+            gap: 12px;
         }
 
-        /* Card Design */
         .card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 35px;
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid rgba(255,215,0,0.2);
+            transition: all 0.3s ease;
             text-decoration: none;
             color: #fff;
-            display: block;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
-            transition: left 0.6s;
-        }
-
-        .card:hover::before {
-            left: 100%;
-        }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .card:hover::after {
-            opacity: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.3);
-            border-color: #ffd700;
+        .card:active {
+            transform: scale(0.98);
         }
 
         .card-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 237, 78, 0.1) 100%);
-            border-radius: 20px;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,237,78,0.1));
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover .card-icon-wrapper {
-            transform: rotate(10deg) scale(1.1);
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 237, 78, 0.2) 100%);
+            flex-shrink: 0;
+            border: 1px solid rgba(255,215,0,0.3);
         }
 
         .card-icon {
-            font-size: 2.5em;
-            animation: iconFloat 3s ease-in-out infinite;
+            font-size: 1.3em;
         }
 
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        .card-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-title {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            font-size: 0.75em;
+            color: #b8c5d6;
+            line-height: 1.4;
         }
 
         .card-badge {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.85em;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.65em;
             font-weight: bold;
-            animation: badgePulse 2s ease-in-out infinite;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-            z-index: 1;
         }
 
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .card-title {
-            font-size: 1.4em;
-            margin-bottom: 12px;
-            color: #ffd700;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover .card-title {
-            transform: translateX(-5px);
-        }
-
-        .card-description {
-            color: #b8c5d6;
-            font-size: 1em;
-            line-height: 1.7;
-        }
-
-        /* Special Card Types */
+        /* Special Cards */
         .card.exam {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25) 0%, rgba(255, 237, 78, 0.15) 100%);
-            border: 3px solid #ffd700;
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
-        }
-
-        .card.exam .card-icon-wrapper {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 237, 78, 0.2) 100%);
-            border-color: #ffd700;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,237,78,0.1));
+            border: 2px solid #ffd700;
         }
 
         .card.new {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(129, 199, 132, 0.1) 100%);
-            border: 2px solid #4caf50;
-            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
-        }
-
-        .card.new .card-icon-wrapper {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(129, 199, 132, 0.2) 100%);
-            border-color: #4caf50;
+            background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(129,199,132,0.1));
+            border: 1px solid #4caf50;
         }
 
         /* Footer */
         .footer {
+            margin-top: 30px;
+            padding: 25px 15px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
+            border-radius: 15px;
+            border: 1px solid rgba(255,215,0,0.2);
             text-align: center;
-            padding: 50px 20px;
-            margin-top: 60px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .footer-quote {
-            font-size: 1.6em;
+            font-size: 0.9em;
             color: #ffd700;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-style: italic;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.9em;
             font-weight: 600;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .social-btn:active {
+            transform: scale(0.98);
         }
 
         .telegram-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, #0088cc 0%, #00a8e6 100%);
-            padding: 18px 45px;
-            border-radius: 50px;
-            text-decoration: none;
-            color: #fff;
+            background: linear-gradient(135deg, #0088cc, #00a8e6);
+            box-shadow: 0 5px 15px rgba(0,136,204,0.3);
+        }
+
+        .facebook-btn {
+            background: linear-gradient(135deg, #1877f2, #42a5f5);
+            box-shadow: 0 5px 15px rgba(24,119,242,0.3);
+        }
+
+        .social-icon {
             font-size: 1.2em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
-            animation: buttonPulse 2s ease-in-out infinite;
-            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .telegram-btn:hover {
-            transform: scale(1.08) translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.6);
-        }
-
-        @keyframes buttonPulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4); }
-            50% { box-shadow: 0 10px 40px rgba(0, 136, 204, 0.6); }
-        }
-
-        /* Staggered Animation Delays */
-        .card:nth-child(1) { animation: fadeInUp 0.8s ease 0.1s both; }
-        .card:nth-child(2) { animation: fadeInUp 0.8s ease 0.2s both; }
-        .card:nth-child(3) { animation: fadeInUp 0.8s ease 0.3s both; }
-        .card:nth-child(4) { animation: fadeInUp 0.8s ease 0.4s both; }
-        .card:nth-child(5) { animation: fadeInUp 0.8s ease 0.5s both; }
-        .card:nth-child(6) { animation: fadeInUp 0.8s ease 0.6s both; }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .header .subtitle {
-                font-size: 1.1em;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-            
-            .section-title {
-                font-size: 1.4em;
-            }
-            
+        /* Tablet and Up */
+        @media (min-width: 600px) {
             .cards-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .card {
-                padding: 25px;
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .logo {
+                width: 90px;
+                height: 90px;
+                font-size: 45px;
             }
         }
 
-        /* Loading State */
-        .loading-skeleton {
-            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
         }
 
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        /* Loading Animation */
+        .card:nth-child(1) { animation: slideIn 0.5s ease 0.1s both; }
+        .card:nth-child(2) { animation: slideIn 0.5s ease 0.2s both; }
+        .card:nth-child(3) { animation: slideIn 0.5s ease 0.3s both; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Particles -->
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-
     <!-- Header -->
     <header class="header">
-        <div class="logo-wrapper">
-            <div class="logo-ring"></div>
-            <div class="logo">🦅</div>
-        </div>
+        <div class="logo">🦅</div>
         <h1>أكاديمية النسر</h1>
-        <p class="subtitle">المنصة الذكية للتعليم والتدريب</p>
-        <div class="badge-container">
+        <p class="subtitle">المنصة الذكية</p>
+        <div class="badge">
             <i class="fas fa-graduation-cap"></i>
-            <span>دورة التحضير لمسابقة الترقية جويلية 2026</span>
+            دورة التحضير لمسابقة الترقية جويلية 2026
             <i class="fas fa-star"></i>
         </div>
     </header>
@@ -578,34 +322,40 @@
                     <div class="card-icon-wrapper">
                         <i class="fas fa-bullseye card-icon"></i>
                     </div>
-                    <h3 class="card-title">مراجعة وتقييم الحصة الأولى</h3>
-                    <p class="card-description">مفاهيم عتاد الحاسوب والشبكات الأساسية والـ IP مع تمارين تطبيقية</p>
+                    <div class="card-content">
+                        <h3 class="card-title">مراجعة الحصة الأولى</h3>
+                        <p class="card-description">مفاهيم عتاد الحاسوب والشبكات الأساسية والـ IP</p>
+                    </div>
                 </a>
                 <a href="review2.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-bullseye card-icon"></i>
                     </div>
-                    <h3 class="card-title">مراجعة وتقييم الحصة الثانية</h3>
-                    <p class="card-description">أنظمة التشغيل، تسيير الملفات، والأمن الرقمي الشامل</p>
+                    <div class="card-content">
+                        <h3 class="card-title">مراجعة الحصة الثانية</h3>
+                        <p class="card-description">أنظمة التشغيل، تسيير الملفات، والأمن الرقمي</p>
+                    </div>
                 </a>
                 <a href="exam.html" class="card exam">
-                    <span class="card-badge"><i class="fas fa-fire"></i> مهم جداً</span>
+                    <span class="card-badge"><i class="fas fa-fire"></i> مهم</span>
                     <div class="card-icon-wrapper">
                         <i class="fas fa-trophy card-icon"></i>
                     </div>
-                    <h3 class="card-title">الامتحان الشامل الرسمي للرتبة</h3>
-                    <p class="card-description">الاختبار الشامل النهائي لمحاكاة مسابقة الترقية الفعلية 100%</p>
+                    <div class="card-content">
+                        <h3 class="card-title">الامتحان الشامل الرسمي</h3>
+                        <p class="card-description">الاختبار النهائي لمحاكاة مسابقة الترقية</p>
+                    </div>
                 </a>
             </div>
         </section>
 
-        <!-- Office Applications Section -->
+        <!-- Office Section -->
         <section class="section">
             <div class="section-header">
                 <i class="fas fa-laptop-code section-icon"></i>
                 <h2 class="section-title">
-                    تطبيقات محاكاة محاور Office الإجرائية
-                    <span class="new-badge"><i class="fas fa-sparkles"></i> جديد</span>
+                    تطبيقات Office الإجرائية
+                    <span class="new-badge">جديد</span>
                 </h2>
             </div>
             <div class="cards-grid">
@@ -613,22 +363,28 @@
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-word card-icon" style="color: #2b579a;"></i>
                     </div>
-                    <h3 class="card-title">محاكاة إجراءات Microsoft Word</h3>
-                    <p class="card-description">إجراءات القوائم، الخطوط، الفقرات، تنظيم النوافذ وتنسيق الأشكال الاحترافي</p>
+                    <div class="card-content">
+                        <h3 class="card-title">Microsoft Word</h3>
+                        <p class="card-description">القوائم، الخطوط، الفقرات، وتنسيق الأشكال</p>
+                    </div>
                 </a>
                 <a href="quiz-excel-steps.html" class="card new">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-excel card-icon" style="color: #217346;"></i>
                     </div>
-                    <h3 class="card-title">محاكاة إجراءات Microsoft Excel</h3>
-                    <p class="card-description">إدراج الصيغ، تجميد الألواح، دمج الخلايا، وتنسيقات التخطيطات المتقدمة</p>
+                    <div class="card-content">
+                        <h3 class="card-title">Microsoft Excel</h3>
+                        <p class="card-description">الصيغ، تجميد الألواح، دمج الخلايا</p>
+                    </div>
                 </a>
                 <a href="quiz-powerpoint.html" class="card new">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-powerpoint card-icon" style="color: #d24726;"></i>
                     </div>
-                    <h3 class="card-title">محاكاة إجراءات Microsoft PowerPoint</h3>
-                    <p class="card-description">ترتيب الشرائح، المراحل الانتقالية، الحركات المخصصة وإعدادات العرض</p>
+                    <div class="card-content">
+                        <h3 class="card-title">Microsoft PowerPoint</h3>
+                        <p class="card-description">الشرائح، الانتقالات، الحركات والعرض</p>
+                    </div>
                 </a>
             </div>
         </section>
@@ -637,36 +393,44 @@
         <section class="section">
             <div class="section-header">
                 <i class="fas fa-book-open section-icon"></i>
-                <h2 class="section-title">الدروس التدريبية الملحقة والمراجعات</h2>
+                <h2 class="section-title">الدروس والمراجعات</h2>
             </div>
             <div class="cards-grid">
                 <a href="excel-lessons.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-cogs card-icon"></i>
                     </div>
-                    <h3 class="card-title">درس: تداول الجداول الحسابية المتقدمة Excel</h3>
-                    <p class="card-description">الدوال الأساسية والمركبة والشرطية مع النماذج التطبيقية والإدارية العملية</p>
+                    <div class="card-content">
+                        <h3 class="card-title">Excel المتقدم</h3>
+                        <p class="card-description">الدوال الأساسية والمركبة والشرطية</p>
+                    </div>
                 </a>
                 <a href="storage-lessons.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-folder-tree card-icon"></i>
                     </div>
-                    <h3 class="card-title">درس: الملفات والمجلدات وتسيير التخزين</h3>
-                    <p class="card-description">الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية المطورة</p>
+                    <div class="card-content">
+                        <h3 class="card-title">الملفات والتخزين</h3>
+                        <p class="card-description">الامتدادات، القرص الصلب، تحويل الوحدات</p>
+                    </div>
                 </a>
                 <a href="software-examples.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-compact-disc card-icon"></i>
                     </div>
-                    <h3 class="card-title">درس: فئات البرمجيات وأنظمتها القياسية</h3>
-                    <p class="card-description">المتصفحات، التعريفات، والتراخيص مفتوحة ومغلقة المصدر الشاملة</p>
+                    <div class="card-content">
+                        <h3 class="card-title">فئات البرمجيات</h3>
+                        <p class="card-description">المتصفحات، التعريفات، والتراخيص</p>
+                    </div>
                 </a>
                 <a href="miscellaneous-quiz.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-target card-icon"></i>
                     </div>
-                    <h3 class="card-title">تطبيقات عامة ومبسطة (20 سؤالاً)</h3>
-                    <p class="card-description">مجموعة ميسرة وموسعة حول التخزين والبرمجيات للمبتدئين</p>
+                    <div class="card-content">
+                        <h3 class="card-title">تطبيقات عامة (20 سؤال)</h3>
+                        <p class="card-description">مجموعة موسعة للمبتدئين</p>
+                    </div>
                 </a>
             </div>
         </section>
@@ -675,87 +439,75 @@
         <section class="section">
             <div class="section-header">
                 <i class="fas fa-edit section-icon"></i>
-                <h2 class="section-title">المواضيع النموذجية المقترحة الجديدة</h2>
+                <h2 class="section-title">المواضيع المقترحة</h2>
             </div>
             <div class="cards-grid">
                 <a href="subject1.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-alt card-icon"></i>
                     </div>
-                    <h3 class="card-title">الموضوع المقترح رقم 01</h3>
-                    <p class="card-description">أنظمة التشغيل، واجهة وورد، ودالة الجمع، والبريد الإلكتروني الشامل</p>
+                    <div class="card-content">
+                        <h3 class="card-title">الموضوع 01</h3>
+                        <p class="card-description">أنظمة التشغيل، وورد، الجمع، البريد</p>
+                    </div>
                 </a>
                 <a href="subject2.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-alt card-icon"></i>
                     </div>
-                    <h3 class="card-title">الموضوع المقترح رقم 02</h3>
-                    <p class="card-description">مفاهيم الشبكات (LAN/WAN)، كلمات المرور، ودالة الشرط البسيط</p>
+                    <div class="card-content">
+                        <h3 class="card-title">الموضوع 02</h3>
+                        <p class="card-description">الشبكات، كلمات المرور، الشرط البسيط</p>
+                    </div>
                 </a>
                 <a href="subject3.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-alt card-icon"></i>
                     </div>
-                    <h3 class="card-title">الموضوع المقترح رقم 03</h3>
-                    <p class="card-description">الذاكرة والتخزين، حماية المستندات، والشرط المركب والأمن السيبراني</p>
+                    <div class="card-content">
+                        <h3 class="card-title">الموضوع 03</h3>
+                        <p class="card-description">الذاكرة، الحماية، الشرط المركب</p>
+                    </div>
                 </a>
                 <a href="subject4.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-alt card-icon"></i>
                     </div>
-                    <h3 class="card-title">الموضوع المقترح رقم 04</h3>
-                    <p class="card-description">وحدات الإدخال والإخراج، تسيير الملفات، ودوال المتوسط الحسابي</p>
+                    <div class="card-content">
+                        <h3 class="card-title">الموضوع 04</h3>
+                        <p class="card-description">الإدخال/الإخراج، الملفات، المتوسط</p>
+                    </div>
                 </a>
                 <a href="subject5.html" class="card">
                     <div class="card-icon-wrapper">
                         <i class="fas fa-file-alt card-icon"></i>
                     </div>
-                    <h3 class="card-title">الموضوع المقترح رقم 05</h3>
-                    <p class="card-description">تحسين أداء نظام الحاسوب، امتدادات الملفات، والشرط المتقدم للموظفين</p>
+                    <div class="card-content">
+                        <h3 class="card-title">الموضوع 05</h3>
+                        <p class="card-description">تحسين الأداء، الامتدادات، الشرط المتقدم</p>
+                    </div>
                 </a>
             </div>
         </section>
 
-        <!-- Footer -->
+        <!-- Footer with Social Links -->
         <footer class="footer">
             <p class="footer-quote">
                 <i class="fas fa-lightbulb"></i>
                 التعلم يبدأ بخطوة: تعلم، طبق، أبدع
                 <i class="fas fa-lightbulb"></i>
             </p>
-            <a href="#" class="telegram-btn">
-                <i class="fab fa-telegram-plane fa-lg"></i>
-                <span>قناة التلجرام: أكاديمية النسر للتدريب والتعليم التقني</span>
-                <i class="fas fa-arrow-left"></i>
-            </a>
+            <div class="social-links">
+                <a href="https://t.me/eagleinfoservices" target="_blank" class="social-btn telegram-btn">
+                    <i class="fab fa-telegram-plane social-icon"></i>
+                    <span>قناة التلغرام</span>
+                </a>
+                <a href="https://www.facebook.com/share/1DuP6puhJk/" target="_blank" class="social-btn facebook-btn">
+                    <i class="fab fa-facebook-f social-icon"></i>
+                    <span>صفحة الفيسبوك</span>
+                </a>
+            </div>
         </footer>
     </div>
-
-    <script>
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Add parallax effect to particles
-        document.addEventListener('mousemove', (e) => {
-            const particles = document.querySelectorAll('.particle');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            particles.forEach((particle, index) => {
-                const speed = (index + 1) * 5;
-                const xOffset = (0.5 - x) * speed;
-                const yOffset = (0.5 - y) * speed;
-                particle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-            });
-        });
-    </script>
 </body>
 </html>
