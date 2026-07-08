@@ -3,170 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكاديمية النسر - صفحة البداية المحدثة</title>
+    <title>أكاديمية النسر - صفحة البداية</title>
     <style>
         body {
             background-color: #1a2a33;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
             box-sizing: border-box;
         }
         .container {
             background-color: #243441;
-            padding: 40px 30px;
-            border-radius: 24px;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            max-width: 650px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 800px;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .logo { width: 90px; margin-bottom: 15px; }
-        h1 { color: #ffad33; font-size: 28px; margin: 0 0 5px 0; font-weight: bold; }
-        .welcome-msg { color: #cfd8dc; margin: 0 0 12px 0; font-size: 16px; }
-        .subtitle {
-            color: #ff9f43; font-size: 16px; font-weight: 600; margin: 0 0 25px 0;
-            background: rgba(255, 159, 67, 0.1); padding: 6px 15px; border-radius: 20px; display: inline-block;
-        }
-        .section-title {
-            text-align: right; color: #ffad33; font-size: 15px; font-weight: bold;
-            margin: 25px 0 12px 0; padding-right: 5px; border-right: 3px solid #ffad33;
-        }
-        .btn-card {
-            display: flex; align-items: center; background-color: #2c3e50; margin: 12px 0;
-            padding: 16px 20px; border-radius: 16px; text-decoration: none; color: white;
-            transition: all 0.2s ease; border: 2px solid transparent; text-align: right; box-sizing: border-box;
-        }
-        .btn-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .btn-icon { font-size: 24px; margin-left: 15px; display: flex; align-items: center; justify-content: center; }
-        .btn-content { flex-grow: 1; }
-        .btn-title { font-size: 17px; font-weight: bold; margin-bottom: 2px; }
-        .btn-desc { font-size: 13px; color: #b0bec5; }
+        h1 { color: #ffad33; font-size: 28px; margin-bottom: 5px; }
+        .subtitle { color: #cfd8dc; margin-bottom: 30px; font-size: 16px; }
         
-        /* تأثيرات ألوان الحواف عند التمرير */
-        .btn-word:hover { border-color: #2b579a; }
-        .btn-excel:hover { border-color: #217346; }
-        .btn-powerpoint:hover { border-color: #b7472a; }
-        .btn-h1:hover { border-color: #34ace0; }
-        .btn-h2:hover { border-color: #ff9f43; }
-        .btn-h3:hover { border-color: #2ed573; }
-        .btn-storage:hover { border-color: #eccc68; }
-        .btn-software:hover { border-color: #ff6b6b; }
-        .btn-misc-quiz:hover { border-color: #70a1ff; }
-
-        .arrow-left { font-size: 18px; color: #78909c; }
-        .footer { margin-top: 30px; border-top: 1px solid #2c3e50; padding-top: 20px; }
-        .motto { font-size: 15px; font-weight: bold; color: #e0e0e0; margin-bottom: 15px; }
-        .telegram-link {
-            display: inline-block; color: #26a69a; text-decoration: none; font-size: 14px; font-weight: 500;
-            background: rgba(38, 166, 154, 0.08); padding: 8px 16px; border-radius: 30px; transition: background 0.2s;
+        .section-title {
+            color: #ff9f43;
+            font-size: 20px;
+            margin: 25px 0 15px 0;
+            text-align: right;
+            border-right: 4px solid #ff9f43;
+            padding-right: 10px;
         }
-        .telegram-link:hover { background: rgba(38, 166, 154, 0.15); color: #4db6ac; }
+
+        /* شبكة الأزرار للمحاكاة والتطبيقات */
+        .grid-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.3); filter: brightness(1.1); }
+        
+        .btn-blue { background-color: #34ace0; color: white; }
+        .btn-green { background-color: #217346; color: white; }
+        .btn-orange { background-color: #b7472a; color: white; }
+
+        /* قائمة المواضيع المقترحة */
+        .subjects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: right;
+        }
+        .subject-card {
+            background: #2c3e50;
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 4px solid #34ace0;
+            transition: background 0.2s;
+        }
+        .subject-card:hover {
+            background: #34495e;
+        }
+        .subject-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: #fff;
+        }
+        .subject-info p {
+            margin: 0;
+            font-size: 13px;
+            color: #b0bec5;
+        }
+        .btn-link {
+            background: #ff9f43;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .btn-link:hover {
+            background: #ffad33;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="logo.png" alt="🦅" class="logo">
-        <h1>أكاديمية النسر</h1>
-        <p class="welcome-msg">مرحباً بك في منصة الاختبارات والمراجعات الذكية المتقدمة</p>
-        <div class="subtitle">🎓 دورة التحضير لمسابقة الترقية جويلية 2026</div>
+<div class="container">
+    <img src="logo.png" alt="شعار أكاديمية النسر" class="logo" onerror="this.style.display='none'">
+    <h1>أكاديمية النسر للتعليم والتدريب التقني</h1>
+    <p class="subtitle">منصة التحضير الذكي لمسابقة الترقية المهنية</p>
 
-        <!-- القسم الجديد: تطبيقات محاكاة حزمة الأوفيس الإجرائية -->
-        <div class="section-title">🖥️ تطبيقات محاكاة محاور Office الإجرائية (جديد)</div>
-
-        <!-- تطبيق وورد -->
-        <a href="quiz-word.html" class="btn-card btn-word">
-            <div class="btn-icon">📝</div>
-            <div class="btn-content">
-                <div class="btn-title">محاكاة إجراءات Microsoft Word</div>
-                <div class="btn-desc">إجراءات القوائم، الخطوط، الفقرات، تنظيم النوافذ وتنسيق الأشكال</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <!-- تطبيق إكسيل -->
-        <a href="quiz-excel-steps.html" class="btn-card btn-excel">
-            <div class="btn-icon">📊</div>
-            <div class="btn-content">
-                <div class="btn-title">محاكاة إجراءات Microsoft Excel</div>
-                <div class="btn-desc">إدراج الصيغ، تجميد الألواح، دمج الخلايا، وتنسيقات التخطيطات</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <!-- تطبيق بوربوينت -->
-        <a href="quiz-powerpoint.html" class="btn-card btn-powerpoint">
-            <div class="btn-icon">📉</div>
-            <div class="btn-content">
-                <div class="btn-title">محاكاة إجراءات Microsoft PowerPoint</div>
-                <div class="btn-desc">ترتيب الشرائح، المراحل الانتقالية، الحركات المخصصة وإعدادات العرض</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <!-- القسم القديم: الحصص الرئيسية والدروس -->
-        <div class="section-title">📚 الحصص والمراجعات النظرية والشاملة</div>
-        
-        <a href="exam.html" class="btn-card btn-h1">
-            <div class="btn-icon">💻</div>
-            <div class="btn-content">
-                <div class="btn-title">مراجعة الحصة الأولى</div>
-                <div class="btn-desc">أساسيات الإعلام الآلي والبريد الإلكتروني</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <a href="review2.html" class="btn-card btn-h2">
-            <div class="btn-icon">⚙️</div>
-            <div class="btn-content">
-                <div class="btn-title">مراجعة الحصة الثانية</div>
-                <div class="btn-desc">الشبكات، التخزين، والبرمجيات</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <a href="storage-lessons.html" class="btn-card btn-storage">
-            <div class="btn-icon">📁</div>
-            <div class="btn-content">
-                <div class="btn-title">درس: الملفات والمجلدات وتسيير التخزين</div>
-                <div class="btn-desc">الامتدادات، القرص الصلب، وأداة تحويل الوحدات التفاعلية المطورة</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <a href="software-examples.html" class="btn-card btn-software">
-            <div class="btn-icon">💿</div>
-            <div class="btn-content">
-                <div class="btn-title">درس: فئات البرمجيات وأنظمتها القياسية</div>
-                <div class="btn-desc">المتصفحات، التعريفات، والتراخيص مفتوحة ومغلقة المصدر</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <a href="miscellaneous-quiz.html" class="btn-card btn-misc-quiz">
-            <div class="btn-icon">🎯</div>
-            <div class="btn-content">
-                <div class="btn-title">تطبيقات عامة ومبسطة (20 سؤالاً)</div>
-                <div class="btn-desc">مجموعة ميسرة وموسعة حول التخزين والبرمجيات للمبتدئين</div>
-            </div>
-            <div class="arrow-left">◀</div>
-        </a>
-
-        <div class="footer">
-            <div class="motto">💡 التعلم يبدأ بخطوة: تعلم، طبق، أبدع</div>
-            <a href="https://t.me/🦅" target="_blank" class="telegram-link">
-                📢 قناة التلغرام: أكاديمية النسر للتدريب والتعليم التقني
-            </a>
-        </div>
+    <div class="section-title">💻 محاكاة الاختبارات الإجرائية (أوفيس)</div>
+    <div class="grid-buttons">
+        <a href="quiz-word.html" class="btn btn-blue">📝 محاكاة Microsoft Word</a>
+        <a href="quiz-excel-steps.html" class="btn btn-green">📊 محاكاة Microsoft Excel</a>
+        <a href="quiz-powerpoint.html" class="btn btn-orange">📉 محاكاة PowerPoint</a>
     </div>
+
+    <div class="section-title">📚 المواضيع النموذجية المقترحة للامتحان</div>
+    <div class="subjects-list">
+        
+        <div class="subject-card">
+            <div class="subject-info">
+                <h3>الموضوع المقترح رقم 01</h3>
+                <p>تسيير أنظمة التشغيل، واجهة وورد الأساسية، دالة الجمع التلقائي، والبريد الإلكتروني المتقدم.</p>
+            </div>
+            <a href="subject1.html" class="btn-link">ولوج الامتحان ◀</a>
+        </div>
+
+        <div class="subject-card" style="border-right-color: #2ed573;">
+            <div class="subject-info">
+                <h3>الموضوع المقترح رقم 02</h3>
+                <p>مفاهيم الشبكات وأنواعها (LAN/WAN)، الحماية بكلمات المرور، ودالة الشرط البسيط.</p>
+            </div>
+            <a href="subject2.html" class="btn-link">ولوج الامتحان ◀</a>
+        </div>
+
+        <div class="subject-card" style="border-right-color: #ff9f43;">
+            <div class="subject-info">
+                <h3>الموضوع المقترح رقم 03</h3>
+                <p>الذاكرة والتخزين المؤقت، دالة الشرط المركب والتقديرات، وجدران الحماية السيبرانية.</p>
+            </div>
+            <a href="subject3.html" class="btn-link">ولوج الامتحان ◀</a>
+        </div>
+
+        <div class="subject-card" style="border-right-color: #b7472a;">
+            <div class="subject-info">
+                <h3>الموضوع المقترح رقم 04</h3>
+                <p>تصنيف وحدات الإدخال والإخراج، وظائف تسيير الملفات، ودوال المتوسط الحسابي والإجمالي.</p>
+            </div>
+            <a href="subject4.html" class="btn-link">ولوج الامتحان ◀</a>
+        </div>
+
+        <div class="subject-card" style="border-right-color: #34ace0;">
+            <div class="subject-info">
+                <h3>الموضوع المقترح رقم 05</h3>
+                <p>عوامل تحسين أداء الحاسوب، امتدادات الملفات، ودالة الشرط المتقدم لتسيير الموظفين.</p>
+            </div>
+            <a href="subject5.html" class="btn-link">ولوج الامتحان ◀</a>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>
