@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الامتحان الشامل الرسمي للرتبة - أكاديمية النسر</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            max-width: 900px;
+            width: 100%;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #ef4444; /* إطار أحمر خفيف يرمز للحرارة والأهمية كما في الصورة 🔥 */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .header h2 { color: #f97316; margin: 5px 0; font-size: 24px; font-weight: bold; }
+        .header p { color: #94a3b8; font-size: 15px; margin: 8px 0 0 0; }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            background: #0f172a;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 15px;
+            border-left: 4px solid #f97316;
+        }
+        .stats-bar span b { color: #38bdf8; }
+
+        .question-box { display: none; }
+        .question-box.active { display: block; }
+        .question-text { font-size: 19px; font-weight: bold; margin-bottom: 25px; line-height: 1.7; color: #f1f5f9; }
+        .options-list { display: flex; flex-direction: column; gap: 14px; }
+        .option {
+            background: #334155;
+            padding: 16px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            font-size: 16px;
+        }
+        .option:hover { background: #475569; transform: translateY(-2px); }
+        .option.correct { background: #22c55e !important; border-color: #15803d; color: white; }
+        .option.wrong { background: #ef4444 !important; border-color: #b91c1c; color: white; }
+        
+        .actions { margin-top: 30px; text-align: left; }
+        .btn {
+            background-color: #f97316;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        }
+        
+        .results-window { display: none; text-align: center; padding: 15px; }
+        .score-display { font-size: 28px; font-weight: bold; color: #f97316; margin: 20px 0; }
+        
+        /* أزرار التحميل المفتوحة بالأسفل تفادياً لأي حجب نهائياً */
+        .pdf-download-area {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pdf-btn {
+            display: block;
+            width: 100%;
+            background-color: #ef4444; /* لون أحمر ناري متناسق مع أيقونة اللهب للمسابقة */
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-sizing: border-box;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: background 0.2s;
+        }
+        .pdf-btn:hover { background-color: #dc2626; }
+        .home-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 12px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* حاوية الطباعة المخفية والمنسقة */
+        #print-section { display: none; }
+
+        @media print {
+            body { background: white !important; color: black !important; padding: 0; }
+            .quiz-container, .pdf-download-area { display: none !important; }
+            #print-section { display: block !important; color: black !important; }
+            .print-item { page-break-inside: avoid; border-bottom: 2px solid #ddd; padding: 20px 0; }
+            .print-opt { margin: 8px 0; padding: 8px; border: 1px solid #ccc; background: #f8fafc; }
+            .print-correct { background: #dcfce7 !important; border-color: #86efac !important; font-weight: bold; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h2>🔥 الامتحان الشامل الرسمي للرتبة</h2>
+        <p>الاختبار الشامل الجامع لمحاكاة مسابقة الترقية جويلية 2026 الفعلي</p>
+    </div>
+
+    <div class="stats-bar" id="stats-panel">
+        <span>السؤال الحالي: <b id="current-q-num">1</b> من <b id="total-q-num">20</b></span>
+        <span>الدرجة الحالية: <b id="live-score">0</b> / 20</span>
+    </div>
+
+    <div id="quiz-window">
+        <div id="question-container"></div>
+        <div class="actions">
+            <button class="btn" id="next-button" onclick="nextQuestion()">تأكيد والانتقال للسؤال التالي ◀</button>
+        </div>
+    </div>
+
+    <div id="results-window" class="results-window">
+        <h3>🏆 هنيئاً لك! أكملت الامتحان المحاكي الشامل بنجاح</h3>
+        <p class="score-display" id="final-score-text"></p>
+        <p id="feedback-text" style="color: #94a3b8; font-size: 18px; line-height: 1.6;"></p>
+        
+        <button onclick="printDoneQuiz()" class="pdf-btn" style="background-color: #22c55e; margin-top: 30px;">
+            📄 استخراج كشف النقاط الإجمالي وتقرير الإجابات (PDF)
+        </button>
+
+        <a href="index.html" class="home-btn">🏠 العودة إلى واجهة الأكاديمية</a>
+    </div>
+</div>
+
+<div class="pdf-download-area" id="control-panel">
+    <button onclick="printBlankQuiz()" class="pdf-btn" id="blankPdfBtn">
+        📥 تنزيل هذا الاختبار الشامل كنسخة بيضاء فارغة للطباعة (PDF)
+    </button>
+</div>
+
+<div id="print-section"></div>
+
+<script>
+    // 20 سؤالاً معيارياً شاملاً لمحاكاة امتحان الترقية الفعلي لقطاع التربية الوطنية 2026
+    const questions = [
+        { q: "1) أي من المصطلحات التالية يعبر عن الشبكة الداخلية المغلقة التي تستخدمها الوزارة أو المؤسسة التربوية لمشاركة البيانات داخلياً بين الموظفين فقط دون الوصول الخارجي؟", options: ["شبكة الإنترنت (Internet)", "شبكة الإنترانت (Intranet)", "شبكة الإكسترانت (Extranet)", "الشبكة المحلية السلكية فقط"], correct: 1 },
+        { q: "2) في نظام التشغيل Windows، أي اختصار من لوحة المفاتيح يُستخدم لإعادة تسمية (Rename) ملف أو مجلد محدد بشكل سريع؟", options: ["F2", "F5", "Ctrl + R", "Alt + Enter"], correct: 0 },
+        { q: "3) ما هي وظيفة ميزة 'دمج المراسلات' (Mail Merge) الأساسية في برنامج معالج النصوص Microsoft Word؟", options: ["دمج عدة مستندات نصية مختلفة في ملف واحد متصل", "إرسال قالب مستند موحد إلى قائمة بريد إلكتروني أو أسماء متعددة ببيانات متغيرة تلقائياً", "تصحيح الأخطاء الإملائية والنحوية دفعة واحدة", "تحويل مستند الوورد إلى جدول بيانات إكسيل مدمج"], correct: 1 },
+        { q: "4) في برنامج الجداول الحسابية Microsoft Excel، كيف تبدأ صياغة أي دالة أو معادلة حسابية داخل الخلية بشكل صحيح؟", options: ["بالرمز @", "بالرمز #", "بالعلامة =", "بالعلامة +"], correct: 2 },
+        { q: "5) أي من الصيغ التالية في Excel تُستخدم لحساب المتوسط الحسابي (Average) لمجموعة من القيم من الخلية A1 إلى A10؟", options: ["=SUM(A1:A10)", "=AVERAGE(A1:A10)", "=COUNT(A1:A10)", "=MEDIAN(A1:A10)"], correct: 1 },
+        { q: "6) ما هي الوظيفة الأساسية لجدار الحماية (Firewall) في أنظمة الشبكات وحواسب المؤسسات؟", options: ["تسريع وتيرة تصفح مواقع الإنترنت التعليمية", "مراقبة وحظر حزم البيانات الواردة والصادرة غير المصرح بها لمنع الاختراقات", "تخزين وتوليد النسخ الاحتياطية للملفات الحساسة تلقائياً", "تنظيف أقراص التخزين من الملفات المؤقتة المتراكمة"], correct: 1 },
+        { q: "7) أي مما يلي يمثل امتداداً قياسياً لملف قاعدة بيانات منشأ بواسطة برنامج Microsoft Access؟", options: [".docx", ".xlsx", ".accdb", ".pptx"], correct: 2 },
+        { q: "8) ما هو البروتوكول المسؤول عن تأمين وتشفير الاتصال بين متصفح الويب ومواقع الإنترنت لضمان سرية البيانات المنقولة؟", options: ["HTTP", "HTTPS", "FTP", "SMTP"], correct: 1 },
+        { q: "9) تسمى تقنية ربط مجموعة من الحواسب داخل حجرة الدراسة أو مبنى المؤسسة التربوية الواحدة بـ:", options: ["شبكة LAN", "شبكة WAN", "شبكة MAN", "شبكة VPN"], correct: 0 },
+        { q: "10) عند تلقي بريد إلكتروني يحتوي على اختصار الرمز (CC)، فإن هذا يعني برمجياً وتنظيمياً:", options: ["إرسال الرسالة إلى مستقبل أساسي ومخفي تماماً عن الآخرين", "إرسال نسخة كربونية واضحة من الرسالة إلى أشخاص آخرين للعلم والمتابعة", "إعادة توجيه تلقائية للرسالة إلى سلة المهملات", "تشفير محتوى الرسالة بكلمة مرور سرية"], correct: 1 },
+        { q: "11) أي من المكونات التالية يعتبر مسؤولاً عن حفظ التوقيت والتاريخ وإعدادات اللوحة الأم الأساسية حتى بعد فصل التيار الكهربائي نهائياً؟", options: ["المعالج (CPU)", "بطارية BIOS (أو بطارية CMOS)", "ذاكرة RAM المفاجئة", "القرص الصلب (SSD)"], correct: 1 },
+        { q: "12) تسمى البرمجيات الخبيثة التي تقوم بتشفير كافة ملفات المستخدم ومطالبته بمبالغ مالية لفك التشفير بـ:", options: ["برمجيات التجسس (Spyware)", "فيروسات الفدية (Ransomware)", "حصان طروادة (Trojan)", "الديدان البرمجية (Worms)"], correct: 1 },
+        { q: "13) في برنامج Microsoft Excel، ماذا يعني ظهور الخطأ المتمثل بالرموز التالية (#####) داخل الخلية؟", options: ["المعادلة الحسابية المكتوبة تحتوي على خطأ إملائي", "عرض العمود أصغر من أن يتسع للمحتوى الرقمي أو التاريخ المدرج", "القسمة على صفر وهي عملية محظورة رياضياً", "الخلية فارغة تماماً ولا تحتوي على بيانات"], correct: 1 },
+        { q: "14) أي الامتدادات التالية يُشير إلى عرض تقديمي تلقائي وبث مباشر فور الفتح في برنامج Microsoft PowerPoint؟", options: [".pptx", ".ppsx", ".potx", ".thmx"], correct: 1 },
+        { q: "15) ما هي التقنية المعاصرة التي تتيح تخزين الملفات والوصول إلى التطبيقات عبر خوادم بعيدة على الإنترنت دون الحاجة لمساحة تخزين محلية؟", options: ["الحوسبة السحابية (Cloud Computing)", "التهيئة المادية للقرص الصلب", "التقسيم المنطقي للأقراص", "الشبكات المحلية السلكية"], correct: 0 },
+        { q: "16) لتثبيت السطر العلوي للعناوين في جدول إكسيل ضخم ومنعه من الاختفاء أثناء التمرير للأسفل، نستخدم ميزة:", options: ["دمج الخلايا (Merge)", "تجميد الأجزاء (Freeze Panes)", "التفاف النص (Wrap Text)", "الفرز والتصفية (Sort)"], correct: 1 },
+        { q: "17) أي من الخيارات التالية يُعد وسيلة ممتازة وآمنة لمشاركة الملفات التعليمية الكبيرة الحجم وتخزينها سحابياً لطلاب الأكاديمية؟", options: ["Google Drive", "برنامج المفكرة Notepad", "رسائل التثبيت بويندوز", "لوحة التحكم Control Panel"], correct: 0 },
+        { q: "18) ما هو الاختصار البرمجي العالمي المستخدم للتراجع (Undo) عن آخر خطوة أو تعديل تم إجراؤه في البرامج؟", options: ["Ctrl + C", "Ctrl + V", "Ctrl + Z", "Ctrl + X"], correct: 2 },
+        { q: "19) أي من الأجهزة التالية يُستخدم لربط شبكات مختلفة وتوجيه حزم البيانات بينها عبر أفضل مسار ممكن؟", options: ["الموزع (Hub)", "المحول (Switch)", "الموجه (Router)", "المكرر (Repeater)"], correct: 2 },
+        { q: "20) ما هي الممارسة المثلى والأكثر أماناً لتجنب فقدان المستندات التربوية والملفات الإدارية الهامة نتيجة الأعطال المفاجئة؟", options: ["حفظ الملفات على سطح المكتب دائماً", "إنشاء نسخ احتياطية بانتظام (Backups) على وسائط تخزين خارجية أو سحابية", "إبقاء الحاسوب شغالاً طوال أيام الأسبوع", "تغيير اسم المستخدم الخاص بالنظام بصفة دورية"], correct: 1 }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let userSelections = [];
+
+    function renderQuestion() {
+        const total = questions.length;
+        document.getElementById('total-q-num').innerText = total;
+        document.getElementById('current-q-num').innerText = currentIdx + 1;
+        document.getElementById('live-score').innerText = score;
+        document.getElementById('next-button').style.display = 'none';
+
+        const q = questions[currentIdx];
+        const container = document.getElementById('question-container');
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+            optionsHtml += `<div class="option" onclick="checkAnswer(this, ${idx})">${opt}</div>`;
+        });
+
+        container.innerHTML = `
+            <div class="question-box active">
+                <div class="question-text">${q.q}</div>
+                <div class="options-list">${optionsHtml}</div>
+            </div>
+        `;
+    }
+
+    function checkAnswer(selectedElement, choiceIndex) {
+        const q = questions[currentIdx];
+        const options = selectedElement.parentElement.getElementsByClassName('option');
+        
+        userSelections.push(choiceIndex);
+
+        for (let opt of options) {
+            opt.style.pointerEvents = 'none';
+        }
+
+        if (choiceIndex === q.correct) {
+            selectedElement.classList.add('correct');
+            score++;
+            document.getElementById('live-score').innerText = score;
+        } else {
+            selectedElement.classList.add('wrong');
+            options[q.correct].classList.add('correct');
+        }
+        
+        document.getElementById('next-button').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        if (currentIdx < questions.length) {
+            renderQuestion();
+        } else {
+            finishQuiz();
+        }
+    }
+
+    function finishQuiz() {
+        document.getElementById('quiz-window').style.display = 'none';
+        document.getElementById('stats-panel').style.display = 'none';
+        document.getElementById('control-panel').style.display = 'none';
+        document.getElementById('results-window').style.display = 'block';
+        
+        document.getElementById('final-score-text').innerText = `النتيجة الإجمالية النهائية المحققة: ${score} من ${questions.length}`;
+        
+        const feedback = document.getElementById('feedback-text');
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 85) {
+            feedback.innerHTML = "🦅 <b>مستوى استثنائي رائع جداً!</b> نبارك لك هذا التحضير الاحترافي الشامل. أنت جاهز 100% لافتكاك المرتبة الأولى في مسابقة الترقية جويلية 2026 الرسمية بامتياز.";
+        } else if (percentage >= 60) {
+            feedback.innerHTML = "👍 <b>نتيجة جيدة جداً ومطمئنة للنجاح!</b> لقد تخطيت الاختبار بنجاح، رصيدك المعرفي قوي وثابت، مع تمنيات أكاديمية النسر لك بالتوفيق الفعلي.";
+        } else {
+            feedback.innerHTML = "📚 <b>نتيجة تستدعي المراجعة المركزة!</b> نوصيك بشدة بإعادة مراجعة تجميعات دروس وحصص الدورة لتعزيز نقاط قوتك قبل موعد المسابقة الرسمي.";
+        }
+    }
+
+    function printBlankQuiz() {
+        const printSection = document.getElementById('print-section');
+        printSection.innerHTML = `<h2 style="text-align:center; color:#000;">🔥 الامتحان الشامل الرسمي للرتبة (نسخة بيضاء فارغة للطباعة)</h2>`;
+        printSection.innerHTML += `<p style="text-align:center; font-size:14px; margin-bottom:20px;">المحاكاة الرسمية لمسابقة الترقية جويلية 2026 - أكاديمية النسر للتدريب والتعليم التقني</p><hr>`;
+        
+        questions.forEach((q, idx) => {
+            let opts = '';
+            q.options.forEach(o => {
+                opts += `<div class="print-opt">⬜ ${o}</div>`;
+            });
+            printSection.innerHTML += `
+                <div class="print-item">
+                    <div style="font-weight:bold; font-size:15px; margin-bottom:10px;">${q.q}</div>
+                    ${opts}
+                </div>
+            `;
+        });
+        window.print();
+        printSection.innerHTML = "";
+    }
+
+    function printDoneQuiz() {
+        const printSection = document.getElementById('print-section');
+        printSection.innerHTML = `<h2 style="text-align:center; color:#000;">📊 كشف ومحضر نقاط الطالب المصحح في الامتحان الشامل</h2>`;
+        printSection.innerHTML += `<p style="text-align:center; font-size:18px;">النقاط المستحقة: <b>${score} من ${questions.length}</b></p><hr>`;
+        
+        questions.forEach((q, idx) => {
+            let opts = '';
+            const userAns = userSelections[idx];
+            
+            q.options.forEach((o, oIdx) => {
+                let isCorrect = (oIdx === q.correct);
+                let isUserWrong = (oIdx === userAns && userAns !== q.correct);
+                
+                let cls = isCorrect ? 'print-correct' : '';
+                let mark = isCorrect ? '✅' : (isUserWrong ? '❌' : '⬜');
+                
+                opts += `<div class="print-opt ${cls}">${mark} ${o}</div>`;
+            });
+            printSection.innerHTML += `
+                <div class="print-item">
+                    <div style="font-weight:bold; font-size:15px; margin-bottom:10px;">${q.q}</div>
+                    ${opts}
+                </div>
+            `;
+        });
+        window.print();
+        printSection.innerHTML = "";
+    }
+
+    window.onload = renderQuestion;
+</script>
+</body>
+</html>
