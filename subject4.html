@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الموضوع رقم 04 - تكنولوجيا الإعلام والاتصال</title>
@@ -125,14 +128,44 @@
             }
             const sBox = document.getElementById('scoreBox');
             sBox.style.display = 'block';
-            if(points >= 10) {
+            if (points >= 10) {
                 sBox.className = "score-board pass";
                 sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: ناجح(ة) في الاختبار المقترح.`;
+                
+                // إطلاق القصاصات الورقية الملونة المتطايرة احتفالاً بالنجاح
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+
+                // إظهار نافذة تهنئة فخمة ومخصصة باسم الطالب المخزن سابقاً
+                const savedName = localStorage.getItem("academy_user_name") || "أيها البطل";
+                Swal.fire({
+                    title: `تهانينا الفائقة، أستاذ ${savedName}! 🎉`,
+                    html: `لقد اجتزت الموضوع المقترح بنجاح باهر.<br><br><b style="font-size: 22px; color: #2ecc71;">العلامة: ${points} / 20</b>`,
+                    icon: 'success',
+                    confirmButtonText: 'ممتاز، واصل التقدم 💪',
+                    confirmButtonColor: '#2ecc71',
+                    background: '#243441',
+                    color: '#ffffff'
+                });
             } else {
                 sBox.className = "score-board fail";
-                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: راسب(ة)، يرجى مراجعة التبريرات المرفقة باللون الأزرق.`;
+                sBox.innerHTML = `العلامة الإجمالية المستحقة: ${points} / 20 <br> النتيجة: راسب(ة)، يرجى مراجعة التبريرات المرفقة باللون الأخضر.`;
+                
+                // إظهار نافذة دعم بيداغوجية أنيقة في حال عدم توفق الطالب
+                const savedName = localStorage.getItem("academy_user_name") || "أيها الأستاذ";
+                Swal.fire({
+                    title: `محاولة جيدة، أستاذ ${savedName}`,
+                    html: `للأسف لم تتجاوز عتبة النجاح هذه المرة.<br><b style="font-size: 18px; color: #ff4757;">العلامة: ${points} / 20</b><br><br>💡 لا تقلق، تصفح التبريرات الخضراء وحاول مرة أخرى.`,
+                    icon: 'info',
+                    confirmButtonText: 'موافق، سأراجع الأخطاء 🎯',
+                    confirmButtonColor: '#ff9f43',
+                    background: '#243441',
+                    color: '#ffffff'
+                });
             }
-            window.scrollTo({ top: sBox.offsetTop - 30, behavior: 'smooth' });
         });
     </script>
 </body>
