@@ -277,19 +277,30 @@
     color:#f1d57a;
     margin-top:8px;
   }
+  
+  /* تحسينات لمنع تداخل العناصر أثناء التصدير للطباعة */
+  .pdf-no-break { page-break-inside: avoid !important; break-inside: avoid !important; }
+  .pdf-hide-btn { display: none !important; }
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </head>
 <body>
-<div class="container">
+<div class="container" id="exam-capture-zone">
 
   <header>
     <div class="logo">🦅</div>
     <h1>أكاديمية النسر للتدريب والتعليم التقني</h1>
     <h2>مراجعة الحصة الأولى من دورة التحضير لمسابقة الترقية</h2>
     <p class="org">امتحان تفاعلي في مادة الإعلام الآلي — اكتشف أخطاءك فور الإجابة وتعرّف على نقطتك النهائية</p>
+    
+    <button onclick="downloadBlankExamAsPDF()" class="btn" id="blankPdfBtn" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: #fff; padding: 10px 20px; font-size: 13px; margin-top: 15px;">
+      📥 تحميل الاختبار كنسخة بيضاء فارغة (PDF)
+    </button>
   </header>
 
-  <div class="progress-wrap">
+  <div class="progress-wrap" id="progressArea">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <div class="progress-text">
       <span id="progressLabel">0 / 0 سؤال تمت الإجابة عنه</span>
@@ -299,7 +310,7 @@
 
   <div id="quiz"></div>
 
-  <div class="submit-wrap">
+  <div class="submit-wrap" id="submitArea">
     <button class="btn" id="submitBtn" onclick="finishExam()" disabled>إنهاء الامتحان وعرض النتيجة النهائية</button>
     <div class="locked-msg" id="lockMsg">أجب عن جميع الأسئلة لتفعيل هذا الزر</div>
   </div>
@@ -325,7 +336,7 @@ const questions = [
   },
   {
     topic:"مفهوم الإعلام الآلي",
-    text:"كلمة Informatique تتكون من دمج كلمتين، ما هما؟",
+    text:"كلمة Informatique تتكون من دمج كلمتين، ما هما？",
     options:[
       "Information و Automatique",
       "Internet و Technique",
@@ -489,7 +500,7 @@ const questions = [
       "السماعات اللاسلكية"
     ],
     correct:0,
-    explain:"منفذ RJ45 هو المنفذ المستخدم لتوصيل كابل الشبكة (Ethernet) لربط الحاسوب بشبكة محلية أو بالإنترنت بشكل سلكي."
+    explain:"منفذ RJ45 هو المنفذ المستخدم توصيل كابل الشبكة (Ethernet) لربط الحاسوب بشبكة محلية أو بالإنترنت بشكل سلكي."
   },
   {
     topic:"المنافذ (HDMI/RJ45/USB)",
@@ -524,7 +535,7 @@ function buildQuiz(){
   const quizDiv = document.getElementById('quiz');
   questions.forEach((q, idx)=>{
     const card = document.createElement('div');
-    card.className = 'question-card';
+    card.className = 'question-card pdf-no-break'; // لمنع انقسام السؤال إلى نصفين عند الطباعة ورقياً
     card.id = 'q'+idx;
 
     let optsHtml = '';
@@ -589,76 +600,4 @@ function updateProgress(){
   const done = Object.keys(answered).length;
   const correctCount = Object.keys(answered).filter(k => answered[k] === questions[k].correct).length;
 
-  document.getElementById('progressFill').style.width = (done/total*100) + '%';
-  document.getElementById('progressLabel').textContent = `${done} / ${total} سؤال تمت الإجابة عنه`;
-  document.getElementById('liveScore').textContent = `النقطة الحالية: ${correctCount} / ${total}`;
-
-  const submitBtn = document.getElementById('submitBtn');
-  const lockMsg = document.getElementById('lockMsg');
-  if(done === total){
-    submitBtn.disabled = false;
-    lockMsg.style.display = 'none';
-  } else {
-    submitBtn.disabled = true;
-    lockMsg.style.display = 'block';
-  }
-}
-
-function finishExam(){
-  const total = questions.length;
-  const correctCount = Object.keys(answered).filter(k => answered[k] === questions[k].correct).length;
-  const percent = Math.round((correctCount/total)*100);
-
-  // Topic stats
-  const topicStats = {};
-  questions.forEach((q, idx)=>{
-    if(!topicStats[q.topic]) topicStats[q.topic] = {correct:0, total:0};
-    topicStats[q.topic].total++;
-    if(answered[idx] === q.correct) topicStats[q.topic].correct++;
-  });
-
-  let verdictText = '';
-  let verdictColor = '';
-  if(percent >= 85){
-    verdictText = '🏆 ممتاز! إتقان جيد جدًا لمحتوى الحصة';
-    verdictColor = '#2ecc71';
-  } else if(percent >= 60){
-    verdictText = '👍 جيد، لكن يستحسن مراجعة بعض النقاط';
-    verdictColor = '#f1d57a';
-  } else {
-    verdictText = '⚠️ يُنصح بإعادة مراجعة محتوى الحصة الأولى بتركيز';
-    verdictColor = '#e74c3c';
-  }
-
-  let topicHtml = '';
-  Object.keys(topicStats).forEach(t=>{
-    const s = topicStats[t];
-    topicHtml += `<div class="topic-row"><span>${t}</span><span class="score-val">${s.correct} / ${s.total}</span></div>`;
-  });
-
-  const resultDiv = document.getElementById('result');
-  resultDiv.style.display = 'block';
-  resultDiv.innerHTML = `
-    <h2>📊 نتيجتك النهائية</h2>
-    <div class="score-circle" style="border-color:${verdictColor}">
-      <div class="num">${correctCount}/${total}</div>
-      <div class="lbl">${percent}%</div>
-    </div>
-    <div class="verdict" style="color:${verdictColor}">${verdictText}</div>
-    <div class="topic-stats">
-      <h3>تفصيل النتيجة حسب المحور</h3>
-      ${topicHtml}
-    </div>
-  `;
-
-  document.getElementById('submitBtn').disabled = true;
-  document.getElementById('submitBtn').textContent = 'تم إنهاء الامتحان';
-  document.getElementById('lockMsg').style.display = 'none';
-
-  resultDiv.scrollIntoView({behavior:'smooth'});
-}
-
-buildQuiz();
-</script>
-</body>
-</html>
+  document.getElementById('progressFill').style.width = (done/total*100
