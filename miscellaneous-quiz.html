@@ -9,9 +9,8 @@
             background-color: #1a2a33;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 15px;
+            padding: 20px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -21,18 +20,17 @@
             max-width: 850px;
             width: 100%;
             background: #243441;
-            padding: 25px;
+            padding: 35px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            box-sizing: border-box;
         }
         .header {
             text-align: center;
             border-bottom: 2px solid #2c3e50;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
             margin-bottom: 20px;
         }
-        .header h2 { color: #ffad33; margin: 5px 0; font-size: 22px; }
+        .header h2 { color: #ffad33; margin: 5px 0; font-size: 24px; }
         .header p { color: #cfd8dc; font-size: 14px; margin: 5px 0 0 0; }
         .progress-bar {
             height: 6px;
@@ -49,16 +47,16 @@
         }
         .question-box { display: none; }
         .question-box.active { display: block; }
-        .question-text { font-size: 18px; font-weight: bold; margin-bottom: 20px; line-height: 1.6; }
+        .question-text { font-size: 19px; font-weight: bold; margin-bottom: 20px; line-height: 1.6; }
         .options-list { display: flex; flex-direction: column; gap: 12px; }
         .option {
             background: #2c3e50;
-            padding: 14px 18px;
+            padding: 15px 20px;
             border-radius: 10px;
             cursor: pointer;
             transition: background 0.2s;
             border: 2px solid transparent;
-            font-size: 15px;
+            font-size: 16px;
         }
         .option:hover { background: #34495e; }
         .option.correct { background: #2ed573 !important; border-color: #26af5f; color: white; }
@@ -75,10 +73,10 @@
             cursor: pointer;
             display: none;
         }
-        .results-window { display: none; text-align: center; padding: 10px; }
+        .results-window { display: none; text-align: center; padding: 20px; }
         .score-circle {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 5px solid #ffad33;
             display: flex;
@@ -87,51 +85,16 @@
             align-items: center;
             margin: 20px auto;
         }
-        .score-circle .num { font-size: 30px; font-weight: bold; color: #ffad33; }
-        
-        /* تخصيص أزرار التحويل والعودة السفلية */
-        .pdf-download-area {
-            width: 100%;
-            max-width: 850px;
-            margin-top: 15px;
-            text-align: center;
-        }
-        .pdf-btn {
-            display: block;
-            width: 100%;
-            background-color: #ff9f43;
-            color: white;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            box-sizing: border-box;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+        .score-circle .num { font-size: 32px; font-weight: bold; color: #ffad33; }
         .home-btn {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 25px;
             background-color: #34ace0;
             color: white;
             padding: 12px 30px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-        }
-
-        /* حاوية مخفية مخصصة لتنسيق الطباعة فقط */
-        #print-section { display: none; }
-
-        /* إعدادات الطباعة الذكية وتحويلها إلى PDF نظيف */
-        @media print {
-            body { background: white !important; color: black !important; padding: 0; }
-            .quiz-container, .pdf-download-area { display: none !important; }
-            #print-section { display: block !important; color: black !important; }
-            .print-item { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 15px 0; }
-            .print-opt { margin: 5px 0; padding: 5px; border: 1px solid #ddd; background: #fafafa; }
-            .print-correct { background: #d4edda !important; border-color: #c3e6cb !important; font-weight: bold; }
         }
     </style>
 </head>
@@ -160,53 +123,117 @@
             <div class="num" id="final-score">0</div>
             <div style="font-size: 12px; color: #aaa;">من 20</div>
         </div>
-        <p id="feedback-text" style="font-size: 16px; color: #cfd8dc;"></p>
-        
-        <button onclick="printDoneQuiz()" class="pdf-btn" style="background-color: #2ed573; margin-top: 20px;">
-            📄 حفظ كشف الإجابات النهائي (PDF)
-        </button>
-
+        <p id="feedback-text" style="font-size: 18px; color: #cfd8dc;"></p>
         <a href="index.html" class="home-btn">🏠 العودة للصفحة الرئيسية</a>
     </div>
 </div>
 
-<!-- مساحة الأزرار السفلية بعيداً عن حجب واجهة الأسئلة -->
-<div class="pdf-download-area" id="control-panel">
-    <button onclick="printBlankQuiz()" class="pdf-btn" id="blankPdfBtn">
-        📥 تحميل التطبيق كاملاً كنسخة بيضاء فارغة (PDF)
-    </button>
-</div>
-
-<!-- حاوية الطباعة الديناميكية التي تظهر فقط عند التصدير -->
-<div id="print-section"></div>
-
 <script>
     const questions = [
-        { q: "📝 ما هو الامتداد القياسي الشهير الخاص بملفات الوثائق النصية المحررة في Microsoft Word؟", options: [".mp4", ".docx", ".jpg", ".xlsx"], correct: 1 },
-        { q: "🗂️ أي مما يلي يعبر بدقة عن الوظيفة الأساسية والدور الجوهري للمجلد (Folder)؟", options: ["رفع سرعة المعالج الحسابي", "تنظيم وترتيب وحفظ ملفات المستخدم لتسهيل تصفحها", "حذف الفيروسات بشكل نهائي", "تشغيل مقاطع الفيديو عالية الدقة"], correct: 1 },
-        { q: "🗑️ أين تذهب الملفات والمجلدات مباشرة بعد حذفها المؤقت بواسطة المستخدم في ويندوز؟", options: ["مجلد سطح المكتب", "سلة المهملات (Recycle Bin)", "قرص النظام المحمي C", "مجلد التحميلات المستلمة"], correct: 1 },
-        { q: "🚫 يمنع نظام تسيير الملفات استخدام بعض الرموز في تسمية الملفات، أي الرموز التالية محظور تماماً؟", options: ["الرمز المائل /", "العلامة المفتوحة -", "الشرطة السفلية _", "الرقم التسلسلي 9"], correct: 0 },
-        { q: "🛠️ عملية تقسيم القرص الصلب الفيزيائي إلى عدة أقراص منطقية تفيد بشكل أساسي في:", options: ["زيادة المساحة التخزينية الإجمالية للقرص", "حماية وتأمين بيانات المستخدم الشخصية في حال انهيار نظام التشغيل", "تنظيف الشاشة وتسريع الإنترنت", "تغيير لغة كيبورد الحاسوب تلقائياً"], correct: 1 },
-        { q: "💻 ما هو البرنامج الأب والأساسي الذي بدونه لا يمكن لأي حاسب آلي أن يقلع أو يعمل نهائياً؟", options: ["مضاد الفيروسات المطور", "متصفح الويب المفتوح", "نظام التشغيل (Operating System)", "حزمة مايكروسوفت أوفيس"], correct: 2 },
-        { q: "🌐 يعتبر متصفح Mozilla Firefox مثالاً تطبيقياً قياسياً لـ:", options: ["أنظمة التشغيل المتقدمة", "برامج تصفح واستعراض مواضيع الويب", "برمجيات تعديل وإنشاء الأصوات", "ملفات تعريف قطع العتاد الملحق"], correct: 1 },
-        { q: "🔌 ما هي الوظيفة الحقيقية لبرمجيات تعريف العتاد (Drivers) في الحاسب الآلي؟", options: ["حماية المتصفح من الإعلانات المزعجة", "جعل نظام التشغيل يتعرف ويتوافق وظيفياً مع القطع والملحقات المربوطة بالجهاز", "تعديل أبعاد الصور الفوتوغرافية", "كتابة وطباعة التقارير الإدارية بمرونة"], correct: 1 },
-        { q: "🎬 أي من البرامج التالية يعد مشغلاً متميزاً ومفتوح المصدر لفك ترميز مقاطع الملتيميديا بكافة امتداداتها؟", options: ["VLC Media Player", "Adobe Photoshop", "Windows Defender", "Audacity"], correct: 0 },
-        { q: "🔓 البرمجيات المجانية تماماً والتي تتيح كودها المصدري الأصلي للجميع للتعديل والتطوير تسمى:", options: ["برمجيات تجارية مغلقة", "برمجيات مفتوحة المصدر (Open-Source)", "برمجيات مؤقتة ومحمية", "أنظمة تشغيل مخفية"], correct: 1 },
-        { q: "🧮 عند التحويل من وحدة تخزين صغيرة إلى وحدة تخزين أكبر مباشرة (مثال: من KB إلى MB)، فإننا نقوم بـ:", options: ["الضرب في 1024", "القسمة على 1024", "الجمع مع 1024", "الضرب في 1000"], correct: 1 },
-        { q: "🖼️ أي من الامتدادات التالية يمثل ملف صورة ذات خلفية شفافة؟", options: [".exe", ".png", ".mp3", ".pdf"], correct: 1 },
-        { q: "🧹 ما هي العملية التي تؤدي إلى مسح كامل البيانات من على قرص معين وإعادة تهيئة نظام ملفاته؟", options: ["التقسيم (Partitioning)", "التهيئة (Formatting)", "نسخ التنسيق", "التفاف النص"], correct: 1 },
-        { q: "👤 المجلد المدمج بالنظام المسؤول عن استقبال وحفظ الملفات المحملة تلقائياً من الإنترنت يسمى:", options: ["Documents", "Downloads", "Desktop", "Music"], correct: 1 },
-        { q: "🎨 أي من البرامج التالية متخصص في تحرير ومعالجة وتعديل الصور الرقمية？", options: ["Adobe Photoshop", "VLC Media Player", "Microsoft Excel", "Audacity"], correct: 0 },
-        { q: "📊 كم بايت (Byte) يوجد في 1 كيلوبايت (KB) واحد؟", options: ["1000 بايت", "1024 بايت", "100 بايت", "1024 ميغابايت"], correct: 1 },
-        { q: "🔒 أي من البرامج التالية يعتبر مضاد الفيروسات الافتراضي المدمج تلقائياً في نظام تشغيل Windows؟", options: ["Avast", "Kaspersky", "Windows Defender", "VLC Player"], correct: 2 },
-        { q: "🔊 برنامج Audacity الشهير يستخدم بشكل أساسي في معالجة وتعديل وتصفية ملفات الـ:", options: ["صور الفنية", "مقاطع الصوت واللوائح الصوتية", "الفيديوهات والمونتاج", "الجداول الحسابية والإحصاء"], correct: 1 },
-        { q: "📁 هل يمتلك المجلد (Folder) امتداداً برمجياً ثابتاً يظهر بجانب اسمه مثل الملفات؟", options: ["نعم، دائماً له امتداد", "لا، المجلد لا يمتلك أي امتداد برمي مطلقاً", "نعم، يمتلك امتداد .exe فقط", "يمتلك امتداداً يتغير حسب حجمه"], correct: 1 },
-        { q: "🏢 حزمة البرامج المكتبية الشهيرة Microsoft Office تعتبر مثالاً على البرمجيات الـ:", options: ["مفتوحة المصدر بالكامل", "مغلقة المصدر والمدفوعة (Proprietary)", "المجانية المتاحة للتعديل الشامل", "أنظمة التشغيل المدمجة"], correct: 1 }
+        {
+            q: "📝 ما هو الامتداد القياسي الشهير الخاص بملفات الوثائق النصية المحررة في Microsoft Word؟",
+            options: [".mp4", ".docx", ".jpg", ".xlsx"],
+            correct: 1
+        },
+        {
+            q: "🗂️ أي مما يلي يعبر بدقة عن الوظيفة الأساسية والدور الجوهري للمجلد (Folder)؟",
+            options: ["رفع سرعة المعالج الحسابي", "تنظيم وترتيب وحفظ ملفات المستخدم لتسهيل تصفحها", "حذف الفيروسات بشكل نهائي", "تشغيل مقاطع الفيديو عالية الدقة"],
+            correct: 1
+        },
+        {
+            q: "🗑️ أين تذهب الملفات والمجلدات مباشرة بعد حذفها المؤقت بواسطة المستخدم في ويندوز؟",
+            options: ["مجلد سطح المكتب", "سلة المهملات (Recycle Bin)", "قرص النظام المحمي C", "مجلد التحميلات المستلمة"],
+            correct: 1
+        },
+        {
+            q: "🚫 يمنع نظام تسيير الملفات استخدام بعض الرموز في تسمية الملفات، أي الرموز التالية محظور تماماً؟",
+            options: ["الرمز المائل /", "العلامة المفتوحة -", "الشرطة السفلية _", "الرقم التسلسلي 9"],
+            correct: 0
+        },
+        {
+            q: "🛠️ عملية تقسيم القرص الصلب الفيزيائي إلى عدة أقراص منطقية تفيد بشكل أساسي في:",
+            options: ["زيادة المساحة التخزينية الإجمالية للقرص", "حماية وتأمين بيانات المستخدم الشخصية في حال انهيار نظام التشغيل", "تنظيف الشاشة وتسريع الإنترنت", "تغيير لغة كيبورد الحاسوب تلقائياً"],
+            correct: 1
+        },
+        {
+            q: "💻 ما هو البرنامج الأب والأساسي الذي بدونه لا يمكن لأي حاسب آلي أن يقلع أو يعمل نهائياً؟",
+            options: ["مضاد الفيروسات المطور", "متصفح الويب المفتوح", "نظام التشغيل (Operating System)", "حزمة مايكروسوفت أوفيس"],
+            correct: 2
+        },
+        {
+            q: "🌐 يعتبر متصفح Mozilla Firefox مثالاً تطبيقياً قياسياً لـ:",
+            options: ["أنظمة التشغيل المتقدمة", "برامج تصفح واستعراض مواضيع الويب", "برمجيات تعديل وإنشاء الأصوات", "ملفات تعريف قطع العتاد الملحق"],
+            correct: 1
+        },
+        {
+            q: "🔌 ما هي الوظيفة الحقيقية لبرمجيات تعريف العتاد (Drivers) في الحاسب الآلي؟",
+            options: ["حماية المتصفح من الإعلانات المزعجة", "جعل نظام التشغيل يتعرف ويتوافق وظيفياً مع القطع والملحقات المربوطة بالجهاز", "تعديل أبعاد الصور الفوتوغرافية", "كتابة وطباعة التقارير الإدارية بمرونة"],
+            correct: 1
+        },
+        {
+            q: "🎬 أي من البرامج التالية يعد مشغلاً متميزاً ومفتوح المصدر لفك ترميز مقاطع الملتيميديا بكافة امتداداتها؟",
+            options: ["VLC Media Player", "Adobe Photoshop", "Windows Defender", "Audacity"],
+            correct: 0
+        },
+        {
+            q: "🔓 البرمجيات المجانية تماماً والتي تتيح كودها المصدري الأصلي للجميع للتعديل والتطوير تسمى:",
+            options: ["برمجيات تجارية مغلقة", "برمجيات مفتوحة المصدر (Open-Source)", "برمجيات مؤقتة ومحمية", "أنظمة تشغيل مخفية"],
+            correct: 1
+        },
+        {
+            q: "🧮 عند التحويل من وحدة تخزين صغيرة إلى وحدة تخزين أكبر مباشرة (مثال: من KB إلى MB)، فإننا نقوم بـ:",
+            options: ["الضرب في 1024", "القسمة على 1024", "الجمع مع 1024", "الضرب في 1000"],
+            correct: 1
+        },
+        {
+            q: "🖼️ أي من الامتدادات التالية يمثل ملف صورة ذات خلفية شفافة؟",
+            options: [".exe", ".png", ".mp3", ".pdf"],
+            correct: 1
+        },
+        {
+            q: "🧹 ما هي العملية التي تؤدي إلى مسح كامل البيانات من على قرص معين وإعادة تهيئة نظام ملفاته؟",
+            options: ["التقسيم (Partitioning)", "التهيئة (Formatting)", "نسخ التنسيق", "التفاف النص"],
+            correct: 1
+        },
+        {
+            q: "👤 المجلد المدمج بالنظام المسؤول عن استقبال وحفظ الملفات المحملة تلقائياً من الإنترنت يسمى:",
+            options: ["Documents", "Downloads", "Desktop", "Music"],
+            correct: 1
+        },
+        {
+            q: "🎨 أي من البرامج التالية متخصص في تحرير ومعالجة وتعديل الصور الرقمية؟",
+            options: ["Adobe Photoshop", "VLC Media Player", "Microsoft Excel", "Audacity"],
+            correct: 0
+        },
+        {
+            q: "📊 كم بايت (Byte) يوجد في 1 كيلوبايت (KB) واحد؟",
+            options: ["1000 بايت", "1024 بايت", "100 بايت", "1024 ميغابايت"],
+            correct: 1
+        },
+        {
+            q: "🔒 أي من البرامج التالية يعتبر مضاد الفيروسات الافتراضي المدمج تلقائياً في نظام تشغيل Windows؟",
+            options: ["Avast", "Kaspersky", "Windows Defender", "VLC Player"],
+            correct: 2
+        },
+        {
+            q: "🔊 برنامج Audacity الشهير يستخدم بشكل أساسي في معالجة وتعديل وتصفية ملفات الـ:",
+            options: ["صور الفنية", "مقاطع الصوت واللوائح الصوتية", "الفيديوهات والمونتاج", "الجداول الحسابية والإحصاء"],
+            correct: 1
+        },
+        {
+            q: "📁 هل يمتلك المجلد (Folder) امتداداً برمجياً ثابتاً يظهر بجانب اسمه مثل الملفات؟",
+            options: ["نعم، دائماً له امتداد", "لا، المجلد لا يمتلك أي امتداد برمي مطلقاً", "نعم، يمتلك امتداد .exe فقط", "يمتلك امتداداً يتغير حسب حجمه"],
+            correct: 1
+        },
+        {
+            q: "🏢 حزمة البرامج المكتبية الشهيرة Microsoft Office تعتبر مثالاً على البرمجيات الـ:",
+            options: ["مفتوحة المصدر بالكامل", "مغلقة المصدر والمدفوعة (Proprietary)", "المجانية المتاحة للتعديل الشامل", "أنظمة التشغيل المدمجة"],
+            correct: 1
+        }
     ];
 
     let currentIdx = 0;
     let score = 0;
-    let userSelections = [];
 
     function renderQuestion() {
         const totalQ = questions.length;
@@ -236,8 +263,6 @@
         const q = questions[currentIdx];
         const options = selectedElement.parentElement.getElementsByClassName('option');
         
-        userSelections.push(choiceIndex);
-
         for (let opt of options) {
             opt.style.pointerEvents = 'none';
         }
@@ -266,73 +291,22 @@
         document.getElementById('progress-line').style.width = `100%`;
         document.getElementById('quiz-window').style.display = 'none';
         document.getElementById('results-window').style.display = 'block';
-        document.getElementById('control-panel').style.display = 'none'; // إخفاء زر النسخة البيضاء عند النهاية
         document.getElementById('final-score').innerText = score;
         
         const feedback = document.getElementById('feedback-text');
         const percent = (score / questions.length) * 100;
 
         if (percent >= 80) {
-            feedback.innerText = "🦅 أداء ممتاز خارق للعادة! لقد اجتزت كافة التطبيقات الموسعة بنجاح تام.";
+            feedback.innerText = "🦅 أداء ممتاز خارق للعادة! لقد اجتزت كافة التطبيقات الموسعة بنجاح تام، مستواك أسطوري ومستعد بقوة لمسابقات الترقية!";
         } else if (percent >= 50) {
-            feedback.innerText = "👍 عمل جيد جداً ونتيجة طيبة تؤهلك للنجاح.";
+            feedback.innerText = "👍 عمل جيد جداً ونتيجة طيبة تؤهلك للنجاح. يمكنك مراجعة الأسئلة الخاطئة لضمان التميز والعلامة الكاملة مستقبلاً.";
         } else {
-            feedback.innerText = "📚 علامة دون المتوسط، ننصح بإعادة الاطلاع على دروس التخزين.";
+            feedback.innerText = "📚 علامة دون المتوسط، ننصح بإعادة الاطلاع على دروس التخزين وفئات التراخيص البرمجية بتركيز لتصحيح معلوماتك الأساسية.";
         }
-    }
-
-    // دالة طباعة النسخة الفارغة الأصلية
-    function printBlankQuiz() {
-        const printSection = document.getElementById('print-section');
-        printSection.innerHTML = `<h2 style="text-align:center;">🎯 تطبيقات عامة وموسعة - نسخة بيضاء للطباعة</h2>`;
-        
-        questions.forEach((q, idx) => {
-            let opts = '';
-            q.options.forEach(o => {
-                opts += `<div class="print-opt">⬜ ${o}</div>`;
-            });
-            printSection.innerHTML += `
-                <div class="print-item">
-                    <div style="font-weight:bold; margin-bottom:10px;">${idx + 1}) ${q.q}</div>
-                    ${opts}
-                </div>
-            `;
-        });
-        window.print();
-        printSection.innerHTML = "";
-    }
-
-    // دالة طباعة تقرير الطالب المصحح
-    function printDoneQuiz() {
-        const printSection = document.getElementById('print-section');
-        printSection.innerHTML = `<h2 style="text-align:center;">📊 تقرير إجابات الطالب وكشف النقاط النهائي</h2>`;
-        printSection.innerHTML += `<p style="text-align:center; font-size:18px;">النتيجة الإجمالية: <b>${score} من ${questions.length}</b></p><hr>`;
-        
-        questions.forEach((q, idx) => {
-            let opts = '';
-            const userAns = userSelections[idx];
-            
-            q.options.forEach((o, oIdx) => {
-                let isCorrect = (oIdx === q.correct);
-                let isUserWrong = (oIdx === userAns && userAns !== q.correct);
-                
-                let cls = isCorrect ? 'print-correct' : '';
-                let mark = isCorrect ? '✅' : (isUserWrong ? '❌' : '⬜');
-                
-                opts += `<div class="print-opt ${cls}">${mark} ${o}</div>`;
-            });
-            printSection.innerHTML += `
-                <div class="print-item">
-                    <div style="font-weight:bold; margin-bottom:10px;">${idx + 1}) ${q.q}</div>
-                    ${opts}
-                </div>
-            `;
-        });
-        window.print();
-        printSection.innerHTML = "";
     }
 
     window.onload = renderQuestion;
 </script>
+
 </body>
 </html>
