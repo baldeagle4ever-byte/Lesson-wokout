@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكاة إجراءات Office</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Reem+Kufi:wght@700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: linear-gradient(135deg, rgba(10, 15, 30, 0.95), rgba(15, 23, 42, 0.92)); color: #f1f5f9; font-family: 'Cairo', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 30px 14px 80px 14px; }
+        .sub-wrapper { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.06); padding: 30px 20px; border-radius: 24px; max-width: 750px; width: 100%; }
+        .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 15px; }
+        .page-header h1 { font-family: 'Reem Kufi', sans-serif; font-size: 20px; color: #c084fc; }
+        .back-btn { text-decoration: none; color: #64748b; font-size: 14px; display: flex; align-items: center; gap: 6px; font-weight: bold; }
+        .back-btn:hover { color: #ffffff; }
+        .links-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .sub-item-card { display: flex; align-items: center; justify-content: space-between; padding: 16px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.03); border-radius: 14px; text-decoration: none; color: #fff; transition: 0.3s; }
+        .sub-item-card:hover { background: rgba(192, 132, 252, 0.1); border-color: #c084fc; transform: translateX(-4px); }
+        .card-meta { text-align: right; }
+        .card-meta h3 { font-size: 15px; margin-bottom: 4px; }
+        .card-meta p { font-size: 12px; color: #64748b; }
+        .item-icon { font-size: 20px; }
+        .running-ticker-container { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b; padding: 10px 0; font-size: 13px; font-weight: bold; z-index: 3000; overflow: hidden; white-space: nowrap; }
+        .ticker-text { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+    </style>
+</head>
+<body>
+<div class="sub-wrapper">
+    <div class="page-header">
+        <h1><i class="bi bi-window-stack"></i> محاكاة إجراءات وقوائم Office</h1>
+        <a href="index.html" class="back-btn">العودة للرئيسية <i class="bi bi-arrow-left"></i></a>
+    </div>
+    <div class="links-list">
+        <a href="quiz-word.html" class="sub-item-card">
+            <div class="card-meta"><h3>محاكاة إجراءات Microsoft Word</h3><p>إجراءات القوائم، تنسيق وتوثيق الفقرات، والتحكم بالهوامش والنوافذ المفتوحة.</p></div>
+            <div class="item-icon" style="color:#60a5fa"><i class="bi bi-filetype-docx"></i></div>
+        </a>
+        <a href="quiz-excel-steps.html" class="sub-item-card">
+            <div class="card-meta"><h3>محاكاة إجراءات Microsoft Excel</h3><p>طرق إدراج الصيغ الحسابية، تجميد الصفوف، دمج الخلايا والمخططات البيانية.</p></div>
+            <div class="item-icon" style="color:#4ade80"><i class="bi bi-filetype-xlsx"></i></div>
+        </a>
+        <a href="quiz-powerpoint.html" class="sub-item-card">
+            <div class="card-meta"><h3>محاكاة إجراءات Microsoft PowerPoint</h3><p>فرز الشرائح، الحركات والمراحل الانتقالية المخصصة وضبط التوقيت للعروض.</p></div>
+            <div class="item-icon" style="color:#f87171"><i class="bi bi-filetype-pptx"></i></div>
+        </a>
+    </div>
+</div>
+<div class="running-ticker-container"><div class="ticker-text">⚡ أكاديمية النسر للتعليم والتدريب التقني 2026 كل الحقوق محفوظة .</div></div>
+</body>
+</html>
