@@ -21,14 +21,24 @@
         .btn { background-color: #ff9f43; color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; display: none; margin-top: 15px; font-weight: bold; }
         .result-view { display: none; text-align: center; }
         .home-btn { display: inline-block; margin-top: 20px; background-color: #34ace0; color: white; padding: 10px 25px; border-radius: 20px; text-decoration: none; font-weight: bold; }
+        
+        /* تنسيقات مخصصة لهندسة ملف الـ PDF وحفظ التماسك المظهري */
+        .pdf-no-break { page-break-inside: avoid !important; break-inside: avoid !important; }
+        .pdf-hide { display: none !important; }
     </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-<div class="quiz-container">
+<div class="quiz-container" id="excel-capture-zone">
     <div class="header">
         <h2>📊 محاكاة الإجراءات التطبيقية: Microsoft Excel</h2>
         <p id="counter">السؤال 1 من 6</p>
+        
+        <button onclick="downloadBlankExcelAsPDF()" class="home-btn" id="blankPdfBtn" style="background-color: #ff9f43; border: none; cursor: pointer; font-size: 13px; padding: 8px 20px; margin-top: 10px;">
+            📥 تحميل المحاكاة كنسخة بيضاء فارغة (PDF)
+        </button>
     </div>
 
     <div id="quiz-body">
@@ -39,8 +49,13 @@
     <div id="result-body" class="result-view">
         <h3>📊 النتيجة النهائية لمحاكاة Excel إجرائياً</h3>
         <p id="score-text" style="font-size: 22px; font-weight: bold; color: #ffad33;"></p>
-        <p id="feedback" style="color: #cfd8dc;"></p>
-        <a href="index.html" class="home-btn">🏠 العودة للرئيسية</a>
+        <p id="feedback" style="color: #cfd8dc; margin-bottom: 20px;"></p>
+        
+        <button onclick="downloadDoneExcelAsPDF()" class="home-btn" style="background-color: #2ed573; border: none; cursor: pointer; width: 100%; display: block; margin-bottom: 10px;">
+            📄 تحميل كشف الإجابات والتقرير النهائي (PDF)
+        </button>
+        
+        <a href="index.html" class="home-btn" id="homeReturnBtn">🏠 العودة للرئيسية</a>
     </div>
 </div>
 
@@ -116,6 +131,7 @@
 
     let currentIdx = 0;
     let score = 0;
+    let userSelections = []; // مصفوفة لحفظ تتبع خيارات إجابات الطالب بالتفصيل
 
     function renderQ() {
         document.getElementById('counter').innerText = `السؤال ${currentIdx + 1} من ${excelQuestions.length}`;
@@ -142,6 +158,8 @@
         const qData = excelQuestions[currentIdx];
         const options = element.parentElement.getElementsByClassName('option');
         
+        userSelections.push(index); // حفظ الخيار المنقور برمجياً
+
         for(let opt of options) { opt.style.pointerEvents = 'none'; }
 
         if(index === qData.correct) {
@@ -172,6 +190,105 @@
                 feedback.innerText = "📚 ننصحك بالرجوع لدروس إكسيل التطبيقية والتركيز على آليات التعامل مع البيانات والصيغ الحسابية لتطوير رصيدك.";
             }
         }
+    }
+
+    // 1. دالة تصدير كراسة الأسئلة الفارغة ملائمة بشكل متناسق للطباعة الورقية والنماذج الملموسة
+    function downloadBlankExcelAsPDF() {
+        const zone = document.getElementById('excel-capture-zone');
+        const blankBtn = document.getElementById('blankPdfBtn');
+        const quizBody = document.getElementById('quiz-body');
+
+        blankBtn.classList.add('pdf-hide');
+        quizBody.classList.add('pdf-hide');
+
+        const tempDiv = document.createElement('div');
+        tempDiv.id = 'excel-blank-temp';
+        
+        excelQuestions.forEach((item, idx) => {
+            let optionsStr = '';
+            item.options.forEach(o => {
+                optionsStr += `<div style="padding: 8px 15px; background: #2c3e50; border-radius: 6px; margin-top:6px; font-size:14px;">⬜ ${o}</div>`;
+            });
+            tempDiv.innerHTML += `
+                <div class="pdf-no-break" style="margin-bottom: 20px; border-bottom: 1px solid #217346; padding-bottom: 15px;">
+                    <div style="background: #2c3e50; padding: 10px; border-radius: 6px; font-size:14px; color:#b0bec5; margin-bottom:8px;">${item.scenario}</div>
+                    <div style="font-weight: bold; font-size: 15px; margin-bottom: 8px;">${idx+1}) ${item.q}</div>
+                    <div>${optionsStr}</div>
+                </div>
+            `;
+        });
+        zone.appendChild(tempDiv);
+
+        const options = {
+            margin: [12, 12, 12, 12],
+            filename: 'محاكاة_إكسيل_الإجرائية_الخام_أكاديمية_النسر.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(options).from(zone).save().then(() => {
+            tempDiv.remove();
+            blankBtn.classList.remove('pdf-hide');
+            quizBody.classList.remove('pdf-hide');
+        });
+    }
+
+    // 2. دالة بناء وتصدير كشف إجابات الطالب الشامل والمدعوم بالتصحيح الفوري والكامل
+    function downloadDoneExcelAsPDF() {
+        const zone = document.getElementById('excel-capture-zone');
+        const blankBtn = document.getElementById('blankPdfBtn');
+        const homeReturnBtn = document.getElementById('homeReturnBtn');
+        let studentName = localStorage.getItem("academy_user_name") || "مترشح_الأكاديمية";
+
+        blankBtn.classList.add('pdf-hide');
+        homeReturnBtn.classList.add('pdf-hide');
+
+        const tempReportDiv = document.createElement('div');
+        tempReportDiv.id = 'excel-report-temp';
+        tempReportDiv.innerHTML = `<h3 style="text-align: center; color: #ffad33; margin-top: 25px; border-top: 2px dashed #217346; padding-top: 15px;">📋 كشف تفصيلي مصحح لمادة محاكاة إكسيل الإجرائية</h3>`;
+
+        excelQuestions.forEach((item, idx) => {
+            let optionsStr = '';
+            const studentAns = userSelections[idx];
+            
+            item.options.forEach((o, oIdx) => {
+                let prefix = '⬜';
+                let style = 'padding: 8px 15px; border-radius: 6px; margin-top:6px; font-size:14px; background: #2c3e50;';
+                
+                if (oIdx === item.correct) {
+                    prefix = '✅ (الإجراء الصحيح القياسي)';
+                    style += ' background: #2ed573; color: white;';
+                } else if (oIdx === studentAns && studentAns !== item.correct) {
+                    prefix = '❌ (خياراتك الخاطئة)';
+                    style += ' background: #ff4757; color: white;';
+                }
+                optionsStr += `<div style="${style}">${prefix} ${o}</div>`;
+            });
+            
+            tempReportDiv.innerHTML += `
+                <div class="pdf-no-break" style="margin-bottom: 20px; border-bottom: 1px solid #217346; padding-bottom: 15px;">
+                    <div style="background: #2c3e50; padding: 10px; border-radius: 6px; font-size:14px; color:#b0bec5; margin-bottom:8px;">${item.scenario}</div>
+                    <div style="font-weight: bold; font-size: 15px; margin-bottom: 8px;">${idx+1}) ${item.q}</div>
+                    <div>${optionsStr}</div>
+                </div>
+            `;
+        });
+        zone.appendChild(tempReportDiv);
+
+        const options = {
+            margin: [12, 12, 12, 12],
+            filename: `كشف_نقاط_إكسيل_${studentName}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(options).from(zone).save().then(() => {
+            tempReportDiv.remove();
+            blankBtn.classList.remove('pdf-hide');
+            homeReturnBtn.classList.remove('pdf-hide');
+        });
     }
 
     window.onload = renderQ;
