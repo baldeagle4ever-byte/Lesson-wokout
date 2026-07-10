@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المراجعة النهائية قبل مسابقة الترقية 26 - أكاديمية النسر</title>
+    <style>
+        :root {
+            --bg-main: #0b1329;
+            --bg-card: #1c2541;
+            --accent-gold: #eab308;
+            --accent-cyan: #38bdf8;
+            --success-green: #22c55e;
+            --danger-red: #ef4444;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .quiz-container {
+            max-width: 950px;
+            width: 100%;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 24px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        .top-header {
+            text-align: center;
+            border-bottom: 2px dashed #334155;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        .top-header h1 {
+            color: var(--accent-gold);
+            font-size: 26px;
+            margin: 5px 0;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(234, 179, 8, 0.2);
+        }
+        .top-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 8px 0 0 0;
+        }
+        .axis-badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-cyan);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            text-align: center;
+            border-right: 5px solid var(--accent-cyan);
+        }
+        .metric-box span { font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 4px;}
+        .metric-box b { font-size: 17px; color: var(--text-light); }
+        .metric-box b span.highlight { color: var(--accent-gold); }
+
+        .progress-container {
+            height: 8px;
+            background: #0f172a;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-gold));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-box { display: none; }
+        .question-box.active { display: block; animation: fadeIn 0.4s ease; }
+        .question-text {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .option {
+            background: #222f54;
+            padding: 16px 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .option:hover {
+            background: #2c3b6e;
+            transform: scale(1.01);
+        }
+        .option.correct { background: var(--success-green) !important; border-color: #166534; color: white; font-weight: bold;}
+        .option.wrong { background: var(--danger-red) !important; border-color: #991b1b; color: white; }
+        
+        .action-area {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .nav-btn {
+            background: var(--accent-gold);
+            color: #000;
+            border: none;
+            padding: 14px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+        }
+
+        .final-panel {
+            display: none;
+            text-align: center;
+            padding: 10px;
+        }
+        .score-medal {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 1.5s infinite;
+        }
+        .score-text {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-gold);
+            margin: 15px 0;
+        }
+        
+        /* أزرار سفلية منسقة مخصصة للموبايل تمنع تداخل العناصر وحجب الأسئلة */
+        .bottom-action-panel {
+            width: 100%;
+            max-width: 950px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .action-card-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent-gold);
+            color: #0f172a;
+            padding: 15px;
+            border-radius: 14px;
+            border: none;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-sizing: border-box;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: background 0.2s;
+        }
+        .action-card-btn:hover { background: #d97706; color: white; }
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            background: #334155;
+            color: white;
+            padding: 12px 40px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        #print-section { display: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media print {
+            body { background: white !important; color: black !important; padding: 0; }
+            .quiz-container, .bottom-action-panel { display: none !important; }
+            #print-section { display: block !important; color: black !important; }
+            .print-item { page-break-inside: avoid; border-bottom: 2px solid #ccc; padding: 20px 0; }
+            .print-opt { margin: 8px 0; padding: 8px; border: 1px solid #ccc; background: #f8fafc; color: #000; }
+            .print-correct { background: #dcfce7 !important; border-color: #86efac !important; font-weight: bold; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="top-header">
+        <h1>🦅 المراجعة النهائية قبل مسابقة الترقية 26</h1>
+        <p>بنك الأسئلة الشامل والجامع لكافة المحاور والحصص التكوينية - أكاديمية النسر</p>
+    </div>
+
+    <div id="quiz-flow-area">
+        <div style="text-align: center;">
+            <div class="axis-badge" id="current-axis-title">المحور: عتاد وهندسة الحاسوب الأساسية</div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <span>السؤال الحالي</span>
+                <b><span id="live-index-text" class="highlight">1</span> / 52</b>
+            </div>
+            <div class="metric-box">
+                <span>الإجابات الصحيحة</span>
+                <b><span id="live-correct-text" style="color: var(--success-green);">0</span></b>
+            </div>
+            <div class="metric-box">
+                <span>النسبة المئوية</span>
+                <b><span id="live-percent-text" style="color: var(--accent-cyan);">0%</span></b>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-indicator"></div>
+        </div>
+
+        <div id="dynamic-question-placeholder"></div>
+
+        <div class="action-area">
+            <button class="nav-btn" id="next-step-btn" onclick="advanceQuiz()">السؤال الموالي ◀</button>
+        </div>
+    </div>
+
+    <div id="final-results-area" class="final-panel">
+        <div class="score-medal" id="medal-emoji">🏆</div>
+        <h2>التقرير الختامي للمترشح</h2>
+        <div class="score-text" id="total-score-render">النتيجة: 0 من 52</div>
+        <p id="final-feedback-msg" style="font-size: 17px; max-width: 700px; margin: 15px auto; color: var(--text-muted); line-height: 1.6;"></p>
+        
+        <button onclick="exportGradedPdf()" class="action-card-btn" style="background-color: var(--success-green); color: white; margin-top: 25px;">
+            📄 استخراج وطباعة كشف مراجعتك التفصيلي المصحح (PDF)
+        </button>
+        <br>
+        <a href="index.html" class="back-link">🏠 العودة إلى الصفحة الرئيسية</a>
+    </div>
+</div>
+
+<div class="bottom-action-panel" id="lower-panel">
+    <button onclick="exportBlankPdf()" class="action-card-btn" id="blankExportBtn">
+        📥 تحميل بنك الأسئلة كاملاً كنسخة بيضاء فارغة للمراجعة الورقية (PDF)
+    </button>
+</div>
+
+<div id="print-section"></div>
+
+<script>
+    const bank = [
+        // محور 1: العتاد وهندسة الحاسوب
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "ما هي الوحدة التخزينية المادية الأسرع مباشرة في استجابة معالج الحاسوب؟", options: ["الذاكرة الخبئية (Cache Memory)", "القرص الصلب (SSD)", "الذاكرة العشوائية (RAM)", "الفلاش ديسك (USB)"], correct: 0 },
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "أي من القطع التالية تُعد لوحة الربط الحيوية الأساسية التي تتصل بها كافة مكونات الحاسوب؟", options: ["لوحة الأم (Motherboard)", "مزود الطاقة (Power Supply)", "بطاقة الشاشة (GPU)", "صندوق الحاسوب"], correct: 0 },
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "ما هي الوظيفة المحورية لذاكرة ROM (ذاكرة القراءة فقط) بالحاسوب؟", options: ["حفظ نظام التشغيل بالكامل", "تخزين البرامج المكتبية المفعلة", "حفظ البرمجيات البدئية الأساسية للإقلاع واختبار العتاد الفوري (BIOS)", "مضاعفة سرعة الألعاب الرقمية"], correct: 2 },
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "الوظيفة الجوهرية لمعجون التبريد (Thermal Paste) الموضع فوق المعالج هي:", options: ["تنظيف المعالج من الأتربة", "سد الفراغات المجهرية لنقل الحرارة بكفاءة إلى المشتت الميكانيكي", "زيادة التردد الكهربائي للمعالج", "حماية نظام التشغيل من التجمد"], correct: 1 },
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "أي المكونات التالية يصنف كجهاز إدخال وإخراج للبيانات في نفس الوقت؟", options: ["شاشة اللمس (Touch Screen)", "الماسح الضوئي (Scanner)", "المكبرات الصوتية (Speakers)", "لوحة المفاتيح"], correct: 0 },
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "تُقاس سرعة معالجة البيانات وتنفيذ العمليات في وحدات الـ CPU الحديثة بوحدة:", options: ["الغيغابايت (GB)", "الغيغاهرتز (GHz)", "الميغابايت لكل ثانية", "البكسل الكلي (Pixel)"], correct: 1 },
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "عند ترقية مساحة القرص الصلب من نوع HDD التقليدي إلى نوع SSD، فإن الميزة المباشرة المحصلة هي:", options: ["زيادة أبعاد الشاشة تلقائياً", "ارتفاع هائل في سرعة قراءة وكتابة البيانات وإقلاع النظام", "توفير باقات إنترنت مجانية", "منع الفيروسات من الدخول تماماً"], correct: 1 },
+        { axis: "عتاد وهندسة الحاسوب الأساسية", q: "الوحدة المسؤولة عن إجراء العمليات المنطقية والمقارنات (مثل أكبر أو أصغر) داخل المعالج هي:", options: ["وحدة التحكم (CU)", "المسجلات الداخلية", "وحدة الحساب والمنطق (ALU)", "الذاكرة المخبئية"], correct: 2 },
+        
+        // محور 2: أنظمة التشغيل وتسيير الملفات
+        { axis: "أنظمة التشغيل وتسيير الملفات", q: "ما هو الاختصار القياسي المستخدم لإغلاق أي نافذة برمجية أو تطبيق نشط فوراً في نظام Windows؟", options: ["Alt + F4", "Ctrl + F4", "Ctrl + Shift + Esc", "Shift + Delete"], correct: 0 },
+        { axis: "أنظمة التشغيل وتسيير الملفات", q: "أي مما يلي يمثل نظام ملفات (File System) معتمد في أنظمة ويندوز الحديثة لتسيير وصلاحيات الأقراص؟", options: ["NTFS", "HTTP", "JPEG", "BIOS"], correct: 0 },
+        { axis: "أنظمة التشغيل وتسيير الملفات", q: "حذف ملف بشكل نهائي وبدون المرور على سلة المهملات (Recycle Bin) يتطلب الضغط المدمج على:", options: ["Ctrl + Delete", "Shift + Delete", "Alt + Delete", "Tab + Delete"], correct: 1 },
+        { axis: "أنظمة التشغيل وتسيير الملفات", q: "ما هو الامتداد الافتراضي للملفات النصية البسيطة والأساسية المنشأة عبر مفكرة ويندوز (Notepad)؟", options: [".docx", ".pdf", ".txt", ".html"], correct: 2 },
+        { axis: "أنظمة التشغيل وتسيير الملفات", q: "أي البرامج التالية يعد المسؤول المباشر عن إدارة قطع العتاد الملحقة وتوافقها التام مع بيئة نظام التشغيل؟", options: ["برامج التعريفات (Drivers)", "برامج معالجة الملتيميديا", "حزم الجداول الحسابية", "متصفحات الويب المستقلة"], correct: 0 },
+        { axis: "أنظمة التشغيل وتسيير الملفات", q: "ماذا تسمى العملية التي تقوم بإعادة تنظيم الملفات المبعثرة على القرص المغناطيسي لتسريع استجابة النظام؟", options: ["إلغاء التجزئة (Defragmentation)", "التهيئة السريعة (Formatting)", "النسخ الاحتياطي السحابي", "الضغط البرمجي للمجلدات"], correct: 0 },
+        { axis: "أنظمة التشغيل وتسيير الملفات", q: "في نظام ويندوز، أين تقع الأداة المركزية التي تتيح تعديل اللغات، إدارة الحسابات، وإلغاء تثبيت البرامج من جذورها؟", options: ["لوحة التحكم (Control Panel / Settings)", "مجلد المستندات الشخصية", "ملف الإقلاع المحمي", "شريط المهام السفلي"], correct: 0 },
+
+        // محور 3: البرمجيات المكتبية وحزمة أوفيس
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "في Microsoft Word، الاختصار المسؤول عن محاذاة النص المظلل وتوسيطه في منتصف السطر هو:", options: ["Ctrl + E", "Ctrl + C", "Ctrl + L", "Ctrl + R"], correct: 0 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "أي الرموز التالية يظهر في خلايا Excel ليدل على أن محتوى الخلية أكبر من المساحة العرضية الحالية للعمود؟", options: ["#VALUE!", "#DIV/0!", "#####", "#NAME?"], correct: 2 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "ما هي الدالة الحسابية الصحيحة التي تُستخدم لمعرفة عدد الخلايا التي تحتوي على أرقام فقط ضمن نطاق معين في Excel؟", options: ["=COUNT()", "=COUNTA()", "=COUNTIF()", "=SUM()"], correct: 0 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "في برنامج PowerPoint، لإنشاء تأثير بصري حركي عند الانتقال من شريحة (Slide) إلى أخرى، نستخدم التبويب:", options: ["حركات (Animations)", "انتقالات (Transitions)", "تصميم (Design)", "عرض الشرائح"], correct: 1 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "الصيغة الافتراضية الصحيحة لحساب حاصل جمع الخلايا من B1 إلى B20 في جداول إكسيل هي:", options: ["=SUM(B1:B20)", "=ADD(B1-B20)", "=TOTAL(B1..B20)", "SUM(B1:B20)="], correct: 0 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "في Microsoft Word، ميزة 'نسخ التنسيق' (Format Painter) تهدف أساساً إلى:", options: ["تكرار الكلمات والنصوص المظللة", "نسخ نوع الخط وحجمه ولونه وتطبيقه على نص آخر بسرعة", "تحويل المستند إلى ملف PDF", "إدراج صورة منسقة تلقائياً"], correct: 1 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "أي البرامج التالية يتبع لحزمة مايكروسوفت أوفيس ويتخصص في إدارة وتصميم قواعد البيانات العلائقية؟", options: ["Microsoft Access", "Microsoft Publisher", "Microsoft Outlook", "Microsoft Excel"], correct: 0 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "لتثبيت سطر العناوين العلوي بشكل دائم في جداول البيانات أثناء التصفح العمودي الطويل نختار ميزة:", options: ["دمج وتوسيط", "تجميد الأجزاء (Freeze Panes)", "فرز وتصفية متقدمة", "تقسيم الخلايا المنطقية"], correct: 1 },
+        { axis: "البرمجيات المكتبية وحزمة Office", q: "في برنامج الجداول الحسابية، تظهر الدالة بالشكل المتمثل بالرمز `=IF()` وتستخدم برمجياً من أجل:", options: ["إجراء عمليات الضرب المعقدة", "التحقق من شرط معين وإخراج نتيجة بناءً على صحته أو خطئه", "حساب المتوسط الحسابي للغيابات", "تلوين الخلايا الفارغة تلقائياً"], correct: 1 },
+
+        // محور 4: شبكات الحاسوب والإنترنت والبريد
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "ما هي الوظيفة الجوهرية لنظام وخوادم DNS على شبكة الإنترنت العالمية؟", options: ["حفظ وتشفير كلمات مرور المستخدمين", "تحويل عناوين المواقع النصية (URLs) إلى عناوين رقمية (IP Addresses) والعكس", "رفع سرعة التحميل للملفات الكبيرة", "توزيع الطاقة الكهربائية لخوادم الويب"], correct: 1 },
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "أي من العناوين البرمجية التالية يمثل البنية الصحيحة والقياسية المعتمدة لعنوان الـ IP الإصدار الرابع (IPv4)؟", options: ["192.168.1.1", "192.168.1.300", "www.google.com", "192-168-1-1"], correct: 0 },
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "بروتوكول الإنترنت المعتمد والمسؤول حصرياً عن نقل وتنزيل الملفات من وإلى الخوادم عبر الشبكة هو:", options: ["FTP", "SMTP", "HTTP", "IMAP"], correct: 0 },
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "ما هو الرمز الأساسي والمحوري الذي يفصل بين اسم المستخدم واسم النطاق في أي بريد إلكتروني معتمد؟", options: ["الرمز @", "الرمز #", "الرمز $", "الرمز &"], correct: 0 },
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "عند إرسال رسالة بريد إلكتروني، ماذا يعني وضع عنوان بريدي لشخص ما في حقل النسخة الكربونية غير الظاهرة (BCC)؟", options: ["تصله نسخة من الرسالة دون أن يعلم المستلمون الآخرون بذلك", "يتم حظر رسالته تلقائياً من الخادم", "تصله الرسالة مشفرة بكلمة مرور خاصة به", "توضع الرسالة في مجلد البريد المزعج لديه"], correct: 0 },
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "تتميز الشبكات من نوع WAN بأنها شبكات تضمن التغطية الجغرافية على نطاق:", options: ["محدود جداً داخل غرفة واحدة", "متوسط يربط مباني قريبة", "واسع جداً يشمل دولاً وقارات بأكملها", "داخل حافلة النقل المدرسية فقط"], correct: 2 },
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "أي الأجهزة الشبكية التالية يعمل بذكاء لتوجيه حزم البيانات بين شبكات مختلفة بالاعتماد على جداول التوجيه؟", options: ["الموجه (Router)", "المبدل (Switch)", "الموزع التقليدي (Hub)", "مكرر الإشارة (Repeater)"], correct: 0 },
+        { axis: "شبكات الحاسوب والإنترنت والبريد الإلكتروني", q: "تصفح الويب الآمن والمشفر الذي يضمن عدم اعتراض البيانات المتبادلة يعتمد كلياً على بروتوكول:", options: ["HTTPS", "HTTP", "SMTP", "POP3"], correct: 0 },
+
+        // محور 5: أمن وتأمين المعلومات والبيانات
+        { axis: "أمن وتأمين المعلومات والبيانات", q: "تسمى البرمجيات الخبيثة التي تتخفى داخل برامج سليمة وتخدع المستخدمين لفتحها واختراق أجهزتهم بـ:", options: ["حصان طروادة (Trojan Horse)", "برمجيات الإعلانات (Adware)", "الديدان الشبكية مستقلة الإقلاع", "مضادات الفيروسات الوهمية"], correct: 0 },
+        { axis: "أمن وتأمين المعلومات والبيانات", q: "ما هي أفضل ممارسة تقنية لحماية حساباتك المهنية من الاختراق والتخمين التلقائي؟", options: ["استخدام نفس كلمة المرور لكافة الحسابات تسهيلاً لحفظها", "تفعيل ميزة المصادقة الثنائية (2FA) واستخدام كلمات مرور قوية ومتنوعة", "حفظ كلمات المرور في ملف نصي عادي على سطح المكتب", "عدم تحديث برمجيات المتصفح مطلقاً"], correct: 1 },
+        { axis: "أمن وتأمين المعلومات والبيانات", q: "أي من الهجمات التالية يعتمد على إرسال رسائل مزيفة تطابق تماماً الهوية البصرية للبنوك أو الوزارات لسرقة بيانات المستخدمين؟", options: ["الهندسة الاجتماعية والصيد الاحتيالي (Phishing)", "هجمات حجب الخدمة الموزعة (DDoS)", "حقن قواعد البيانات الضخمة", "الفيروسات التدميرية التلقائية"], correct: 0 },
+        { axis: "أمن وتأمين المعلومات والبيانات", q: "ما هو الدور الحقيقي والفعلي لبرنامج الجدار الناري (Firewall) المثبت في الأنظمة؟", options: ["تنظيف القرص من الملفات المكررة", "مراقبة وفلترة حزم البيانات وحظر الاتصالات غير المصرح بها والقادمة من الشبكة", "زيادة سرعة معالج الحاسوب", "تشفير رسائل الواتساب تلقائياً"], correct: 1 },
+        { axis: "أمن وتأمين المعلومات والبيانات", q: "الفيروسات الشبكية المعروفة باسم (Worms) تتميز وظيفياً وعن غيرها بقابليتها على:", options:
