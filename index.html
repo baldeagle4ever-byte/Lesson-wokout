@@ -21,7 +21,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px 14px 80px 14px; /* مسافة سفلية للشريط المتحرك */
+            padding: 20px 14px 80px 14px;
             overflow-x: hidden;
         }
 
@@ -71,7 +71,7 @@
         .sidebar-content h2 { font-family: 'Reem Kufi', sans-serif; color: #f59e0b; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid rgba(245, 158, 11, 0.1); padding-bottom: 8px; }
         
         .sidebar-menu-item {
-            display: flex; align-items: center; gap: 12px; color: #94a3b8; text-decoration: none; padding: 12px; border-radius: 10px; margin-bottom: 8px; font-size: 14px; font-weight: 600;
+            display: flex; align-items: center; gap: 12px; color: #94a3b8; text-decoration: none; padding: 12px; border-radius: 10px; margin-bottom: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
         }
         .sidebar-menu-item:hover { background: rgba(245, 158, 11, 0.08); color: #f59e0b; padding-right: 16px; }
         .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 6, 12, 0.7); z-index: 1500; display: none; }
@@ -162,7 +162,7 @@
         <a href="page-simulation.html" class="sidebar-menu-item"><i class="bi bi-window-stack" style="color:#c084fc"></i> المحاكاة الإجرائية Office</a>
         <a href="page-subjects.html" class="sidebar-menu-item"><i class="bi bi-file-earmark-text-fill" style="color:#fb923c"></i> المواضيع المقترحة</a>
         <a href="final-review.html" class="sidebar-menu-item"><i class="bi bi-chat-left-check-fill" style="color:#eab308"></i> المراجعة النهائية</a>
-        <a href="#" class="sidebar-menu-item" onclick="changeUser()"><i class="bi bi-person-gear"></i> تغيير اسم المستخدم</a>
+        <span class="sidebar-menu-item" onclick="changeUser()"><i class="bi bi-person-gear"></i> تغيير اسم المستخدم</span>
         
         <h2 style="margin-top:25px;">الاتصال والدعم الفني</h2>
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=baldeagle.online.interact@gmail.com" target="_blank" class="sidebar-menu-item">
@@ -218,7 +218,7 @@
         </a>
 
         <a href="final-review.html" class="review-card-item" style="text-decoration: none; display: block; width: 100%; box-sizing: border-box; margin-bottom: 15px;">
-            <div style="background: linear-gradient(135deg, #1c2541 0%, #0b1329 100%); border: 2px solid #eab308; border-radius: 12px; padding: 16px; position: relative; box-shadow: 0 4px 15px rgba(234,179,8,0.1); height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; text-align: right;">
+            <div style="background: linear-gradient(135deg, #1c2541 0%, #0b1329 100%); border: 2px solid #eab308; border-radius: 12px; padding: 16px; position: relative; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.2);">
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <span style="background: rgba(234,179,8,0.1); padding: 6px; border-radius: 8px; font-size: 20px; line-height: 1;">👑</span>
@@ -230,7 +230,7 @@
                         المراجعة النهائية الشاملة قبل مسابقة الترقية 26
                     </h3>
                     <p style="color: #94a3b8; margin: 0; font-size: 12px; line-height: 1.5; font-weight: normal;">
-                        بنك الأسئلة الأكبر: +50 سؤالاً معيارياً يغطي العتاد، الأنظمة، وحقيبة الرقمنة وعصرنة الإدارة التربوية.
+                        بنك الأسئلة الأكبر: +50 سؤالاً معيارياً يغطي العتاد، الأنظمة، وحقيبة الرقمنة وعصرنة الإدارة
                     </p>
                 </div>
                 
@@ -241,25 +241,60 @@
 
 <div class="running-ticker-container">
     <div class="ticker-text">
-        ⚡ أكاديمية النسر للتعليم والتدريب التقني 2026 كل الحقوق محفوظة . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚡ بالتوفيق والنجاح لج[...]
+        ⚡ أكاديمية النسر للتعليم والتدريب التقني 2026 كل الحقوق محفوظة . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚡ بالتوفيق والنجاح لجميع المتدربين والمتدربات
     </div>
 </div>
 
 <script>
 function toggleSidebar() {
-    document.getElementById("sidebarMenu").classList.toggle("active");
-    document.getElementById("sidebarOverlay").classList.toggle("active");
+    const sidebar = document.getElementById("sidebarMenu");
+    const overlay = document.getElementById("sidebarOverlay");
+    
+    if (sidebar) {
+        sidebar.classList.toggle("active");
+    }
+    if (overlay) {
+        overlay.classList.toggle("active");
+    }
 }
-document.addEventListener("DOMContentLoaded", function() {
-    let name = localStorage.getItem("academy_user_name");
-    if (!name) { askForName(); } else { document.getElementById("welcomeBox").innerHTML = `مرحباً بك يا أستاذ: <strong>${name}</strong> | دورة التحضير لمسابقة التر[...]
-});
+
 function askForName() {
     Swal.fire({
-        title: 'مرحباً بك في الأكاديمية', text: 'يرجى كتابة اسمك الكريم لتخصيص تقارير الامتحانات:', input: 'text', confirmButtonText: 'دخ[...]
-    }).then((res) => { if (res.value) { localStorage.setItem("academy_user_name", res.value.trim()); location.reload(); } });
+        title: 'مرحباً بك في الأكاديمية',
+        text: 'يرجى كتابة اسمك الكريم لتخصيص تقارير الامتحانات:',
+        input: 'text',
+        inputPlaceholder: 'اكتب اسمك هنا',
+        confirmButtonText: 'دخول',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'الرجاء إدخال اسمك!'
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            const userName = result.value.trim();
+            localStorage.setItem("academy_user_name", userName);
+            document.getElementById("welcomeBox").innerHTML = `مرحباً بك يا أستاذ: <strong>${userName}</strong> | دورة التحضير لمسابقة الترقية 26`;
+        }
+    });
 }
-function changeUser() { toggleSidebar(); localStorage.removeItem("academy_user_name"); askForName(); }
+
+function changeUser() {
+    toggleSidebar();
+    localStorage.removeItem("academy_user_name");
+    askForName();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    let name = localStorage.getItem("academy_user_name");
+    if (!name) { 
+        askForName(); 
+    } else { 
+        document.getElementById("welcomeBox").innerHTML = `مرحباً بك يا أستاذ: <strong>${name}</strong> | دورة التحضير لمسابقة الترقية 26`;
+    }
+});
 </script>
 </body>
 </html>
