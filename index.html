@@ -147,27 +147,8 @@
             .platform-header h1 { font-size: 28px; }
         }
     </style>
-</<a href="final-review.html" class="review-card-item" style="text-decoration: none; display: block; width: 100%; box-sizing: border-box; margin-bottom: 15px;">
-    <div style="background: linear-gradient(135deg, #1c2541 0%, #0b1329 100%); border: 2px solid #eab308; border-radius: 12px; padding: 16px; position: relative; box-shadow: 0 4px 15px rgba(234,179,8,0.1); height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; text-align: right;">
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <span style="background: rgba(234,179,8,0.1); padding: 6px; border-radius: 8px; font-size: 20px; line-height: 1;">👑</span>
-            <span style="background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 2px 10px; border-radius: 8px; box-shadow: 0 2px 6px rgba(239,68,68,0.3);">🔥 مصيري</span>
-        </div>
-
-        <div style="flex-grow: 1;">
-            <h3 style="color: #eab308; margin: 0 0 8px 0; font-size: 16px; font-weight: bold; line-height: 1.4;">
-                المراجعة النهائية الشاملة قبل مسابقة الترقية 26
-            </h3>
-            <p style="color: #94a3b8; margin: 0; font-size: 12px; line-height: 1.5; font-weight: normal;">
-                بنك الأسئلة الأكبر: +50 سؤالاً معيارياً يغطي العتاد، الأنظمة، وحقيبة الرقمنة وعصرنة الإدارة التربوية.
-            </p>
-        </div>
-        
-    </div>
-</a>
-    
-
+</head>
+<body>
 
 <div class="sidebar-toggle-btn" onclick="toggleSidebar()"><i class="bi bi-grid-3x3-gap-fill"></i></div>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
@@ -239,7 +220,7 @@
 
 <div class="running-ticker-container">
     <div class="ticker-text">
-        ⚡ أكاديمية النسر للتعليم والتدريب التقني 2026 كل الحقوق محفوظة . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚡ بالتوفيق والنجاح لجميع أساتذتنا الكرام في مسابقة الترقية جويلية 2026 .
+        ⚡ أكاديمية النسر للتعليم والتدريب التقني 2026 كل الحقوق محفوظة . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚡ بالتوفيق والنجاح لجميع الطلاب الكرام
     </div>
 </div>
 
@@ -250,11 +231,11 @@ function toggleSidebar() {
 }
 document.addEventListener("DOMContentLoaded", function() {
     let name = localStorage.getItem("academy_user_name");
-    if (!name) { askForName(); } else { document.getElementById("welcomeBox").innerHTML = `مرحباً بك يا أستاذ: <strong>${name}</strong> | دورة التحضير لمسابقة جويلية 2026`; }
+    if (!name) { askForName(); } else { document.getElementById("welcomeBox").innerHTML = `مرحباً بك يا أستاذ: <strong>${name}</strong> | دورة التحضير لمسابقة الترقية 26`; }
 });
 function askForName() {
     Swal.fire({
-        title: 'مرحباً بك في الأكاديمية', text: 'يرجى كتابة اسمك الكريم لتخصيص تقارير الامتحانات:', input: 'text', confirmButtonText: 'دخول المنصة 🚀', confirmButtonColor: '#f59e0b', background: '#0f172a', color: '#f8fafc', allowOutsideClick: false
+        title: 'مرحباً بك في الأكاديمية', text: 'يرجى كتابة اسمك الكريم لتخصيص تقارير الامتحانات:', input: 'text', confirmButtonText: 'دخول',
     }).then((res) => { if (res.value) { localStorage.setItem("academy_user_name", res.value.trim()); location.reload(); } });
 }
 function changeUser() { toggleSidebar(); localStorage.removeItem("academy_user_name"); askForName(); }
